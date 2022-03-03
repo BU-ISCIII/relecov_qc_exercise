@@ -298,10 +298,30 @@ estadistica_data<- data.frame (
 unmapped_data<- data.frame(
   id = as.character(estadistica_data$id),
   muestra = factor(estadistica_data$muestra, levels = c("#1","#2","#3","#4","#5","#6","#7","#8","#9","#10")),
+  host = as.numeric(estadistica_data$host),
+  virus = as.numeric(estadistica_data$virus),
   unmapped = as.numeric(estadistica_data$unmapped),
   q10x =  as.numeric(estadistica_data$qc10x),
   depth = as.numeric(estadistica_data$mean_depth)
 )
+
+##### Plot host -----
+
+ggplot(unmapped_data, aes(x = id, y = host)) +
+  geom_boxplot() +
+  geom_jitter(position=position_jitter(0.2), aes (color = muestra)) +
+  labs(x = "", y = "% mapped reads (host) / sample",  title = "") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size = 7))
+ggsave("Graficos/qc_resultados_read_host.png")
+
+##### Plot virus -----
+
+ggplot(unmapped_data, aes(x = id, y = virus)) +
+  geom_boxplot() +
+  geom_jitter(position=position_jitter(0.2), aes (color = muestra)) +
+  labs(x = "", y = "% mapped reads (virus) / sample",  title = "") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size = 7))
+ggsave("Graficos/qc_resultados_read_virus.png")
 
 ##### Plot unmapped virus -----
 
