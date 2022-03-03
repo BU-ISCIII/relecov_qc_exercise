@@ -272,43 +272,33 @@ ggsave("Graficos/qc_bioinformatica_protocolo.png")
 
 ### datos estadistica ----
 
-qc_estadistica<- read_excel(dir_excel[1], sheet = 11)
+qc_estadistica<- read_excel(dir_excel[1], sheet = 4)
 
 estadistica_data<- data.frame (
   id = as.character(qc_estadistica$ID),
   muestra = as.character(qc_estadistica$`Sample ID`),
   ct = as.numeric(qc_estadistica$`Valor Ct PCR`),
   ct_N = as.numeric(qc_estadistica$`Valor Ct N`),
-  ct_ORF = as.numeric(qc_estadistica$`Valor Ct N`),
+  ct_ORF = as.numeric(qc_estadistica$`Valor Ct ORF`),
   ct_S = as.numeric(qc_estadistica$`Valor Ct S`),
-  readc = log10(as.numeric(qc_estadistica$`Read count`)),
-  qc_filtered = as.numeric(qc_estadistica$var_QCfiltered),
-  qc_filtered_10 = as.numeric(qc_estadistica$var_QCfiltered) / 10,
-  unmapped = as.numeric(qc_estadistica$`%Unmapped`),
+  readc = log10(as.numeric(qc_estadistica$var_readcount)),
+  qc_filtered = as.numeric(qc_estadistica$var_qcfiltered),
+  qc_filtered_10 = as.numeric(qc_estadistica$var_qcfiltered) / 10,
+  host = as.numeric(qc_estadistica$var_readhost),
+  virus = as.numeric(qc_estadistica$var_readsvirus),
+  unmapped = as.numeric(qc_estadistica$var_unmapped),
   qc10x = as.numeric(qc_estadistica$`var_QC>10x`),
   mean_depth = as.numeric(qc_estadistica$var_mean_depth_coverage),
   perc_Ns = as.numeric(qc_estadistica$var_n_Ns),
   variants_75 = as.numeric(qc_estadistica$var_number_variants_75),
-  variants_effect = as.numeric(qc_estadistica$var_variantseffect),
-  secuenciado = qc_estadistica$secuenciado
+  variants_effect = as.numeric(qc_estadistica$var_variantseffect)
 )
 
 #### datos unmapped virus, % genoma 10x y media de la profundidad -----
 
-v_muestras<- c("#1",
-  "#2",
-  "#3",
-  "#4",
-  "#5",
-  "#6",
-  "#7",
-  "#8",
-  "#9",
-  "#10")
-
 unmapped_data<- data.frame(
   id = as.character(estadistica_data$id),
-  muestra = factor(rep (v_muestras, 37), levels = c("#1","#2","#3","#4","#5","#6","#7","#8","#9","#10")),
+  muestra = factor(estadistica_data$muestra, levels = c("#1","#2","#3","#4","#5","#6","#7","#8","#9","#10")),
   unmapped = as.numeric(estadistica_data$unmapped),
   q10x =  as.numeric(estadistica_data$qc10x),
   depth = as.numeric(estadistica_data$mean_depth)
