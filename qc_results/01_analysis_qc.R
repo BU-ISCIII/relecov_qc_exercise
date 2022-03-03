@@ -283,7 +283,6 @@ estadistica_data<- data.frame (
   ct_S = as.numeric(qc_estadistica$`Valor Ct S`),
   readc = log10(as.numeric(qc_estadistica$var_readcount)),
   qc_filtered = as.numeric(qc_estadistica$var_qcfiltered),
-  qc_filtered_10 = as.numeric(qc_estadistica$var_qcfiltered) / 10,
   host = as.numeric(qc_estadistica$var_readhost),
   virus = as.numeric(qc_estadistica$var_readsvirus),
   unmapped = as.numeric(qc_estadistica$var_unmapped),
