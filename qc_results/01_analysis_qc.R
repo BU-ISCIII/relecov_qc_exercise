@@ -121,13 +121,7 @@ genoma_data<- data.frame (
   genoma = as.character(qc_resultados$var_referencegenomeaccession)
 )
 
-n_genoma_data<- genoma_data[,c(1,3)]
-
-revalue(n_genoma_data$genoma, c("no secuenciable" = "NA", 
-                                  "NO SECUENCIADO" = "NA"
-)) -> n_genoma_data$genoma
-
-n_2_genoma_data <- n_genoma_data %>% 
+n_2_genoma_data <- genoma_data %>% 
   group_by(genoma) %>% 
   summarise(count = n()) %>% 
   mutate(perc = round (count/sum(count), 3))
