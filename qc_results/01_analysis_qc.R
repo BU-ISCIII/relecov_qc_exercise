@@ -17,7 +17,7 @@ library(viridis, quietly = TRUE, warn.conflicts = FALSE)
 
 ### Excel ----
 
-dir_excel<-list.files(path = "../../Data/", pattern = "xlsx", full.names = TRUE, recursive = TRUE, include.dirs = FALSE)
+dir_excel<-list.files(path = "Data", pattern = "xlsx", full.names = TRUE, recursive = TRUE, include.dirs = FALSE)
 
 ### datos Fechas ----
 
@@ -40,36 +40,36 @@ ggplot (fechas_data, aes(x = recepcion, xend = secuenciacion,
                          y = id, yend = id, color = id)) + 
   geom_segment(size = 3, show.legend = F) +
   labs(x = "", y = "", title = "Tiempo de ejecucion")
-ggsave("../../Graficos/qc_tiempo_ejecucion.png")
+ggsave("Graficos/qc_tiempo_ejecucion.png")
 
 #### plot Envio ----
-
+getwd()
 ggplot (fechas_data, aes(y = id, x = as.character(envio))) +
   geom_point() +
   labs(x = "", y = "", title = "Send samples dates") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
-ggsave("../../Graficos/qc_fechas_envio.png")
+ggsave("Graficos/qc_fechas_envio.png")
 
 #### plot Recepcion ----
 ggplot (fechas_data, aes(y = id, x = as.character(recepcion))) +
   geom_point() +
   labs(x = "", y = "", title = "Reception samples dates") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
-ggsave("../../Graficos/qc_fechas_recepcion.png")
+ggsave("Graficos/qc_fechas_recepcion.png")
 
 #### plot Secuencing ----
 ggplot (fechas_data, aes(y = id, x = as.character(secuenciacion))) +
   geom_point() +
   labs(x = "", y = "", title = "Sequencing samples dates") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
-ggsave("../../Graficos/qc_fechas_secuenciacion.png")
+ggsave("Graficos/qc_fechas_secuenciacion.png")
 
 #### plot Emision ----
 ggplot (fechas_data, aes(y = id, x = as.character(emision))) +
   geom_point() +
   labs(x = "", y = "", title = "Emission samples dates") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
-ggsave("../../Graficos/qc_fechas_emision.png")
+ggsave("Graficos/qc_fechas_emision.png")
 
 ### datos Fechas totales ----
 
@@ -89,7 +89,7 @@ ggplot (fechas_data, aes(y = id, x = as.character(fecha), color = tipo)) +
   geom_point() +
   labs(x = "", y = "", title = "Fechas de envio, recepcion, emision y secuenciacion del QC") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size = 6))
-ggsave("../../Graficos/qc_fechas_total.png")
+ggsave("Graficos/qc_fechas_total.png")
 
 ### datos Resultados ----
 
