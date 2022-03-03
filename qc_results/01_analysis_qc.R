@@ -354,7 +354,7 @@ ggsave("Graficos/qc_resultados_coverage.png")
 
 ns_data<- data.frame(
   id = as.character(estadistica_data$id),
-  muestra =factor(estadistica_data$muestra, levels = c("#1","#2","#3","#4","#5","#6","#7","#8","#9","#10")),
+  muestra = factor(estadistica_data$muestra, levels = c("#1","#2","#3","#4","#5","#6","#7","#8","#9","#10")),
   Ns = as.numeric(estadistica_data$perc_Ns)
 )
 
@@ -370,11 +370,10 @@ ggsave("Graficos/qc_resultados_Ns.png")
 
 variantes_data<- data.frame(
   id = as.character(estadistica_data$id),
-  muestra = factor(rep (v_muestras, 37), levels = c("#1","#2","#3","#4","#5","#6","#7","#8","#9","#10")),
+  muestra = factor(estadistica_data$muestra, levels = c("#1","#2","#3","#4","#5","#6","#7","#8","#9","#10")),
   variants_75 = as.numeric(qc_estadistica$var_number_variants_75),
   variants_effect = as.numeric(qc_estadistica$var_variantseffect),
-  ct = estadistica_data$ct,
-  secuenciado = qc_estadistica$secuenciado
+  ct = estadistica_data$ct
 )
 
 ##### Plot variantes -----
@@ -394,21 +393,18 @@ ggplot(variantes_data, aes(x = id, y = variants_effect)) +
 ggsave("Graficos/qc_resultados_variantes_efecto.png")
 
 #### datos reads -----
-
 lista_read<- list ()
 for (i in 1:nrow(estadistica_data)){
   
-  read_t<- t(estadistica_data[i,7:9])
+  read_t<- t(estadistica_data[i,c(7,8,12)])
   lista_read[[i]]<- data.frame(id = i, read = read_t[,1], tipo = c("read_n", "quality", "quality_10"))
   
 }
 
-
 df_read <- bind_rows(lista_read, .id = "id")
 
-nombres_labs<- unique(estadistica_data$id)
 lista_nombres<- list()
-for (i in 1:37){
+for (i in 1:40){
   
   n_nombres_labs<- rep (nombres_labs[i], 30)
   lista_nombres[[i]]<- as.character(n_nombres_labs)
@@ -420,7 +416,6 @@ id_lab<- unlist(lista_nombres)
 read_data<- data.frame (id = id_lab,
                       df_read[,c(2,3)]); row.names(read_data)<- NULL
 read_data$tipo<- factor(read_data$tipo, levels = c("read_n", "quality", "quality_10"))
-
 
 ##### Plot reads -----
 plot_data_read<- read_data[read_data$tipo == "read_n" | read_data$tipo == "quality_10", ]
@@ -450,14 +445,12 @@ df_ct <- bind_rows(lista_ct, .id = "id")
 
 nombres_labs<- unique(estadistica_data$id)
 lista_nombres<- list()
-for (i in 1:37){
+for (i in 1:40){
   
   n_nombres_labs<- rep (nombres_labs[i], 40)
   lista_nombres[[i]]<- as.character(n_nombres_labs)
   
 }
-
-id_lab<- print(unlist(lista_nombres))
 
 ct_data<- data.frame (id = id_lab,
   df_ct[,c(2,3)]); row.names(ct_data)<- NULL
