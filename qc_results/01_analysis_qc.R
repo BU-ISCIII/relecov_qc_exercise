@@ -93,13 +93,13 @@ ggsave("Graficos/qc_fechas_total.png")
 
 ### datos Resultados ----
 
-qc_resultados <- read_excel(dir_excel[2], sheet = 5)
+qc_resultados <- read_excel(dir_excel[1], sheet = 4)
 
 #### Protocolo de diagnostico -----
 
 protocolo_data<- data.frame (
   id = as.character(qc_resultados$ID),
-  protocolo = as.character(qc_resultados$`Protocolo diagnóstico SARS-CoV-2`)
+  protocolo = as.character(qc_resultados$`Protocolo diagnostico SARS-CoV-2`)
 )
 
 n_protocolo_data<- protocolo_data[!duplicated(protocolo_data$id), ]
@@ -118,7 +118,7 @@ ggsave("Graficos/qc_resultado_protocolo.png")
 genoma_data<- data.frame (
   id = as.character(qc_resultados$ID),
   muestra = as.character(qc_resultados$`Sample ID`),
-  genoma = as.character(qc_resultados$`Reference genome accession`)
+  genoma = as.character(qc_resultados$var_referencegenomeaccession)
 )
 
 n_genoma_data<- genoma_data[,c(1,3)]
