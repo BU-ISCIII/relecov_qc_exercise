@@ -159,11 +159,9 @@ ggsave("Graficos/qc_secuenciacion_plataforma.png")
 
 #### Enriquecimiento -----
 
-qc_enriquecimiento <- read_excel(dir_excel[2], sheet = 7)
+qc_enriquecimiento <- read_excel(dir_excel[1], sheet = 5)
 
 qc_enriquecimiento$variable_amplicon[qc_enriquecimiento$variable_amplicon == "NA"]<- NA
-
-unique(qc_enriquecimiento$variable_amplicon)
 
 enriquecimiento_data<- data.frame (
   id = as.character(qc_enriquecimiento$ID),
