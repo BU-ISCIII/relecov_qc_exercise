@@ -248,21 +248,14 @@ ggsave("Graficos/qc_secuenciacion_phiX.png")
 
 ### datos Bioinformatica ----
 
-qc_bioinformatica<- read_excel(dir_excel[2], sheet = 10)
+qc_bioinformatica<- read_excel(dir_excel[1], sheet = 7)
 
 progbio<- data.frame (
   id = as.character(qc_bioinformatica$ID),
-  muestra = as.character(qc_bioinformatica$`Sample ID`),
-  protocolo = as.character(qc_bioinformatica$variable_Bioinformatic_protocol),
-  version = as.character(qc_bioinformatica$variable_version_bioinfo_protocol),
+  protocolo = as.character(qc_bioinformatica$var_bioinformatic_protocol),
+  version = as.character(qc_bioinformatica$var_version_bioinfo_protocol),
   protocolo_version = as.character(qc_bioinformatica$variable_unite_bioinfo_version)
 )
-
-revalue(progbio$protocolo_version, c("SeqCovid" = "SeqCOVID",
-                             "NA v5.14.0" = "NA"
-)) -> progbio$protocolo_version
-
-levels(progbio$protocolo_version)
 
 n_progbio_data <- progbio %>% 
   group_by(protocolo_version) %>% 
