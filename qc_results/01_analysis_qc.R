@@ -206,30 +206,17 @@ ggsave("Graficos/qc_secuenciacion_librerias.png")
 
 #### Muestras por carrera -----
 
-qc_carreras <- read_excel(dir_excel[1], sheet = 10)
+qc_carreras <- read_excel(dir_excel[1], sheet = 5)
 
 carreras_data<- data.frame (
   id = as.character(qc_carreras$ID),
   muestra = as.character(qc_carreras$`Sample ID`),
-  carreras = as.character(qc_carreras$`Number samples in run`),
-  read = as.character(qc_carreras$`Read lenght`),
+  carreras = as.numeric(as.vector(qc_carreras$`Number samples in run`)),
+  read = as.numeric(as.vector(qc_carreras$`Read lenght`)),
   layout = as.character(qc_carreras$`Library layout`),
   phi = as.character(qc_carreras$`Was PhiX used in the sequencing?`),
   plataforma = as.character(qc_librerias$sequencing_platforms_mod)
 )
-
-
-busqueda<- c("15 + 1 system control",
-             "380 + 4 NTC",
-             "23 + 1 NTC")
-
-df_busqueda<- carreras_data[carreras_data$carreras %in% busqueda,]
-
-revalue(carreras_data$carreras, c("15 + 1 system control" = "16", 
-                                  "380 + 4 NTC" = "384",
-                                  "23 + 1 NTC" = "24"
-                                  )) -> carreras_data$carreras
-carreras_data$carreras<- as.numeric(as.vector(carreras_data$carreras))
 
 ##### Plot Muestras por carrera -----
 
