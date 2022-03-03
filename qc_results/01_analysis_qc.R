@@ -354,7 +354,7 @@ ggsave("Graficos/qc_resultados_coverage.png")
 
 ns_data<- data.frame(
   id = as.character(estadistica_data$id),
-  muestra = factor(rep (v_muestras, 37), levels = c("#1","#2","#3","#4","#5","#6","#7","#8","#9","#10")),
+  muestra =factor(estadistica_data$muestra, levels = c("#1","#2","#3","#4","#5","#6","#7","#8","#9","#10")),
   Ns = as.numeric(estadistica_data$perc_Ns)
 )
 
@@ -365,7 +365,6 @@ ggplot(ns_data, aes(x = id, y = Ns, fill = muestra)) +
   labs(x = "", y = "Porcentaje de Ns / muestra",  title = "") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size = 8))
 ggsave("Graficos/qc_resultados_Ns.png")
-
 
 #### datos variantes -----
 
