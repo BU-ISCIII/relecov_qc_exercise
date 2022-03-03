@@ -231,8 +231,8 @@ ggplot(n_carreras_data, aes(x=id, y=carreras, fill=plataforma)) +
 ggsave("Graficos/qc_secuenciacion_carreras.png")
 
 ##### Plot read length -----
-as.numeric(as.vector(carreras_data$read))
-ggplot(carreras_data, aes(x=id, y=as.numeric(as.vector(read))/10, fill = plataforma)) +
+
+ggplot(carreras_data, aes(x=id, y=read/10, fill = plataforma)) +
   geom_col() +
   labs(x = "", y = "longitud read / muestra",  title = "") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size = 8),
