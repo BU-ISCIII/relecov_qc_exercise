@@ -17,7 +17,9 @@ library(viridis, quietly = TRUE, warn.conflicts = FALSE)
 
 ### datos principales ----
 
-qc_analysis_bio <- read_excel(path = "qc_bioinformatic_analysis.xlsx", sheet = 2)
+dir_excel<-list.files(path = "Data", pattern = "xlsx", full.names = TRUE, recursive = TRUE, include.dirs = FALSE)
+
+qc_analysis_bio <- read_excel(dir_excel[1], sheet = 7)
 
 ### datos Illumina iSeq ----
 
