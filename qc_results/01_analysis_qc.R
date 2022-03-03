@@ -136,7 +136,7 @@ ggsave("Graficos/qc_resultado_genoma.png")
 
 ### datos Secuenciacion ----
 
-qc_secuenciacion <- read_excel(dir_excel[2], sheet = 6)
+qc_secuenciacion <- read_excel(dir_excel[1], sheet = 5)
 
 #### Plataformas de secuenciacion -----
 
