@@ -183,7 +183,7 @@ ggsave("Graficos/qc_secuenciacion_enriquecimiento.png")
 
 #### Librerias -----
 
-qc_librerias <- read_excel(dir_excel[1], sheet = 8)
+qc_librerias <- read_excel(dir_excel[1], sheet = 5)
 
 librerias_data<- data.frame (
   id = as.character(qc_librerias$ID),
