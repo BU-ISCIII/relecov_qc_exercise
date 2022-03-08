@@ -34,12 +34,16 @@ fechas_data<- data.frame (
   ejecucion = qc_fechas$`Tiempo de ejecucion`
 )
 
+fechas_data$ejecucion
 
 #### plot tiempo de ejecucion ----
-ggplot (fechas_data, aes(x = recepcion, xend = secuenciacion, 
-                         y = id, yend = id, color = id)) + 
+# tabla con estadisticas
+# indicar que los lab que han fallado
+ggplot (fechas_data, aes(x = recepcion, xend = secuenciacion,
+                         y = id, yend = id, color = "#4a8abe")) + 
   geom_segment(size = 3, show.legend = F) +
-  labs(x = "", y = "", title = "Tiempo de ejecucion")
+  geom_text(aes(label=fechas_data$ejecucion), position = position_dodge(width = 1), hjust=-1, color="black", size=2.5) +
+  labs(x = "Tiempo de ejecucion (dias)", y = "")
 ggsave("Graficos/qc_tiempo_ejecucion.png")
 
 #### plot Envio ----
