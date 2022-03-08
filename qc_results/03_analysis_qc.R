@@ -61,5 +61,22 @@ df_parsed_linajes <- as.data.frame(qc_parsed_linajes[,c(6:17)])
 
 df_linajes<- df_parsed_linajes[df_parsed_linajes$tipo == "linaje" & df_parsed_linajes$grupo != "control", ]
 
-df_control<- df_linajes[df_linajes$grupo == "control_nuevo", c(1,3:12)]
-df_lab<- df_linajes[df_linajes$grupo != "control_nuevo", c(1,3:12)]
+df_linajes_control<- df_linajes[df_linajes$grupo == "control_nuevo", c(1,3:12)]
+df_linajes_lab<- df_linajes[df_linajes$grupo != "control_nuevo", c(1,3:12)]
+
+matrix_linajes<- matrix(0, ncol = 10, nrow = 40)
+for (i in 1:10){
+  matrix_linajes[,i]<- df_linajes_control[,i+1] == df_linajes_lab[,i+1]
+}
+
+# variantes
+
+df_variantes<- df_parsed_linajes[df_parsed_linajes$tipo == "variante" & df_parsed_linajes$grupo != "control", ]
+
+df_variantes_control<- df_linajes[df_linajes$grupo == "control_nuevo", c(1,3:12)]
+df_variantes_lab<- df_linajes[df_linajes$grupo != "control_nuevo", c(1,3:12)]
+
+matrix_variantes<- matrix(0, ncol = 10, nrow = 40)
+for (i in 1:10){
+  matrix_variantes[,i]<- df_variantes_control[,i+1] == df_variantes_lab[,i+1]
+}
