@@ -49,4 +49,17 @@ for (i in 1:length(unique(as.character(linajes_data$id)))) {
 
 df_linajes <- do.call(rbind.data.frame, lista_linajes)
 
-write.table(df_linajes, "Data/linajes_qc_mod.csv", row.names = F, col.names = T, quote = F, sep = "\t")
+# write.table(df_linajes, "Data/linajes_qc_mod.csv", row.names = F, col.names = T, quote = F, sep = "\t")
+
+### calculo de TP y FP
+
+qc_parsed_linajes <- read_excel(dir_excel[1], sheet = 8)
+
+df_parsed_linajes <- qc_parsed_linajes[,c(6:17)]
+
+# linajes
+
+df_linajes<- df_parsed_linajes[df_parsed_linajes$tipo == "linaje", ]
+
+
+
