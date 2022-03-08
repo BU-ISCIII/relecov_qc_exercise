@@ -55,11 +55,11 @@ df_linajes <- do.call(rbind.data.frame, lista_linajes)
 
 qc_parsed_linajes <- read_excel(dir_excel[1], sheet = 8)
 
-df_parsed_linajes <- qc_parsed_linajes[,c(6:17)]
+df_parsed_linajes <- as.data.frame(qc_parsed_linajes[,c(6:17)])
 
 # linajes
 
-df_linajes<- df_parsed_linajes[df_parsed_linajes$tipo == "linaje", ]
+df_linajes<- df_parsed_linajes[df_parsed_linajes$tipo == "linaje" & df_parsed_linajes$grupo != "control", ]
 
-
-
+df_control<- df_linajes[df_linajes$grupo == "control_nuevo", c(1,3:12)]
+df_lab<- df_linajes[df_linajes$grupo != "control_nuevo", c(1,3:12)]
