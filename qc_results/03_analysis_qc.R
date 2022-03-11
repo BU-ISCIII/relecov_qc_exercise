@@ -16,11 +16,11 @@ library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
 
 ### Excel ----
 
-dir_excel <- list.files(path = "../Data", pattern = "xlsx", full.names = TRUE, recursive = TRUE, include.dirs = FALSE)
+dir_excel <- list.files(path = "Data", pattern = "xlsx", full.names = TRUE, recursive = TRUE, include.dirs = FALSE)
 
 ### datos linajes ----
 
-qc_linajes <- read_excel(dir_excel[1], sheet = 4)
+qc_linajes <- read_excel(dir_excel[1], sheet = 7)
 
 linajes_data <- data.frame(
   id = as.character(qc_linajes$ID),
@@ -55,67 +55,66 @@ df_linajes <- do.call(rbind.data.frame, lista_linajes)
 
 qc_parsed_linajes <- read_excel(dir_excel[1], sheet = 8)
 
-df_parsed_linajes <- as.data.frame(qc_parsed_linajes[,c(6:17)])
+df_parsed_linajes <- as.data.frame(qc_parsed_linajes[, c(6:17)])
 
 # linajes
 
-df_linajes<- df_parsed_linajes[df_parsed_linajes$tipo == "linaje" & df_parsed_linajes$grupo != "control", ]
-vector_samples<- paste0(rep("sample_", 3), rep(1:10))
-colnames(df_linajes)<- c("grupo", "tipo", vector_samples)
+df_linajes <- df_parsed_linajes[df_parsed_linajes$tipo == "linaje" & df_parsed_linajes$grupo != "control", ]
+vector_samples <- paste0(rep("sample_", 3), rep(1:10))
+colnames(df_linajes) <- c("grupo", "tipo", vector_samples)
 
-df_linajes_control<- df_linajes[df_linajes$grupo == "control_nuevo", c(1,3:12)]
-df_linajes_lab<- df_linajes[df_linajes$grupo != "control_nuevo", c(1,3:12)]
+df_linajes_control <- df_linajes[df_linajes$grupo == "control_nuevo", c(1, 3:12)]
+df_linajes_lab <- df_linajes[df_linajes$grupo != "control_nuevo", c(1, 3:12)]
 
-matrix_linajes<- matrix(0, ncol = 10, nrow = 40)
-for (i in 1:10){
-  matrix_linajes[,i]<- df_linajes_control[,i+1] == df_linajes_lab[,i+1]
+matrix_linajes <- matrix(0, ncol = 10, nrow = 40)
+for (i in 1:10) {
+  matrix_linajes[, i] <- df_linajes_control[, i + 1] == df_linajes_lab[, i + 1]
 }
 
-colnames(matrix_linajes)<- colnames(df_linajes[3:12])
-rownames(matrix_linajes)<- NULL
+colnames(matrix_linajes) <- colnames(df_linajes[3:12])
+rownames(matrix_linajes) <- NULL
 
-df_resultados_linajes<- data.frame (id = df_linajes$grupo[2:41], matrix_linajes)
+df_resultados_linajes <- data.frame(id = df_linajes$grupo[2:41], matrix_linajes)
 
-dim (df_resultados_linajes[,2:11])
+dim(df_resultados_linajes[, 2:11])
 
-matrix_valores_0<- matrix(0, ncol = 2, nrow = 40)
-for (i in 1:40){
-  tabla_0<- table(matrix_linajes[i,])
-  tabla_0<- table(matrix_linajes[i,])
-  matrix_valores_0[i,1]<- as.numeric(tabla_0[1])
+matrix_valores_0 <- matrix(0, ncol = 1, nrow = 40)
+for (i in 1:40) {
+  tabla_0 <- table(matrix_linajes[i, ])
+  tabla_0 <- table(matrix_linajes[i, ])
+  matrix_valores_0[i, 1] <- as.numeric(tabla_0[1])
 }
 
+table(matrix_valores_0[, 1])
 
+# variantes
 
-#variantes
+df_variantes <- df_parsed_linajes[df_parsed_linajes$tipo == "variante" & df_parsed_linajes$grupo != "control", ]
+vector_samples <- paste0(rep("sample_", 3), rep(1:10))
+colnames(df_variantes) <- c("grupo", "tipo", vector_samples)
 
-df_variantes<- df_parsed_linajes[df_parsed_linajes$tipo == "variante" & df_parsed_linajes$grupo != "control", ]
-vector_samples<- paste0(rep("sample_", 3), rep(1:10))
-colnames(df_variantes)<- c("grupo", "tipo", vector_samples)
+df_variantes_control <- df_variantes[df_variantes$grupo == "control_nuevo", c(1, 3:12)]
+df_variantes_lab <- df_variantes[df_variantes$grupo != "control_nuevo", c(1, 3:12)]
 
-df_variantes_control<- df_variantes[df_variantes$grupo == "control_nuevo", c(1,3:12)]
-df_variantes_lab<- df_variantes[df_variantes$grupo != "control_nuevo", c(1,3:12)]
-
-matrix_variantes<- matrix(0, ncol = 10, nrow = 40)
-for (i in 1:10){
-  matrix_variantes[,i]<- df_variantes_control[,i+1] == df_variantes_lab[,i+1]
+matrix_variantes <- matrix(0, ncol = 10, nrow = 40)
+for (i in 1:10) {
+  matrix_variantes[, i] <- df_variantes_control[, i + 1] == df_variantes_lab[, i + 1]
 }
 
-colnames(matrix_variantes)<- colnames(df_variantes[3:12])
-rownames(matrix_variantes)<- NULL
+colnames(matrix_variantes) <- colnames(df_variantes[3:12])
+rownames(matrix_variantes) <- NULL
 
-df_resultados_variantes<- data.frame (id = df_variantes$grupo[2:41], matrix_variantes)
+df_resultados_variantes <- data.frame(id = df_variantes$grupo[2:41], matrix_variantes)
 
-mm<- as.matrix(df_resultados_variantes[,2:11])
-table (mm)
+mm <- as.matrix(df_resultados_variantes[, 2:11])
+table(mm)
 
 # variantes y linajes
 
-matrix_valores_01<- matrix(0, ncol = 2, nrow = 40)
-for (i in 1:40){
-  tabla_0<- table(matrix_linajes[i,])
-  tabla_1<- table(matrix_variantes[i,])
-  matrix_valores_0[i,1]<- as.numeric(tabla_0[1])
-  matrix_valores_0[i,1]<- as.numeric(tabla_1[1])
+matrix_valores_0 <- matrix(0, ncol = 1, nrow = 40)
+for (i in 1:40) {
+  tabla_0 <- table(matrix_variantes[i, ])
+  matrix_valores_0[i, 1] <- as.numeric(tabla_0[1])
 }
 
+table(matrix_valores_0[, 1])
