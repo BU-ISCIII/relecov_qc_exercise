@@ -21,7 +21,7 @@ dir_excel<-list.files(path = "Data", pattern = "xlsx", full.names = TRUE, recurs
 
 ### datos Resultados ----
 
-qc_resultados <- read_excel(dir_excel[1], sheet = 3)
+qc_resultados <- read_excel(dir_excel[1], sheet = 4)
 
 ### datos Fechas ----
 
@@ -74,16 +74,23 @@ estadistica_data<- data.frame (
   perc_Ns = as.numeric(qc_estadistica$var_n_Ns),
   variants_75 = as.numeric(qc_estadistica$var_number_variants_75),
   variants_effect = as.numeric(qc_estadistica$var_variantseffect),
-  protocolo = as.character(qc_resultados)
+  protocolo = as.character(qc_estadistica$var_protocolo_diagnostico)
 )
 
 ##### Plot ct -----
 
 ggplot(estadistica_data, aes(x = muestra, y = ct, fill = "steelblue")) +
   geom_boxplot(show.legend = F) +
-  facet_grid(~)
   labs(x = "", y = "Ct",  title = "Valores de Ct") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+ggsave("Graficos/qc_resultados_ct_muestras.png")
+
+ggplot(estadistica_data, aes(x = muestra, y = ct, fill = "steelblue")) +
+  geom_boxplot(show.legend = F) +
+  facet_grid(~protocolo) +
+  labs(x = "", y = "Ct",  title = "Valores de Ct") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+ggsave("Graficos/qc_resultados_ct_protocolo.png")
 
 
 #### datos reads -----
@@ -111,23 +118,10 @@ read_data<- data.frame (id = id_lab,
                       df_read[,c(2,3)]); row.names(read_data)<- NULL
 read_data$tipo<- factor(read_data$tipo, levels = c("read_n", "quality", "quality_10"))
 
-
-##### Plot reads -----
-plot_data_read<- read_data[read_data$tipo == "read_n" | read_data$tipo == "quality_10", ]
-
-revalue(plot_data_read$tipo, c("read_n" = "Reads", 
-                          "quality_10" = "Porcentaje reads que han pasado el QC (en base 10)"
-)) -> plot_data_read$tipo
-
-ggplot(plot_data_read, aes(x = id, y = read, fill = tipo)) +
-  geom_boxplot(show.legend = F) +
-  facet_grid(~tipo) +
-  labs(x = "", y = "log(reads) / muestra",  title = "") +
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, size = 7))
-
 #### datos estadistica Ct ----
 
 nombres_labs<- unique(estadistica_data$id)
+nombres_muestras<- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 
 lista_nombres<- list()
 for (i in 1:40){
@@ -138,6 +132,16 @@ for (i in 1:40){
 }
 
 id_lab<- unlist(lista_nombres)
+
+lista_muestras<- list()
+for (i in 1:10){
+  
+  n_nombres_labs<- rep (nombres_muestra)[i], 40)
+  lista_muestras[[i]]<- as.character(n_nombres_labs)
+  
+}
+
+id_muestra<- unlist(lista_muestras)
 
 lista_ct<- list ()
 for (i in 1:nrow(estadistica_data)){
@@ -152,11 +156,14 @@ df_ct <- bind_rows(lista_ct, .id = "id")
 ct_data<- data.frame (id = id_lab,
 df_ct[,c(2,3)])
 
+ct_data<- data.frame (id = id_muestra,
+df_ct[,c(2,3)])
+
 row.names(ct_data)<- NULL
 ct_data$tipo<- factor(ct_data$tipo, levels = c("PCR", "ORF", "S", "N"))
 
 ##### Plot ct -----
-
+head(ct_data)
 ggplot(ct_data, aes(x = id, y = Ct, fill = "steelblue")) +
   geom_boxplot(show.legend = F) +
   labs(x = "", y = "Ct",  title = "Valores de Ct") +
