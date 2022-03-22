@@ -13,7 +13,6 @@ library(readr, quietly = TRUE, warn.conflicts = FALSE)
 library(janitor, quietly = TRUE, warn.conflicts = FALSE)
 library(tibble, quietly = TRUE, warn.conflicts = FALSE)
 library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
-library(viridis, quietly = TRUE, warn.conflicts = FALSE)
 
 ### Excel ----
 
