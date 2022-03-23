@@ -56,7 +56,7 @@ qc_categorias <- read_excel(dir_excel[1], sheet = 1)
 categorias_data <- data.frame(
     id = as.character(qc_categorias$ID),
     values = qc_categorias$values,
-    platform_1 = factor(qc_categorias$sequencing_platforms_1, levels = c("Illumina", "Nanopore", "Ion Torrent")),
+    platform_1 = factor(qc_categorias$sequencing_platforms_1, levels = c("Illumina", "Ion Torrent", "Nanopore")),
     platform_2 = as.character(qc_categorias$sequencing_platforms_2),
     librerias = as.character(qc_categorias$libraries_2),
     diagnostico_1 = qc_categorias$protocolo_diagnostico_2,
@@ -94,6 +94,14 @@ ggplot(subset(categorias_data, diagnostico_2 != "NA"), aes(diagnostico_2)) +
     geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_diagnostico_2.png")
+
+ggplot(subset(categorias_data, diagnostico_1 != "NA"), aes(diagnostico_1)) +
+    geom_bar() +
+    facet_grid(~platform_1) +
+    labs(y = "Number of laboratories", x = "", title = "Diagnosis protocol for SARS-CoV-2") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 6))
+ggsave("Graficos/qc_barplot_diagnostico_3.png")
 
 #### plot librerias ----
 
