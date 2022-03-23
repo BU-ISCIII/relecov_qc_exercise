@@ -52,5 +52,19 @@ ggplot(fechas_data, aes(y = ejecucion)) +
     labs(y = "Execution time (days)", x = "")
 ggsave("Graficos/qc_boxplot_ejecucion.png")
 
+### datos categorias ----
 
-# hay que volver a hacer todo
+qc_categorias <- read_excel(dir_excel[1], sheet = 1)
+
+categorias_data <- data.frame(
+  id = as.character(qc_categorias$ID),
+  platform_1 = as.character(qc_categorias$sequencing_platforms_1),
+  platform_2 = as.character(qc_categorias$sequencing_platforms_2),
+  librerias = as.character(qc_categorias$libraries_2)
+)
+
+#### boxplot ejecucion ----
+
+ggplot(fechas_data, aes(y = ejecucion)) +
+    geom_boxplot() +
+    labs(y = "Execution time (days)", x = "")
