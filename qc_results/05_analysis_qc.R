@@ -20,7 +20,7 @@ dir_excel <- list.files(path = "Data", pattern = "xlsx", full.names = TRUE, recu
 
 qc_fechas <- read_excel(dir_excel[1], sheet = 2)
 
-# interesante las fechas de envio, recepcion y emision
+# datos modificados
 
 fechas_data <- data.frame(
     id = as.character(qc_fechas$ID),
@@ -183,3 +183,141 @@ ggplot(categorias_data, aes(bioinformatica)) +
     geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
     theme(axis.text.x = element_text(angle = 45, size = 6, vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_2.png")
+
+
+#### Datos estadistica -----
+
+qc_ct<- read_excel(dir_excel[1], sheet = 4)
+
+nombres_muestras<- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
+
+ct_data<- data.frame (
+  id = as.character(qc_ct$ID),
+  muestra = as.character(qc_ct$`Sample ID`),
+  muestra2 = as.character(rep(nombres_muestras, 41)),
+  plataforma = as.character(qc_ct$plataforma),
+  ct = as.numeric(qc_ct$`Valor Ct PCR`),
+  ct_N = as.numeric(qc_ct$`Valor Ct N`),
+  ct_ORF = as.numeric(qc_ct$`Valor Ct ORF`),
+  ct_S = as.numeric(qc_ct$`Valor Ct S`)
+)
+
+ct_data$muestra2<- factor(ct_data$muestra2, levels = c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10"))
+
+##### Plot ct -----
+
+ggplot(ct_data, aes(x = muestra2, y = ct, fill = plataforma)) +
+  geom_boxplot(show.legend = T) +
+  guides(fill = guide_legend(title = "Platform")) +
+  geom_point(data = ct_data[ct_data$id == "Control", ], aes(muestra2, ct), colour = "steelblue", shape = 23, width = 0.5, size = 2.5, height = 0.5) +
+  labs(x = "", y = "Ct",  title = "Valores de Ct") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+ggsave("Graficos/qc_resultados_ct_muestras_control.png")
+
+ggplot(estadistica_data, aes(x = muestra, y = ct, fill = "steelblue")) +
+  geom_boxplot(show.legend = F) +
+  facet_grid(~protocolo) +
+  labs(x = "", y = "Ct",  title = "Valores de Ct") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+ggsave("Graficos/qc_resultados_ct_protocolo.png")
+
+
+#### datos reads -----
+lista_read<- list ()
+for (i in 1:nrow(estadistica_data)){
+  
+  read_t<- t(estadistica_data[i,c(7,8,12)])
+  lista_read[[i]]<- data.frame(id = i, read = read_t[,1], tipo = c("read_n", "quality", "quality_10"))
+  
+}
+
+df_read <- bind_rows(lista_read, .id = "id")
+
+lista_nombres<- list()
+for (i in 1:40){
+  
+  n_nombres_labs<- rep (nombres_labs[i], 40)
+  lista_nombres[[i]]<- as.character(n_nombres_labs)
+  
+}
+
+id_lab<- unlist(lista_nombres)
+
+read_data<- data.frame (id = id_lab,
+                      df_read[,c(2,3)]); row.names(read_data)<- NULL
+read_data$tipo<- factor(read_data$tipo, levels = c("read_n", "quality", "quality_10"))
+
+#### datos estadistica Ct ----
+
+nombres_labs<- unique(estadistica_data$id)
+nombres_muestras<- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
+
+lista_nombres<- list()
+for (i in 1:40){
+  
+  n_nombres_labs<- rep (nombres_labs[i], 40)
+  lista_nombres[[i]]<- as.character(n_nombres_labs)
+  
+}
+
+id_lab<- unlist(lista_nombres)
+
+lista_muestras<- list()
+for (i in 1:10){
+  
+  n_nombres_labs<- rep (nombres_muestra)[i], 40)
+  lista_muestras[[i]]<- as.character(n_nombres_labs)
+  
+}
+
+id_muestra<- unlist(lista_muestras)
+
+lista_ct<- list ()
+for (i in 1:nrow(estadistica_data)){
+  
+  ct_t<- t(estadistica_data[i,3:6])
+  lista_ct[[i]]<- data.frame(id = i, Ct = ct_t[,1], tipo = c("PCR", "N", "ORF", "S"))
+  
+}
+
+df_ct <- bind_rows(lista_ct, .id = "id")
+
+ct_data<- data.frame (id = id_lab,
+df_ct[,c(2,3)])
+
+ct_data<- data.frame (id = id_muestra,
+df_ct[,c(2,3)])
+
+row.names(ct_data)<- NULL
+ct_data$tipo<- factor(ct_data$tipo, levels = c("PCR", "ORF", "S", "N"))
+
+##### Plot ct -----
+head(ct_data)
+ggplot(ct_data, aes(x = id, y = Ct, fill = "steelblue")) +
+  geom_boxplot(show.legend = F) +
+  labs(x = "", y = "Ct",  title = "Valores de Ct") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+ggsave("Graficos/qc_resultados_ct.png")
+
+
+
+estadistica_data<- data.frame (
+  id = as.character(qc_estadistica$ID),
+  muestra = as.character(qc_estadistica$`Sample ID`),
+  ct = as.numeric(qc_estadistica$`Valor Ct PCR`),
+  ct_N = as.numeric(qc_estadistica$`Valor Ct N`),
+  ct_ORF = as.numeric(qc_estadistica$`Valor Ct ORF`),
+  ct_S = as.numeric(qc_estadistica$`Valor Ct S`),
+  readc = log10(as.numeric(qc_estadistica$var_readcount)),
+  qc_filtered = as.numeric(qc_estadistica$var_qcfiltered),
+  host = as.numeric(qc_estadistica$var_readhost),
+  virus = as.numeric(qc_estadistica$var_readsvirus),
+  unmapped = as.numeric(qc_estadistica$var_unmapped),
+  qc10x = as.numeric(qc_estadistica$`var_QC>10x`),
+  mean_depth = as.numeric(qc_estadistica$var_mean_depth_coverage),
+  perc_Ns = as.numeric(qc_estadistica$var_n_Ns),
+  variants_75 = as.numeric(qc_estadistica$var_number_variants_75),
+  variants_effect = as.numeric(qc_estadistica$var_variantseffect),
+  protocolo = as.character(qc_estadistica$var_protocolo_diagnostico)
+)
