@@ -60,12 +60,11 @@ categorias_data <- data.frame(
     platform_2 = as.character(qc_categorias$sequencing_platforms_2),
     librerias = as.character(qc_categorias$libraries_2),
     diagnostico_1 = qc_categorias$protocolo_diagnostico_2,
-    prueba = qc_categorias$"Library layout",
+    diagnostico_2 = qc_categorias$protocolo_diagnostico_4,
     comercial = factor(qc_categorias$comercial, levels = c("Thermo Fisher", "Seegene", "Vircell", "None"))
 )
 
 #### plot diagnostico ----
-
 
 categorias_data$diagnostico_1 <- fct_relevel(categorias_data$diagnostico_1, c(
     "RT-PCR 2019-nCoV Assay kit",
@@ -84,17 +83,24 @@ categorias_data$diagnostico_1 <- fct_relevel(categorias_data$diagnostico_1, c(
 ggplot(subset(categorias_data, diagnostico_1 != "NA"), aes(diagnostico_1, fill = comercial)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Commercial")) +
-    labs(y = "", x = "") +
+    labs(y = "Number of laboratories", x = "", title = "Diagnosis protocol for SARS-CoV-2") +
     geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_diagnostico.png")
+
+ggplot(subset(categorias_data, diagnostico_2 != "NA"), aes(diagnostico_2)) +
+    geom_bar() +
+    labs(y = "Number of laboratories", x = "", title = "Diagnosis protocol for SARS-CoV-2") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+ggsave("Graficos/qc_barplot_diagnostico_2.png")
 
 #### plot librerias ----
 
 ggplot(subset(categorias_data, !is.na(librerias)), aes(fct_reorder(categorias_data$librerias, categorias_data$values), fill = platform_1)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Platform")) +
-    labs(y = "", x = "") +
+    labs(y = "Number of laboratories", x = "", title = "Libraries") +
     geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_librerias.png")
