@@ -61,6 +61,9 @@ categorias_data <- data.frame(
     librerias = as.character(qc_categorias$libraries_2),
     diagnostico_1 = qc_categorias$protocolo_diagnostico_2,
     diagnostico_2 = qc_categorias$protocolo_diagnostico_4,
+    enriquecimiento = qc_categorias$enrichment,
+    genome = qc_categorias$reference_genome,
+    bioinformatica = qc_categorias$bioinformatic_protocol,
     comercial = factor(qc_categorias$comercial, levels = c("Thermo Fisher", "Seegene", "Vircell", "None"))
 )
 
@@ -108,7 +111,75 @@ ggsave("Graficos/qc_barplot_diagnostico_3.png")
 ggplot(subset(categorias_data, !is.na(librerias)), aes(fct_reorder(categorias_data$librerias, categorias_data$values), fill = platform_1)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Platform")) +
+    coord_flip() +
     labs(y = "Number of laboratories", x = "", title = "Libraries") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = 1, hjust = 2) +
+    theme(axis.text.x = element_text(vjust = 1, hjust = 1))
+ggsave("Graficos/qc_barplot_librerias.png")
+
+#### plot plataformas ----
+
+ggplot(categorias_data, aes(platform_1)) +
+    geom_bar() +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Platform") +
     geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
-ggsave("Graficos/qc_barplot_librerias.png")
+ggsave("Graficos/qc_barplot_plataforma.png")
+
+ggplot(categorias_data, aes(platform_2, fill = platform_1)) +
+    geom_bar() +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Platform") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+ggsave("Graficos/qc_barplot_plataforma_2.png")
+
+#### plot enriquecimiento ----
+
+ggplot(categorias_data, aes(enriquecimiento)) +
+    geom_bar() +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Enrichment") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+ggsave("Graficos/qc_barplot_enrichment.png")
+
+ggplot(categorias_data, aes(enriquecimiento)) +
+    geom_bar() +
+    facet_grid(~platform_1) +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Enrichment") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+ggsave("Graficos/qc_barplot_enrichment_2.png")
+
+#### plot genome ----
+
+ggplot(categorias_data, aes(genome)) +
+    geom_bar() +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Reference genome") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+ggsave("Graficos/qc_barplot_genome.png")
+
+#### plot bioinformatica ----
+
+ggplot(categorias_data, aes(bioinformatica)) +
+    geom_bar() +
+    coord_flip() +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Bioinformatic protocol") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -2) +
+    theme(axis.text.x = element_text(size = 6, vjust = 1, hjust = 1))
+ggsave("Graficos/qc_barplot_bioinformatica.png")
+
+ggplot(categorias_data, aes(bioinformatica)) +
+    geom_bar() +
+    facet_grid(~platform_1) +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Bioinformatic protocol") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
+    theme(axis.text.x = element_text(angle = 45, size = 6, vjust = 1, hjust = 1))
+ggsave("Graficos/qc_barplot_bioinformatica_2.png")
