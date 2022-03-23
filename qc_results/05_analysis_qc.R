@@ -184,7 +184,6 @@ ggplot(categorias_data, aes(bioinformatica)) +
     theme(axis.text.x = element_text(angle = 45, size = 6, vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_2.png")
 
-
 #### Datos estadistica -----
 
 qc_ct <- read_excel(dir_excel[1], sheet = 4)
@@ -272,24 +271,78 @@ ggplot(ct_format_data, aes(x = id, y = Ct, fill = tipo)) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_ct_plataforma.png")
 
+#### Datos estadistica -----
 
+qc_estadistica <- read_excel(dir_excel[1], sheet = 3)
+
+nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 
 estadistica_data <- data.frame(
     id = as.character(qc_estadistica$ID),
     muestra = as.character(qc_estadistica$`Sample ID`),
-    ct = as.numeric(qc_estadistica$`Valor Ct PCR`),
-    ct_N = as.numeric(qc_estadistica$`Valor Ct N`),
-    ct_ORF = as.numeric(qc_estadistica$`Valor Ct ORF`),
-    ct_S = as.numeric(qc_estadistica$`Valor Ct S`),
-    readc = log10(as.numeric(qc_estadistica$var_readcount)),
-    qc_filtered = as.numeric(qc_estadistica$var_qcfiltered),
-    host = as.numeric(qc_estadistica$var_readhost),
-    virus = as.numeric(qc_estadistica$var_readsvirus),
-    unmapped = as.numeric(qc_estadistica$var_unmapped),
+    muestra2 = as.character(rep(nombres_muestras, 40)),
+    plataforma = as.character(qc_estadistica$plataforma),
     qc10x = as.numeric(qc_estadistica$`var_QC>10x`),
     mean_depth = as.numeric(qc_estadistica$var_mean_depth_coverage),
     perc_Ns = as.numeric(qc_estadistica$var_n_Ns),
     variants_75 = as.numeric(qc_estadistica$var_number_variants_75),
-    variants_effect = as.numeric(qc_estadistica$var_variantseffect),
-    protocolo = as.character(qc_estadistica$var_protocolo_diagnostico)
+    variants_effect = as.numeric(qc_estadistica$var_variantseffect)
 )
+
+estadistica_data$muestra2 <- factor(estadistica_data$muestra2, levels = c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10"))
+estadistica_data$plataforma <- factor(estadistica_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
+
+levels_id <- c(
+    "COD_2103",
+    "COD_2106_2",
+    "COD_2107",
+    "COD_2108",
+    "COD_2109",
+    "COD_2110",
+    "COD_2111",
+    "COD_2112",
+    "COD_2113",
+    "COD_2114",
+    "COD_2116",
+    "COD_2117",
+    "COD_2117_2",
+    "COD_2121",
+    "COD_2122",
+    "COD_2123",
+    "COD_2124",
+    "COD_2124_2",
+    "COD_2125",
+    "COD_2126",
+    "COD_2129",
+    "COD_2131",
+    "COD_2132",
+    "COD_2134",
+    "COD_2135",
+    "COD_2137",
+    "COD_2139",
+    "COD_2141",
+    "COD_2102",
+    "COD_2104",
+    "COD_2105",
+    "COD_2115",
+    "COD_2119",
+    "COD_2120",
+    "COD_2127",
+    "COD_2136",
+    "COD_2143",
+    "COD_2106",
+    "COD_2107_2",
+    "COD_2140"
+)
+
+estadistica_data$id <- factor(estadistica_data$id, levels = levels_id)
+
+##### Plot depth -----
+
+ggplot(subset(estadistica_data, mean_depth > 5), aes(x = id, y = log10(mean_depth), fill = plataforma)) +
+    geom_boxplot() +
+    geom_jitter(position = position_jitter(0.2), aes(color = muestra2)) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    labs(x = "", y = "log10(coverage (mean depth)) / sample", title = "") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+ggsave("Graficos/qc_resultados_coverage_platform.png")
