@@ -82,9 +82,12 @@ categorias_data$librerias <- factor(categorias_data$librerias, levels = c(c(
 
 #### plot librerias ----
 
+count_librerias <- as.numeric(table(categorias_data$librerias))
+
 ggplot(subset(categorias_data, !is.na(librerias)), aes(librerias, fill = platform_1)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Platform")) +
     labs(y = "", x = "") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_librerias.png")
