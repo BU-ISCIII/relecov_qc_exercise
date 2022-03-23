@@ -7,13 +7,10 @@ library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
 library(tidyr, quietly = TRUE, warn.conflicts = FALSE)
 library(tibble, quietly = TRUE, warn.conflicts = FALSE)
 library(readxl, quietly = TRUE, warn.conflicts = FALSE)
-library(stringr, quietly = TRUE, warn.conflicts = FALSE)
-library(readODS, quietly = TRUE, warn.conflicts = FALSE)
-library(readr, quietly = TRUE, warn.conflicts = FALSE)
 library(janitor, quietly = TRUE, warn.conflicts = FALSE)
 library(tibble, quietly = TRUE, warn.conflicts = FALSE)
 library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
-library(viridis, quietly = TRUE, warn.conflicts = FALSE)
+library(forcats, quietly = TRUE, warn.conflicts = FALSE)
 
 ### Excel ----
 
@@ -58,33 +55,43 @@ qc_categorias <- read_excel(dir_excel[1], sheet = 1)
 
 categorias_data <- data.frame(
     id = as.character(qc_categorias$ID),
+    values = qc_categorias$values,
     platform_1 = factor(qc_categorias$sequencing_platforms_1, levels = c("Illumina", "Nanopore", "Ion Torrent")),
     platform_2 = as.character(qc_categorias$sequencing_platforms_2),
-    librerias = as.character(qc_categorias$libraries_2)
+    librerias = as.character(qc_categorias$libraries_2),
+    diagnostico_1 = qc_categorias$protocolo_diagnostico_2,
+    prueba = qc_categorias$"Library layout",
+    comercial = factor(qc_categorias$comercial, levels = c("Thermo Fisher", "Seegene", "Vircell", "None"))
 )
 
-#### levels librerias ----
+#### plot diagnostico ----
 
-categorias_data$librerias <- factor(categorias_data$librerias, levels = c(c(
-    "ABL DeepChek NGS kit",
-    "Illumina DNA Prep Tagmentation",
-    "Illumina COVIDSeq Test kit",
-    "NEBNext® Ultra™ II FS DNA Library Prep Kit for Illumina",
-    "NEBNext® ARTIC SARS-CoV-2 FS kit for Illumina",
-    "Ion Xpress kit",
-    "Ion AmpliSeq Kit for Chef DL8 kit",
-    "NEBNext® Fast DNA Library Prep Set for Ion Torrent™ kit",
-    "ViroKey SQ FLEX SARS-CoV-2 Genotyping Assay (RUO) for Ion Torrent",
-    "Ion Code kit",
-    "Ion AmpliSeq™ SARS-CoV-2 Insight Research Assay - GS Manual",
-    "Oxford Nanopore Sequencing Kit"
-)))
+
+categorias_data$diagnostico_1 <- fct_relevel(categorias_data$diagnostico_1, c(
+    "RT-PCR 2019-nCoV Assay kit",
+    "RT-PCR 2019-nCoV RUO kit",
+    "RT-PCR COVID-19 CE-IVD kit",
+    "RT-PCR Allplex SARS-Cov-2-Master Assay",
+    "RT-PCR AllplexTM SARS-CoV-2/FluA/FluB/RSV kit",
+    "RT-PCR Multiplex SARS-CoV-2 kit",
+    "RT-PCR Vircell Multiplex SARS-CoV-2 kit",
+    "Commercial detection kit",
+    "in house RT-PCR",
+    "NA",
+    "Sequencing"
+))
+
+ggplot(subset(categorias_data, diagnostico_1 != "NA"), aes(diagnostico_1, fill = comercial)) +
+    geom_bar() +
+    guides(fill = guide_legend(title = "Commercial")) +
+    labs(y = "", x = "") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+ggsave("Graficos/qc_barplot_diagnostico.png")
 
 #### plot librerias ----
 
-count_librerias <- as.numeric(table(categorias_data$librerias))
-
-ggplot(subset(categorias_data, !is.na(librerias)), aes(librerias, fill = platform_1)) +
+ggplot(subset(categorias_data, !is.na(librerias)), aes(fct_reorder(categorias_data$librerias, categorias_data$values), fill = platform_1)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Platform")) +
     labs(y = "", x = "") +
