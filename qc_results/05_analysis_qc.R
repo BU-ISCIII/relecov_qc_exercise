@@ -366,6 +366,11 @@ ggplot(estadistica_data, aes(x = id, y = qc10x, fill = plataforma)) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_genoma_10x_sin samples.png")
 
+# NAs
+
+# aa<- data.frame(estadistica_data[is.na(estadistica_data$perc_Ns) == T, c(1, 3, 4, 7)])
+# write.table(aa, "ns_na.csv", sep = "\t", row.names = F, quote = F)
+
 ##### Plot Ns illumina -----
 
 data_n <- data.frame(estadistica_data[is.na(estadistica_data$perc_Ns) != T, c(1, 3, 4, 7)])
@@ -398,3 +403,59 @@ ggplot(subset(data_n, plataforma == "Nanopore"), aes(x = factor(id), y = perc_Ns
     labs(x = "", y = "Ns % / sample", title = "") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_Ns_nanopore.png")
+
+##### Plot variantes -----
+
+data_variantes <- data.frame(estadistica_data[is.na(estadistica_data$variants_75) != T, c(1, 3, 4, 8, 9)])
+data_variantes$id <- factor(data_variantes$id, levels = unique(data_variantes$id))
+
+##### Plot variantes illumina -----
+
+ggplot(subset(data_variantes, plataforma == "Illumina"), aes(x = id, y = variants_75)) +
+    geom_jitter(position = position_jitter(0.01), aes(color = muestra2)) +
+    facet_grid(~plataforma) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "Variants (AF > 0.75) / sample", title = "") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+ggsave("Graficos/qc_resultados_variantes_AF75_illumina.png")
+
+##### Plot variantes Ion torrent -----
+
+ggplot(subset(data_variantes, plataforma == "Ion Torrent"), aes(x = id, y = variants_75)) +
+    geom_jitter(position = position_jitter(0.01), aes(color = muestra2)) +
+    facet_grid(~plataforma) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "Variants (AF > 0.75) / sample", title = "") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+ggsave("Graficos/qc_resultados_variantes_AF75_iontorrent.png")
+
+##### Plot variantes nanopore no hay datos -----
+
+data_efecto <- data.frame(estadistica_data[is.na(estadistica_data$variants_effect) != T, c(1, 3, 4, 9)])
+data_efecto$id <- factor(data_efecto$id, levels = unique(data_efecto$id))
+
+##### Plot variantes efecto -----
+
+ggplot(subset(data_efecto, plataforma == "Illumina"), aes(x = id, y = variants_effect)) +
+    geom_jitter(position = position_jitter(0.01), aes(color = muestra2)) +
+    facet_grid(~plataforma) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "Variants effect (AF > 0.75) / sample", title = "") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+ggsave("Graficos/qc_resultados_variantes_efecto_illumina.png")
+
+ggplot(subset(data_efecto, plataforma == "Ion Torrent"), aes(x = id, y = variants_effect)) +
+    geom_jitter(position = position_jitter(0.01), aes(color = muestra2)) +
+    facet_grid(~plataforma) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "Variants effect (AF > 0.75) / sample", title = "") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+ggsave("Graficos/qc_resultados_variantes_efecto_iontorrent.png")
+
+ggplot(subset(data_efecto, plataforma == "Nanopore"), aes(x = id, y = variants_effect)) +
+    geom_point(aes(color = muestra2)) +
+    facet_grid(~plataforma) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "Variants effect (AF > 0.75) / sample", title = "") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+ggsave("Graficos/qc_resultados_variantes_efecto_nanopore.png")
