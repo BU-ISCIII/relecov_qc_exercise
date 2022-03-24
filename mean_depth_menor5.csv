@@ -1,0 +1,18 @@
+id	muestra2	plataforma	mean_depth
+COD_2106_2	sample_1	Illumina	1.26
+COD_2106_2	sample_2	Illumina	1.2
+COD_2106_2	sample_3	Illumina	1.43
+COD_2106_2	sample_4	Illumina	1.23
+COD_2106_2	sample_5	Illumina	1.56
+COD_2106_2	sample_6	Illumina	1.36
+COD_2106_2	sample_8	Illumina	1.46
+COD_2106_2	sample_9	Illumina	1.39
+COD_2106_2	sample_10	Illumina	1.56
+COD_2114	sample_7	Illumina	0
+COD_2131	sample_7	Illumina	0.5
+COD_2143	sample_2	Ion Torrent	3.07
+COD_2143	sample_4	Ion Torrent	4.8
+COD_2143	sample_6	Ion Torrent	3.92
+COD_2143	sample_7	Ion Torrent	3.93
+COD_2143	sample_8	Ion Torrent	2.75
+COD_2143	sample_9	Ion Torrent	3.82
