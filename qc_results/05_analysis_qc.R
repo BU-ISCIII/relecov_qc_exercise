@@ -579,7 +579,6 @@ ggsave("Graficos/qc_secuenciacion_reads_plataforma.png")
 qc_parsed_linajes <- read_excel(dir_excel[1], sheet = 5)
 df_parsed_linajes <- as.data.frame(qc_parsed_linajes[, c(3, 5:14)])
 
-
 # linajes
 
 df_linajes_control <- df_parsed_linajes[df_parsed_linajes$grupo == "control", 2:11]
@@ -587,7 +586,13 @@ df_linajes_lab <- df_parsed_linajes[df_parsed_linajes$grupo != "control", 2:11]
 
 matrix_linajes <- matrix(0, ncol = 10, nrow = 40)
 for (i in 1:10) {
-    matrix_linajes[, i] <- df_linajes_control[, i] == df_linajes_lab[, i]
+    control <- as.character(df_linajes_control[, i])
+    sample <- as.character(df_linajes_lab[, i])
+    if (control == sample) {
+        matrix_linajes[,i]<- 
+    } else {
+        matrix_linajes[,i]<- 0 
+    }
 }
 
 colnames(matrix_linajes) <- colnames(df_parsed_linajes[2:11])
@@ -604,34 +609,6 @@ for (i in 1:40) {
 
 table(matrix_valores_0[, 1])
 
-# variantes
+# Sensibilidad y precision
 
-df_variantes <- df_parsed_linajes[df_parsed_linajes$tipo == "variante" & df_parsed_linajes$grupo != "control", ]
-vector_samples <- paste0(rep("sample_", 3), rep(1:10))
-colnames(df_variantes) <- c("grupo", "tipo", vector_samples)
 
-df_variantes_control <- df_variantes[df_variantes$grupo == "control_nuevo", c(1, 3:12)]
-df_variantes_lab <- df_variantes[df_variantes$grupo != "control_nuevo", c(1, 3:12)]
-
-matrix_variantes <- matrix(0, ncol = 10, nrow = 40)
-for (i in 1:10) {
-    matrix_variantes[, i] <- df_variantes_control[, i + 1] == df_variantes_lab[, i + 1]
-}
-
-colnames(matrix_variantes) <- colnames(df_variantes[3:12])
-rownames(matrix_variantes) <- NULL
-
-df_resultados_variantes <- data.frame(id = df_variantes$grupo[2:41], matrix_variantes)
-
-mm <- as.matrix(df_resultados_variantes[, 2:11])
-table(mm)
-
-# variantes y linajes
-
-matrix_valores_0 <- matrix(0, ncol = 1, nrow = 40)
-for (i in 1:40) {
-    tabla_0 <- table(matrix_variantes[i, ])
-    matrix_valores_0[i, 1] <- as.numeric(tabla_0[1])
-}
-
-table(matrix_valores_0[, 1])
