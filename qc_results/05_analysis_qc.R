@@ -406,8 +406,13 @@ ggsave("Graficos/qc_resultados_Ns_nanopore.png")
 
 ##### Plot variantes -----
 
-data_variantes <- data.frame(estadistica_data[is.na(estadistica_data$variants_75) != T, c(1, 3, 4, 8, 9)])
+data_variantes <- data.frame(estadistica_data[is.na(estadistica_data$variants_75) != T, c(1, 3, 4, 8)])
 data_variantes$id <- factor(data_variantes$id, levels = unique(data_variantes$id))
+
+# NAs
+
+aa <- data.frame(estadistica_data[is.na(estadistica_data$variants_75) == T, c(1, 3, 4, 8)])
+write.table(aa, "variant_na.csv", sep = "\t", row.names = F, quote = F)
 
 ##### Plot variantes illumina -----
 
@@ -433,6 +438,11 @@ ggsave("Graficos/qc_resultados_variantes_AF75_iontorrent.png")
 
 data_efecto <- data.frame(estadistica_data[is.na(estadistica_data$variants_effect) != T, c(1, 3, 4, 9)])
 data_efecto$id <- factor(data_efecto$id, levels = unique(data_efecto$id))
+
+# NAs
+
+# aa<- data.frame(estadistica_data[is.na(estadistica_data$variants_effect) == T, c(1, 3, 4, 9)])
+# write.table(aa, "varianteffect_na.csv", sep = "\t", row.names = F, quote = F)
 
 ##### Plot variantes efecto -----
 
