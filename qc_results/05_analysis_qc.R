@@ -350,17 +350,47 @@ ggsave("Graficos/qc_resultados_coverage_platform_nosamples.png")
 # aa<- estadistica_data[is.na(estadistica_data$qc10x), c(1, 3, 4, 5)]
 # write.table(aa, "qc10_na.csv", sep = "\t", row.names = F, quote = F)
 
+
 ggplot(estadistica_data, aes(x = id, y = qc10x, fill = plataforma)) +
     geom_boxplot() +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
     geom_jitter(position = position_jitter(0.001), aes(color = muestra2)) +
-    labs(x = "", y = "% genoma 10x / muestra", title = "", size = 10) +
+    labs(x = "", y = "genome % > 10x / sample", title = "", size = 10) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_genoma_10x.png")
 
 ggplot(estadistica_data, aes(x = id, y = qc10x, fill = plataforma)) +
     geom_boxplot() +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
-    labs(x = "", y = "% genoma 10x / muestra", title = "", size = 10) +
+    labs(x = "", y = "genome % > 10x / sample", title = "", size = 10) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_genoma_10x_sin samples.png")
+
+##### Plot Ns illumina -----
+
+data_n <- data.frame(estadistica_data[is.na(estadistica_data$perc_Ns) != T, c(1, 3, 4, 7)])
+data_n$id <- factor(data_n$id, levels = unique(data_n$id))
+
+ggplot(subset(data_n, plataforma == "Illumina"), aes(x = factor(id), y = perc_Ns, fill = muestra2)) +
+    geom_bar(stat = "identity", position = position_dodge()) +
+    facet_grid(~plataforma) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "Ns % / sample", title = "") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+ggsave("Graficos/qc_resultados_Ns_illumina.png")
+
+ggplot(subset(data_n, plataforma == "Ion Torrent"), aes(x = factor(id), y = perc_Ns, fill = muestra2)) +
+    geom_bar(stat = "identity", position = position_dodge()) +
+    facet_grid(~plataforma) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "Ns % / sample", title = "") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+ggsave("Graficos/qc_resultados_Ns_iontorrent.png")
+
+ggplot(subset(data_n, plataforma == "Nanopore"), aes(x = factor(id), y = perc_Ns, fill = muestra2)) +
+    geom_bar(stat = "identity", position = position_dodge()) +
+    facet_grid(~plataforma) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "Ns % / sample", title = "") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+ggsave("Graficos/qc_resultados_Ns_nanopore.png")
