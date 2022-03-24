@@ -339,12 +339,26 @@ estadistica_data$id <- factor(estadistica_data$id, levels = levels_id)
 
 ##### Plot depth -----
 
-# aa<- subset(estadistica_data, mean_depth < 5)
-# write.table(aa[,c(1,3,4, 6)], "mean_depth_menor5.csv", quote = F, row.names = F, sep = "\t")
-
 ggplot(subset(estadistica_data, mean_depth > 5), aes(x = id, y = log10(mean_depth), fill = plataforma)) +
     geom_boxplot() +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
     labs(x = "", y = "log10(coverage (mean depth)) / sample", title = "") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_coverage_platform_nosamples.png")
+
+##### Plot % genoma 10x -----
+
+ggplot(estadistica_data, aes(x = id, y = qc10x, fill = plataforma)) +
+    geom_boxplot() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    geom_jitter(position = position_jitter(0.001), aes(color = muestra2)) +
+    labs(x = "", y = "% genoma 10x / muestra", title = "", size = 10) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 7))
+ggsave("Graficos/qc_resultados_genoma_10x.png")
+
+ggplot(estadistica_data, aes(x = id, y = qc10x, fill = plataforma)) +
+    geom_boxplot() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    labs(x = "", y = "% genoma 10x / muestra", title = "", size = 10) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 7))
+ggsave("Graficos/qc_resultados_genoma_10x_sin samples.png")
