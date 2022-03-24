@@ -379,6 +379,8 @@ ggplot(subset(data_n, plataforma == "Illumina"), aes(x = factor(id), y = perc_Ns
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_Ns_illumina.png")
 
+##### Plot Ns Ion torrent -----
+
 ggplot(subset(data_n, plataforma == "Ion Torrent"), aes(x = factor(id), y = perc_Ns, fill = muestra2)) +
     geom_bar(stat = "identity", position = position_dodge()) +
     facet_grid(~plataforma) +
@@ -386,6 +388,8 @@ ggplot(subset(data_n, plataforma == "Ion Torrent"), aes(x = factor(id), y = perc
     labs(x = "", y = "Ns % / sample", title = "") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_Ns_iontorrent.png")
+
+##### Plot Ns Nanopore -----
 
 ggplot(subset(data_n, plataforma == "Nanopore"), aes(x = factor(id), y = perc_Ns, fill = muestra2)) +
     geom_bar(stat = "identity", position = position_dodge()) +
