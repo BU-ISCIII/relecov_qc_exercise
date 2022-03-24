@@ -282,11 +282,15 @@ estadistica_data <- data.frame(
     muestra = as.character(qc_estadistica$`Sample ID`),
     muestra2 = as.character(rep(nombres_muestras, 40)),
     plataforma = as.character(qc_estadistica$plataforma),
+    plataforma2 = as.character(qc_estadistica$var_sequencing_platforms),
     qc10x = as.numeric(qc_estadistica$`var_QC>10x`),
     mean_depth = as.numeric(qc_estadistica$var_mean_depth_coverage),
     perc_Ns = as.numeric(qc_estadistica$var_n_Ns),
     variants_75 = as.numeric(qc_estadistica$var_number_variants_75),
-    variants_effect = as.numeric(qc_estadistica$var_variantseffect)
+    variants_effect = as.numeric(qc_estadistica$var_variantseffect),
+    carreras = as.numeric(as.vector(qc_estadistica$`Number samples in run`)),
+    read = as.numeric(as.vector(qc_estadistica$`Read lenght`)),
+    layout = as.character(qc_estadistica$`Library layout`)
 )
 
 estadistica_data$muestra2 <- factor(estadistica_data$muestra2, levels = c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10"))
@@ -469,3 +473,89 @@ ggplot(subset(data_efecto, plataforma == "Nanopore"), aes(x = id, y = variants_e
     labs(x = "", y = "Variants effect (AF > 0.75) / sample", title = "") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_variantes_efecto_nanopore.png")
+
+#### Muestras por carrera -----
+
+l_id_plataforma <- c(
+    "COD_2103",
+    "COD_2112",
+    "COD_2117_2",
+    "COD_2122",
+    "COD_2123",
+    "COD_2132",
+    "COD_2107",
+    "COD_2108",
+    "COD_2110",
+    "COD_2113",
+    "COD_2114",
+    "COD_2116",
+    "COD_2124",
+    "COD_2124_2",
+    "COD_2125",
+    "COD_2126",
+    "COD_2129",
+    "COD_2134",
+    "COD_2135",
+    "COD_2137",
+    "COD_2139",
+    "COD_2141",
+    "COD_2109",
+    "COD_2111",
+    "COD_2121",
+    "COD_2131",
+    "COD_2117",
+    "COD_2102",
+    "COD_2104",
+    "COD_2105",
+    "COD_2115",
+    "COD_2119",
+    "COD_2120",
+    "COD_2127",
+    "COD_2136",
+    "COD_2143",
+    "COD_2106",
+    "COD_2107_2",
+    "COD_2140"
+)
+
+carreras_data <- estadistica_data[!duplicated(estadistica_data$id), c(1, 3, 4, 5, 11, 12, 13)]
+carreras_data$id <- factor(carreras_data$id, levels = l_id_plataforma)
+n_carreras_data <- data.frame(carreras_data[is.na(carreras_data$carreras) != T, c(1, 3, 4, 5)])
+
+##### Plot Muestras por carrera -----
+
+ggplot(n_carreras_data, aes(x = id, y = carreras, fill = plataforma)) +
+    geom_bar(stat = "identity") +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    geom_text(aes(label = carreras), vjust = -0.85, color = "black", size = 3) +
+    labs(x = "", y = "samples / run", title = "") +
+    theme(
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
+        axis.text.y = element_text()
+    )
+ggsave("Graficos/qc_secuenciacion_carreras_plataforma.png")
+
+ggplot(n_carreras_data, aes(x = id, y = carreras, fill = plataforma2)) +
+    geom_bar(stat = "identity") +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    geom_text(aes(label = carreras), vjust = -0.85, color = "black", size = 3) +
+    labs(x = "", y = "samples / run", title = "") +
+    theme(
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
+        axis.text.y = element_text()
+    )
+ggsave("Graficos/qc_secuenciacion_carreras_plataforma_2.png")
+
+##### Plot read length -----
+
+read_data <- data.frame(carreras_data[is.na(carreras_data$read) != T, c(1, 3, 5, 6)])
+
+ggplot(read_data, aes(x = id, y = read, fill = plataforma)) +
+    geom_col() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    labs(x = "", y = "read length / sample", title = "") +
+    theme(
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
+        axis.text.y = element_text()
+    )
+ggsave("Graficos/qc_secuenciacion_reads_plataforma.png")
