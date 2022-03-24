@@ -483,6 +483,7 @@ l_id_plataforma <- c(
     "COD_2122",
     "COD_2123",
     "COD_2132",
+    "COD_2106_2",
     "COD_2107",
     "COD_2108",
     "COD_2110",
@@ -522,6 +523,11 @@ carreras_data <- estadistica_data[!duplicated(estadistica_data$id), c(1, 3, 4, 5
 carreras_data$id <- factor(carreras_data$id, levels = l_id_plataforma)
 n_carreras_data <- data.frame(carreras_data[is.na(carreras_data$carreras) != T, c(1, 3, 4, 5)])
 
+# NAs
+
+# aa<- data.frame(carreras_data[is.na(carreras_data$carreras) == T, c(1, 3, 4, 5)])
+# write.table(aa, "carreras_na.csv", sep = "\t", row.names = F, quote = F)
+
 ##### Plot Muestras por carrera -----
 
 ggplot(n_carreras_data, aes(x = id, y = carreras, fill = plataforma)) +
@@ -548,9 +554,14 @@ ggsave("Graficos/qc_secuenciacion_carreras_plataforma_2.png")
 
 ##### Plot read length -----
 
-read_data <- data.frame(carreras_data[is.na(carreras_data$read) != T, c(1, 3, 5, 6)])
+read_data <- data.frame(carreras_data[is.na(carreras_data$read) != T, c(1, 3, 4, 6, 7)])
+read_data$id <- factor(read_data$id, levels = l_id_plataforma)
 
-ggplot(read_data, aes(x = id, y = read, fill = plataforma)) +
+# aa<- data.frame(carreras_data[is.na(carreras_data$read) == T, c(1, 3, 4, 6)])
+# write.table(aa, "read_na.csv", sep = "\t", row.names = F, quote = F)
+
+
+ggplot(read_data, aes(x = id, y = read, fill = plataforma2)) +
     geom_col() +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
     labs(x = "", y = "read length / sample", title = "") +
