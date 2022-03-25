@@ -225,8 +225,6 @@ for (i in 1:41) {
 }
 id_lab <- unlist(lista_nombres)
 
-1681 - 41
-
 lista_muestras <- list()
 for (i in 1:10) {
     n_nombres_labs <- rep(nombres_muestras[i], 41)
@@ -592,27 +590,25 @@ for (j in 1:ncol(df_linajes_lab)) {
     muestra<- df_linajes_lab[, j]
         for (i in 1:length(muestra)) {
             if (control == muestra[i]) {
-                matrix_tasa [i, j]<- 1
+                matrix_tasa [i, j]<- "TP"
             } else if (muestra[i] == "None") {
-                matrix_tasa [i, j]<- 2
+                matrix_tasa [i, j]<- "FN"
             } else if (control != muestra[i]) {
-                matrix_tasa [i, j]<- 0
+                matrix_tasa [i, j]<- "FP"
             } 
         }   
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+table(matrix_tasa[,1])
+table(matrix_tasa[,2])
+table(matrix_tasa[,3])
+table(matrix_tasa[,4])
+table(matrix_tasa[,5])
+table(matrix_tasa[,6])
+table(matrix_tasa[,7])
+table(matrix_tasa[,8])
+table(matrix_tasa[,9])
+table(matrix_tasa[,10])
 
 matrix_linajes <- matrix(0, ncol = 10, nrow = 40)
 for (i in 1:10) {
