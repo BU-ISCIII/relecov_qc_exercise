@@ -584,6 +584,36 @@ df_parsed_linajes <- as.data.frame(qc_parsed_linajes[, c(3, 5:14)])
 df_linajes_control <- df_parsed_linajes[df_parsed_linajes$grupo == "control", 2:11]
 df_linajes_lab <- df_parsed_linajes[df_parsed_linajes$grupo != "control", 2:11]
 
+# calculamos los TP, FP, FN by sample
+
+matrix_tasa<- matrix(0, ncol = 10, nrow = 40)
+for (j in 1:ncol(df_linajes_lab)) {
+    control<- df_linajes_control[, j]
+    muestra<- df_linajes_lab[, j]
+        for (i in 1:length(muestra)) {
+            if (control == muestra[i]) {
+                matrix_tasa [i, j]<- 1
+            } else if (muestra[i] == "None") {
+                matrix_tasa [i, j]<- 2
+            } else if (control != muestra[i]) {
+                matrix_tasa [i, j]<- 0
+            } 
+        }   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 matrix_linajes <- matrix(0, ncol = 10, nrow = 40)
 for (i in 1:10) {
     control <- as.character(df_linajes_control[, i])
