@@ -599,17 +599,6 @@ for (j in 1:ncol(df_linajes_lab)) {
         }   
 }
 
-table(matrix_tasa[,1])
-table(matrix_tasa[,2])
-table(matrix_tasa[,3])
-table(matrix_tasa[,4])
-table(matrix_tasa[,5])
-table(matrix_tasa[,6])
-table(matrix_tasa[,7])
-table(matrix_tasa[,8])
-table(matrix_tasa[,9])
-table(matrix_tasa[,10])
-
 matrix_linajes <- matrix(0, ncol = 10, nrow = 40)
 for (i in 1:10) {
     control <- as.character(df_linajes_control[, i])
@@ -637,4 +626,48 @@ table(matrix_valores_0[, 1])
 
 # Sensibilidad y precision
 
+qc_tasa <- read_excel(dir_excel[1], sheet = 7)
+muestras<- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
+qc_tasa$samples<- as.character(rep(muestras, 2))
+qc_tasa$samples<- factor (qc_tasa$samples, levels = c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10"))
+qc_tasa$lineages<- factor (qc_tasa$lineages, levels = c("B.1.1.7", "B.1.351", "A.28", "B.1.621", "P.1", "C.37", "AY.9.2", "B.1.617.2", "AY.53", "AY.43"))
+qc_tasa$type<- factor (qc_tasa$type, levels = c("Sensitivity", "Precision"))
 
+
+# plot sensitivity & precision
+ggplot(qc_tasa, aes(x = lineages, y = tasa, group = type)) + 
+    geom_line(aes(color = type)) +
+    facet_grid(~type) +
+    guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
+    labs(x = "Lineages", y = "Sensitivity", title = "") +
+    theme(
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
+        axis.text.y = element_text()
+    )
+
+ggsave("Graficos/qc_lineages_sensitivity_precision_2.png")
+
+# plot sensitivity & precision join
+ggplot(qc_tasa, aes(x = lineages, y = tasa, group = type)) + 
+    geom_line(aes(color = type)) +
+    guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
+    labs(x = "Lineages", y = "Sensitivity", title = "") +
+    theme(
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
+        axis.text.y = element_text()
+    )
+
+ggsave("Graficos/qc_lineages_sensitivity_precision.png")
+
+# plot sensitivity & precision smooth
+ggplot(qc_tasa, aes(x = lineages, y = tasa, group = type)) + 
+    geom_smooth(aes(color = type), method = "loess", se = F) +
+    facet_grid(~type) +
+    guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
+    labs(x = "Lineages", y = "", title = "") +
+    theme(
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
+        axis.text.y = element_text()
+    )
+
+ggsave("Graficos/qc_lineages_sensitivity_precision_smooth.png")
