@@ -611,8 +611,8 @@ df_linajes_control<- c("B.1.1.7",
 "P.1",
 "AY.9.2",
 "AY.43",
-"AY.53",
-"AY.53",
+"AY.94",
+"AY.94",
 "AY.43")
 
 df_linajes_lab <- df_parsed_linajes[df_parsed_linajes$grupo != "control", 2:11]
