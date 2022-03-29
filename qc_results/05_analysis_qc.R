@@ -31,6 +31,8 @@ fechas_data <- data.frame(
     ejecucion = as.numeric(qc_fechas$`Tiempo de ejecucion`)
 )
 
+View(fechas_data)
+
 #### plot tiempo de ejecucion ----
 
 ggplot(fechas_data, aes(
@@ -86,9 +88,12 @@ categorias_data$diagnostico_1 <- fct_relevel(categorias_data$diagnostico_1, c(
 ggplot(subset(categorias_data, diagnostico_1 != "NA"), aes(diagnostico_1, fill = comercial)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Commercial")) +
+    coord_flip() +
     labs(y = "Number of laboratories", x = "", title = "Diagnosis protocol for SARS-CoV-2") +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+    geom_text(stat = "count", aes(label = ..count..), vjust = 1, hjust = -2) +
+    theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust = 1, size = 10),
+    legend.title = element_text(size=10),
+    legend.text = element_text(size=10))
 ggsave("Graficos/qc_barplot_diagnostico.png")
 
 ggplot(subset(categorias_data, diagnostico_2 != "NA"), aes(diagnostico_2)) +
@@ -213,6 +218,21 @@ ggplot(ct_data, aes(x = muestra2, y = ct, fill = plataforma)) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_ct_muestras_control.png")
 
+ggplot(ct_data, aes(x = muestra2, y = ct_N, fill = plataforma)) +
+    geom_boxplot(show.legend = T) +
+    guides(fill = guide_legend(title = "Platform")) +
+    geom_point(data = ct_data[ct_data$id == "Control", ], aes(muestra2, ct), colour = "steelblue", shape = 23, width = 0.5, size = 2.5, height = 0.5) +
+    labs(x = "", y = "Ct", title = "Valores de Ct") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+
+ggplot(ct_data, aes(x = muestra2, y = ct_S, fill = plataforma)) +
+    geom_boxplot(show.legend = T) +
+    guides(fill = guide_legend(title = "Platform")) +
+    geom_point(data = ct_data[ct_data$id == "Control", ], aes(muestra2, ct), colour = "steelblue", shape = 23, width = 0.5, size = 2.5, height = 0.5) +
+    labs(x = "", y = "Ct", title = "Valores de Ct") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+
+
 #### datos estadistica Ct ----
 
 nombres_labs <- unique(ct_data$id)
@@ -261,6 +281,8 @@ ct_format_data$plataforma <- id_plataforma
 ct_format_data$id <- factor(ct_format_data$id, levels = c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10"))
 
 ##### Plot ct -----
+
+write.table(ct_format_data, "ct_format_data.csv", quote = F, row.names = F, sep = "\t")
 
 ggplot(ct_format_data, aes(x = id, y = Ct, fill = tipo)) +
     geom_boxplot(show.legend = T) +
@@ -579,14 +601,25 @@ df_parsed_linajes <- as.data.frame(qc_parsed_linajes[, c(3, 5:14)])
 
 # linajes
 
-df_linajes_control <- df_parsed_linajes[df_parsed_linajes$grupo == "control", 2:11]
+# df_linajes_control <- df_parsed_linajes[df_parsed_linajes$grupo == "control", 2:11]
+df_linajes_control<- c("B.1.1.7",
+"B.1.351",
+"A.28",
+"B.1.621",
+"P.1",
+"AY.9.2",
+"AY.43",
+"AY.53",
+"AY.53",
+"AY.43")
+
 df_linajes_lab <- df_parsed_linajes[df_parsed_linajes$grupo != "control", 2:11]
 
 # calculamos los TP, FP, FN by sample
 
 matrix_tasa<- matrix(0, ncol = 10, nrow = 40)
 for (j in 1:ncol(df_linajes_lab)) {
-    control<- df_linajes_control[, j]
+    control<- df_linajes_control[j]
     muestra<- df_linajes_lab[, j]
         for (i in 1:length(muestra)) {
             if (control == muestra[i]) {
@@ -598,6 +631,17 @@ for (j in 1:ncol(df_linajes_lab)) {
             } 
         }   
 }
+
+table(matrix_tasa[,1])
+table(matrix_tasa[,2])
+table(matrix_tasa[,3])
+table(matrix_tasa[,4])
+table(matrix_tasa[,5])
+table(matrix_tasa[,6])
+table(matrix_tasa[,7])
+table(matrix_tasa[,8])
+table(matrix_tasa[,9])
+table(matrix_tasa[,10])
 
 matrix_linajes <- matrix(0, ncol = 10, nrow = 40)
 for (i in 1:10) {
@@ -630,7 +674,7 @@ qc_tasa <- read_excel(dir_excel[1], sheet = 7)
 muestras<- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 qc_tasa$samples<- as.character(rep(muestras, 2))
 qc_tasa$samples<- factor (qc_tasa$samples, levels = c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10"))
-qc_tasa$lineages<- factor (qc_tasa$lineages, levels = c("B.1.1.7", "B.1.351", "A.28", "B.1.621", "P.1", "C.37", "AY.9.2", "B.1.617.2", "AY.53", "AY.43"))
+qc_tasa$lineages<- factor (qc_tasa$lineages, levels = unique(df_linajes_control))
 qc_tasa$tipo<- factor (qc_tasa$type, levels = c("Sensitivity", "Precision"))
 
 
@@ -674,8 +718,6 @@ ggsave("Graficos/qc_lineages_sensitivity_precision_smooth.png")
 
 # mutaciones por muestra
 
-theme_set(theme_gray(base_size = 10))
-
 matrix_mutaciones <- matrix(0, ncol = 2, nrow = 10)
 for (i in 1:10) {
     matrix_mutaciones[i, 1]<- mean(mutaciones_data$variants_effect[mutaciones_data$muestra2 == unique(mutaciones_data$muestra2)[i]], na.rm = T)
@@ -688,7 +730,7 @@ qc_tasa$mutaciones<- round(as.numeric(rep (matrix_mutaciones[,1], 2)))
 data_sen<- qc_tasa[qc_tasa$type == "Sensitivity", ]
 
 ggplot(data_sen, aes(x = lineages, y = tasa * 100)) + 
-    geom_bar(aes(x = lineages, y = mutaciones), stat = "identity",fill="steelblue") +
+    geom_bar(aes(x = lineages, y = mutaciones), stat = "identity",fill = "steelblue") +
     geom_smooth(method = "loess", se = F, aes(group = tipo, fill = tipo)) +
     guides(fill = guide_legend(title = "Curve")) +
     labs(x = "Lineages", y = "", title = "") +
@@ -698,7 +740,7 @@ ggplot(data_sen, aes(x = lineages, y = tasa * 100)) +
     )
 
 ggplot(qc_tasa, aes(x = lineages, y = tasa * 100)) + 
-    geom_bar(aes(x = lineages, y = mutaciones), stat = "identity",fill="steelblue") +
+    geom_bar(aes(x = lineages, y = mutaciones), stat = "identity",fill = "steelblue") +
     geom_smooth(method = "loess", se = F, aes(group = tipo, color = tipo)) +
     guides(fill = guide_legend(title = "Curve")) +
     labs(x = "Lineages", y = "", title = "") +
