@@ -235,59 +235,61 @@ ggplot(ct_data, aes(x = muestra2, y = ct_S, fill = plataforma)) +
 
 #### datos estadistica Ct ----
 
-nombres_labs <- unique(ct_data$id)
-nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
+df_ct_data <- subset(ct_data, id != "Control")
 
-lista_nombres <- list()
-for (i in 1:41) {
-    n_nombres_labs <- rep(nombres_labs[i], 41)
-    lista_nombres[[i]] <- as.character(n_nombres_labs)
-}
-id_lab <- unlist(lista_nombres)
 
-lista_muestras <- list()
-for (i in 1:10) {
-    n_nombres_labs <- rep(nombres_muestras[i], 41)
-    lista_muestras[[i]] <- as.character(n_nombres_labs)
-}
-id_muestra <- unlist(lista_muestras)
+subset(ct_data, plataforma == "Nanopore")
+
+ct_t <- t(df_ct_data[i, c(5:8)])
+id_t <- rep(as.character(t(df_ct_data[i, c(1)])), 4)
+sample_t <- rep(as.character(t(df_ct_data[i, c(3)])), 4)
+plataforma_t <- rep(as.character(t(df_ct_data[i, c(4)])), 4)
+
+
+
+
+
 
 lista_ct <- list()
-for (i in 1:nrow(ct_data)) {
-    ct_t <- t(ct_data[i, 5:8])
+lista_id<- list()
+lista_sample<- list()
+lista_plataforma<- list()
+for (i in 1:nrow(df_ct_data)) {
+    #dataframes
+    ct_t <- t(df_ct_data[i, c(5:8)])
+    id_t <- rep(as.character(t(df_ct_data[i, c(1)])), 4)
+    sample_t <- rep(as.character(t(df_ct_data[i, c(3)])), 4)
+    plataforma_t<- rep(as.character(t(df_ct_data[i, c(4)])), 4)
+    #listas
     lista_ct[[i]] <- data.frame(id = i, Ct = ct_t[, 1], tipo = c("PCR", "N", "ORF", "S"))
+    lista_id[[i]] <- data.frame(id = i, id_v = id_t)
+    lista_sample[[i]] <- data.frame(id = i, sample = sample_t)
+    lista_plataforma[[i]] <- data.frame(id = i, plataforma = plataforma_t)
 }
 
-df_ct <- bind_rows(lista_ct, .id = "id")
+df_ct_data_t <- bind_rows(lista_ct, .id = "id"); row.names(df_ct_data_t) <- NULL
+df_ct_id_t <- bind_rows(lista_id, .id = "id"); row.names(df_ct_id_t) <- NULL
+df_ct_sample_t <- bind_rows(lista_sample, .id = "id"); row.names(df_ct_sample_t) <- NULL
+df_ct_plataforma_t <- bind_rows(lista_plataforma, .id = "id"); row.names(df_ct_plataforma_t) <- NULL
 
-ct_format_data <- data.frame(
-    id = id_muestra,
-    df_ct[, c(2, 3)]
-)
 
-row.names(ct_format_data) <- NULL
-ct_format_data$tipo <- factor(ct_format_data$tipo, levels = c("PCR", "ORF", "S", "N"))
+ct_format_data <- cbind(
+    df_ct_id_t[,2],
+    df_ct_sample_t[,2],
+    df_ct_plataforma_t[,2],
+    df_ct_data_t[, c(2, 3)]
+); colnames (ct_format_data)<- c("id", "sample", "plataforma", "Ct", "tipo")
 
-lista_plataforma <- list()
-for (i in 1:nrow(ct_data)) {
-    nombre <- ct_data$plataforma[i]
-    v_nombres <- rep(nombre, 4)
-    lista_plataforma[[i]] <- v_nombres
-}
-
-id_plataforma <- unlist(lista_plataforma)
-
-ct_format_data$plataforma <- id_plataforma
-ct_format_data$id <- factor(ct_format_data$id, levels = c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10"))
+# write.table(ct_format_data, "ct_format_data.csv", quote = F, row.names = F, sep = "\t")
 
 ##### Plot ct -----
+ct_format_data$tipo <- factor(ct_format_data$tipo, levels = c("PCR", "ORF", "N", "S"))
+ct_format_data$plataforma <- factor(ct_format_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
 
-write.table(ct_format_data, "ct_format_data.csv", quote = F, row.names = F, sep = "\t")
-
-ggplot(ct_format_data, aes(x = id, y = Ct, fill = tipo)) +
+ggplot(ct_format_data, aes(x = sample, y = Ct, fill = tipo)) +
     geom_boxplot(show.legend = T) +
     facet_grid(~plataforma) +
-    labs(x = "", y = "Ct", title = "Valores de Ct") +
+    labs(x = "", y = "Ct", title = "Ct values by gene") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_ct_plataforma.png")
 
