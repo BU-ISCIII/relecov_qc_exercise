@@ -214,6 +214,15 @@ ggplot(bioinfo_data, aes(preprocessing)) +
     labs(y = "Number of laboratories", x = "", title = "Preprocessing software") +
     geom_text(stat = "count", aes(label = ..count..), hjust = -0.8) +
     theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_barplot_bioinformatica_preprocessing_plat.png")
+
+ggplot(bioinfo_data, aes(preprocessing)) +
+    geom_bar(fill = "#1F77B4") +
+    coord_flip() +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Preprocessing software") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.8) +
+    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
 ggsave("Graficos/qc_barplot_bioinformatica_preprocessing.png")
 
 #### plot mapping ----
@@ -225,6 +234,15 @@ ggplot(bioinfo_data, aes(mapping)) +
     guides(fill = guide_legend(title = "platform")) +
     labs(y = "Number of laboratories", x = "", title = "Mapping software") +
     geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
+    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_barplot_bioinformatica_mapping_plat.png")
+
+ggplot(bioinfo_data, aes(mapping)) +
+    geom_bar(fill = "#1F77B4") +
+    coord_flip() +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Mapping software") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.9) +
     theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
 ggsave("Graficos/qc_barplot_bioinformatica_mapping.png")
 
@@ -238,6 +256,15 @@ ggplot(bioinfo_data, aes(assembly)) +
     labs(y = "Number of laboratories", x = "", title = "Assembly software") +
     geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
     theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_barplot_bioinformatica_assembly_plat.png")
+
+ggplot(bioinfo_data, aes(assembly)) +
+    geom_bar(fill = "#1F77B4") +
+    coord_flip() +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Assembly software") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.9) +
+    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
 ggsave("Graficos/qc_barplot_bioinformatica_assembly.png")
 
 #### plot consensus ----
@@ -249,6 +276,15 @@ ggplot(bioinfo_data, aes(consensus)) +
     guides(fill = guide_legend(title = "platform")) +
     labs(y = "Number of laboratories", x = "", title = "Consensus software") +
     geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
+    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_barplot_bioinformatica_consensus_plat.png")
+
+ggplot(bioinfo_data, aes(consensus)) +
+    geom_bar(fill = "#1F77B4") +
+    coord_flip() +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Consensus software") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.9) +
     theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
 ggsave("Graficos/qc_barplot_bioinformatica_consensus.png")
 
@@ -270,7 +306,6 @@ ggplot(bioinfo_data, aes(pangolin_version)) +
     geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
 ggsave("Graficos/qc_barplot_bioinformatica_pangolin.png")
-
 
 #### Datos estadistica -----
 
@@ -319,9 +354,6 @@ ggplot(ct_data, aes(x = muestra2, y = ct_S, fill = plataforma)) +
 #### datos estadistica Ct ----
 
 df_ct_data <- subset(ct_data, id != "Control")
-
-
-subset(ct_data, plataforma == "Nanopore")
 
 ct_t <- t(df_ct_data[i, c(5:8)])
 id_t <- rep(as.character(t(df_ct_data[i, c(1)])), 4)
@@ -373,7 +405,7 @@ ggsave("Graficos/qc_resultados_ct_plataforma.png")
 
 #### Datos estadistica -----
 
-qc_estadistica <- read_excel(dir_excel[1], sheet = 3)
+qc_estadistica <- read_excel(dir_excel[1], sheet = 4)
 
 nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 
@@ -670,6 +702,92 @@ ggplot(read_data, aes(x = id, y = read, fill = plataforma2)) +
         axis.text.y = element_text()
     )
 ggsave("Graficos/qc_secuenciacion_reads_plataforma.png")
+
+
+#new reads data
+
+qc_reads <- read_excel(dir_excel[1], sheet = 4)
+nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
+
+reads_data <- data.frame(
+    id = as.character(qc_reads$ID),
+    muestra = as.character(qc_reads$`Sample ID`),
+    muestra2 = as.character(rep(nombres_muestras, 40)),
+    plataforma = as.character(qc_reads$plataforma),
+    plataforma2 = as.character(qc_reads$var_sequencing_platforms),
+    reads = as.numeric(qc_reads$var_readcount),
+    tipo = factor(qc_reads$type, levels = c("raw", "filtered"))
+)
+
+reads_data$plataforma <- factor(reads_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
+
+levels_id <- c(
+    "COD_2103",
+    "COD_2106_2",
+    "COD_2107",
+    "COD_2108",
+    "COD_2109",
+    "COD_2110",
+    "COD_2111",
+    "COD_2112",
+    "COD_2113",
+    "COD_2114",
+    "COD_2116",
+    "COD_2117",
+    "COD_2117_2",
+    "COD_2121",
+    "COD_2122",
+    "COD_2123",
+    "COD_2124",
+    "COD_2124_2",
+    "COD_2125",
+    "COD_2126",
+    "COD_2129",
+    "COD_2131",
+    "COD_2132",
+    "COD_2134",
+    "COD_2135",
+    "COD_2137",
+    "COD_2139",
+    "COD_2141",
+    "COD_2102",
+    "COD_2104",
+    "COD_2105",
+    "COD_2115",
+    "COD_2119",
+    "COD_2120",
+    "COD_2127",
+    "COD_2136",
+    "COD_2143",
+    "COD_2106",
+    "COD_2107_2",
+    "COD_2140"
+)
+
+reads_data$id <- factor(reads_data$id, levels = levels_id)
+
+#plot reads filtered
+
+ggplot(subset(reads_data, plataforma == "Illumina"), aes(x = id, y = log10(reads), fill = tipo)) +
+    geom_boxplot() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    labs(x = "", y = "log10 (read) / laboratory", title = "Illumina reads", size = 12) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
+ggsave("Graficos/qc_resultados_read_illumina.png")
+
+ggplot(subset(reads_data, plataforma == "Ion Torrent"), aes(x = id, y = log10(reads), fill = tipo)) +
+    geom_boxplot() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    labs(x = "", y = "log10 (read) / laboratory", title = "Illumina reads", size = 12) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
+ggsave("Graficos/qc_resultados_read_iontorrent.png")
+
+ggplot(subset(reads_data, plataforma == "Nanopore"), aes(x = id, y = log10(reads), fill = tipo)) +
+    geom_boxplot() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    labs(x = "", y = "log10 (read) / laboratory", title = "Illumina reads", size = 12) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
+ggsave("Graficos/qc_resultados_read_nanopore.png")
 
 
 ### datos linajes ----
