@@ -168,24 +168,109 @@ ggplot(categorias_data, aes(genome)) +
 ggsave("Graficos/qc_barplot_genome.png")
 
 #### plot bioinformatica ----
-strip.text.x = element_text(size = 30)
+
 ggplot(categorias_data, aes(bioinformatica)) +
-    geom_bar() +
+    geom_bar(fill = "#1F77B4") +
     coord_flip() +
     guides(fill = guide_legend(title = "Platform")) +
     labs(y = "Number of laboratories", x = "", title = "Bioinformatic protocol") +
-    geom_text(stat = "count", aes(label = ..count..), hjust = -2) +
-    theme(axis.text.x = element_text(size = 6, vjust = 1, hjust = 1))
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.8) +
+    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12))
 ggsave("Graficos/qc_barplot_bioinformatica.png")
 
 ggplot(categorias_data, aes(bioinformatica)) +
-    geom_bar() +
+    geom_bar(fill = "#1F77B4") +
+    coord_flip() +
     facet_grid(~platform_1) +
     guides(fill = guide_legend(title = "Platform")) +
     labs(y = "Number of laboratories", x = "", title = "Bioinformatic protocol") +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, size = 6, vjust = 1, hjust = 1))
+    geom_text(stat = "count", aes(label = ..count..), vjust = 0.5, hjust = 2) +
+    theme(axis.text.x = element_text(vjust = 1, hjust = 0, size = 12), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
 ggsave("Graficos/qc_barplot_bioinformatica_2.png")
+
+### datos bioinfo ----
+
+qc_bioinfo <- read_excel(dir_excel[1], sheet = 8)
+
+bioinfo_data <- data.frame(
+    id = as.character(qc_bioinfo$ID),
+    platform = factor(qc_bioinfo$plataformas_2, levels = c("Illumina", "Ion Torrent", "Nanopore")),
+    preprocessing = as.character(qc_bioinfo$Preprocessing),
+    mapping = qc_bioinfo$Mapping,
+    assembly = qc_bioinfo$Assembly,
+    variant = qc_bioinfo$Variant_Calling,
+    consensus = qc_bioinfo$Consensus,
+    lineage_software = qc_bioinfo$Linage_identification,
+    pangolin_version = qc_bioinfo$pangolin_version)
+)
+
+#### plot preprocessing ----
+
+ggplot(bioinfo_data, aes(preprocessing)) +
+    geom_bar(fill = "#1F77B4") +
+    facet_grid(~platform) +
+    coord_flip() +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Preprocessing software") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.8) +
+    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_barplot_bioinformatica_preprocessing.png")
+
+#### plot mapping ----
+
+ggplot(bioinfo_data, aes(mapping)) +
+    geom_bar(fill = "#1F77B4") +
+    facet_grid(~platform) +
+    coord_flip() +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Mapping software") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
+    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_barplot_bioinformatica_mapping.png")
+
+#### plot assembly ----
+
+ggplot(bioinfo_data, aes(assembly)) +
+    geom_bar(fill = "#1F77B4") +
+    facet_grid(~platform) +
+    coord_flip() +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Assembly software") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
+    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_barplot_bioinformatica_assembly.png")
+
+#### plot consensus ----
+
+ggplot(bioinfo_data, aes(consensus)) +
+    geom_bar(fill = "#1F77B4") +
+    facet_grid(~platform) +
+    coord_flip() +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Consensus software") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
+    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_barplot_bioinformatica_consensus.png")
+
+#### plot lineages ----
+
+ggplot(bioinfo_data, aes(lineage_software)) +
+    geom_bar(fill = "#1F77B4") +
+    coord_flip() +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Lineage software") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
+    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_barplot_bioinformatica_lineage.png")
+
+ggplot(bioinfo_data, aes(pangolin_version)) +
+    geom_bar(fill = "#1F77B4") +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Pangolin version", size = 12) +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
+ggsave("Graficos/qc_barplot_bioinformatica_pangolin.png")
+
 
 #### Datos estadistica -----
 
@@ -242,11 +327,6 @@ ct_t <- t(df_ct_data[i, c(5:8)])
 id_t <- rep(as.character(t(df_ct_data[i, c(1)])), 4)
 sample_t <- rep(as.character(t(df_ct_data[i, c(3)])), 4)
 plataforma_t <- rep(as.character(t(df_ct_data[i, c(4)])), 4)
-
-
-
-
-
 
 lista_ct <- list()
 lista_id<- list()
