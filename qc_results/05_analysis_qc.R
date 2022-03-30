@@ -415,6 +415,9 @@ estadistica_data <- data.frame(
     muestra2 = as.character(rep(nombres_muestras, 40)),
     plataforma = as.character(qc_estadistica$plataforma),
     plataforma2 = as.character(qc_estadistica$var_sequencing_platforms),
+    host = as.numeric(qc_estadistica$var_readhost),
+    virus = as.numeric(qc_estadistica$var_readvirus),
+    unmapped = as.numeric(qc_estadistica$var_unmapped),
     qc10x = as.numeric(qc_estadistica$`var_QC>10x`),
     mean_depth = as.numeric(qc_estadistica$var_mean_depth_coverage),
     perc_Ns = as.numeric(qc_estadistica$var_n_Ns),
@@ -703,7 +706,6 @@ ggplot(read_data, aes(x = id, y = read, fill = plataforma2)) +
     )
 ggsave("Graficos/qc_secuenciacion_reads_plataforma.png")
 
-
 #new reads data
 
 qc_reads <- read_excel(dir_excel[1], sheet = 4)
@@ -789,6 +791,93 @@ ggplot(subset(reads_data, plataforma == "Nanopore"), aes(x = id, y = log10(reads
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
 ggsave("Graficos/qc_resultados_read_nanopore.png")
 
+
+#new virus, host data
+
+qc_virushost <- read_excel(dir_excel[1], sheet = 5)
+nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
+
+virushost_data <- data.frame(
+    id = as.character(qc_virushost$ID),
+    muestra = as.character(qc_virushost$`Sample ID`),
+    muestra2 = factor(rep(nombres_muestras, 40), levels = nombres_muestras),
+    plataforma = as.character(qc_virushost$plataforma),
+    plataforma2 = as.character(qc_virushost$var_sequencing_platforms),
+    porcentaje = as.numeric(qc_virushost$percentage),
+    tipo = factor(qc_virushost$tipo, levels = c("host", "virus", "unmapped"))
+)
+
+virushost_data$plataforma <- factor(virushost_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
+
+levels_id <- c(
+    "COD_2103",
+    "COD_2106_2",
+    "COD_2107",
+    "COD_2108",
+    "COD_2109",
+    "COD_2110",
+    "COD_2111",
+    "COD_2112",
+    "COD_2113",
+    "COD_2114",
+    "COD_2116",
+    "COD_2117",
+    "COD_2117_2",
+    "COD_2121",
+    "COD_2122",
+    "COD_2123",
+    "COD_2124",
+    "COD_2124_2",
+    "COD_2125",
+    "COD_2126",
+    "COD_2129",
+    "COD_2131",
+    "COD_2132",
+    "COD_2134",
+    "COD_2135",
+    "COD_2137",
+    "COD_2139",
+    "COD_2141",
+    "COD_2102",
+    "COD_2104",
+    "COD_2105",
+    "COD_2115",
+    "COD_2119",
+    "COD_2120",
+    "COD_2127",
+    "COD_2136",
+    "COD_2143",
+    "COD_2106",
+    "COD_2107_2",
+    "COD_2140"
+)
+
+virushost_data$id <- factor(virushost_data$id, levels = levels_id)
+
+# plot host, virus, unmapped
+
+ggplot(subset(virushost_data, plataforma == "Illumina"), aes(x = muestra2, y = porcentaje)) +
+    geom_boxplot(fill = "#1F77B4") +
+    facet_grid(~tipo) +
+    labs(x = "", y = "", title = "Illumina reads", size = 12) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_hostvirusunmapped_illumina.png")
+
+ggplot(subset(virushost_data, plataforma == "Ion Torrent"), aes(x = muestra2, y = porcentaje)) +
+    geom_boxplot(fill = "#1F77B4") +
+    facet_grid(~tipo) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    labs(x = "", y = "", title = "Ion Torrent reads", size = 12) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_hostvirusunmapped_iontorrent.png")
+
+ggplot(subset(virushost_data, plataforma == "Nanopore"), aes(x = muestra2, y = porcentaje)) +
+    geom_boxplot(fill = "#1F77B4") +
+    facet_grid(~tipo) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    labs(x = "", y = "", title = "Nanopore reads", size = 12) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_hostvirusunmapped_nanopore.png")
 
 ### datos linajes ----
 
