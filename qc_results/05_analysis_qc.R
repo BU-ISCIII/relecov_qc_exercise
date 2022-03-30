@@ -405,7 +405,9 @@ ggsave("Graficos/qc_resultados_ct_plataforma.png")
 
 #### Datos estadistica -----
 
-qc_estadistica <- read_excel(dir_excel[1], sheet = 4)
+qc_estadistica <- read_excel(dir_excel[1], sheet = 3)
+
+head(qc_estadistica)
 
 nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 
@@ -415,9 +417,6 @@ estadistica_data <- data.frame(
     muestra2 = as.character(rep(nombres_muestras, 40)),
     plataforma = as.character(qc_estadistica$plataforma),
     plataforma2 = as.character(qc_estadistica$var_sequencing_platforms),
-    host = as.numeric(qc_estadistica$var_readhost),
-    virus = as.numeric(qc_estadistica$var_readvirus),
-    unmapped = as.numeric(qc_estadistica$var_unmapped),
     qc10x = as.numeric(qc_estadistica$`var_QC>10x`),
     mean_depth = as.numeric(qc_estadistica$var_mean_depth_coverage),
     perc_Ns = as.numeric(qc_estadistica$var_n_Ns),
@@ -489,7 +488,6 @@ ggsave("Graficos/qc_resultados_coverage_platform_nosamples.png")
 # aa<- estadistica_data[is.na(estadistica_data$qc10x), c(1, 3, 4, 5)]
 # write.table(aa, "qc10_na.csv", sep = "\t", row.names = F, quote = F)
 
-
 ggplot(estadistica_data, aes(x = id, y = qc10x, fill = plataforma)) +
     geom_boxplot() +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
@@ -545,23 +543,37 @@ ggsave("Graficos/qc_resultados_Ns_nanopore.png")
 
 ##### Plot variantes -----
 
-data_variantes <- data.frame(estadistica_data[is.na(estadistica_data$variants_75) != T, c(1, 3, 4, 8)])
+str(estadistica_data)
+
+data_variantes <- data.frame(estadistica_data[is.na(estadistica_data$variants_75) != T, c(1, 3, 4, 9)])
 data_variantes$id <- factor(data_variantes$id, levels = unique(data_variantes$id))
 
 # NAs
 
-aa <- data.frame(estadistica_data[is.na(estadistica_data$variants_75) == T, c(1, 3, 4, 8)])
-write.table(aa, "variant_na.csv", sep = "\t", row.names = F, quote = F)
+#aa <- data.frame(estadistica_data[is.na(estadistica_data$variants_75) == T, c(1, 3, 4, 8)])
+#write.table(aa, "variant_na.csv", sep = "\t", row.names = F, quote = F)
 
 ##### Plot variantes illumina -----
 
-ggplot(subset(data_variantes, plataforma == "Illumina"), aes(x = id, y = variants_75)) +
-    geom_jitter(position = position_jitter(0.01), aes(color = muestra2)) +
+ggplot(subset(data_variantes, plataforma == "Illumina" & id != "COD_2117"), aes(x = muestra2, y = variants_75)) +
+    geom_violin() +
+    geom_jitter(position = position_jitter(0.01), aes(color = id)) +
     facet_grid(~plataforma) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
     labs(x = "", y = "Variants (AF > 0.75) / sample", title = "") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
-ggsave("Graficos/qc_resultados_variantes_AF75_illumina.png")
+
+bb<- subset(data_variantes, plataforma == "Illumina" & id != "COD_2117")
+aa<- data.frame (
+    id = as.character(bb$id),
+    variants = bb$variants_75
+)
+
+ggplot(aa, aes(x = id, y = variants)) +
+    geom_point() +
+    geom_line()
+
+# ggsave("Graficos/qc_resultados_variantes_AF75_illumina.png")
 
 ##### Plot variantes Ion torrent -----
 
