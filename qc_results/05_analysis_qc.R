@@ -31,8 +31,6 @@ fechas_data <- data.frame(
     ejecucion = as.numeric(qc_fechas$`Tiempo de ejecucion`)
 )
 
-View(fechas_data)
-
 #### plot tiempo de ejecucion ----
 
 ggplot(fechas_data, aes(
@@ -90,17 +88,17 @@ ggplot(subset(categorias_data, diagnostico_1 != "NA"), aes(diagnostico_1, fill =
     guides(fill = guide_legend(title = "Commercial")) +
     coord_flip() +
     labs(y = "Number of laboratories", x = "", title = "Diagnosis protocol for SARS-CoV-2") +
-    geom_text(stat = "count", aes(label = ..count..), vjust = 1, hjust = -2) +
-    theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust = 1, size = 10),
-    legend.title = element_text(size=10),
-    legend.text = element_text(size=10))
+    geom_text(stat = "count", aes(label = ..count..), vjust = 0.5, hjust = -1) +
+    theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12),
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 12))
 ggsave("Graficos/qc_barplot_diagnostico.png")
 
 ggplot(subset(categorias_data, diagnostico_2 != "NA"), aes(diagnostico_2)) +
-    geom_bar() +
-    labs(y = "Number of laboratories", x = "", title = "Diagnosis protocol for SARS-CoV-2") +
+    geom_bar(fill = "#1F77B4") +
+    labs(y = "Number of laboratories", x = "", title = "Diagnosis protocol for SARS-CoV-2", size = 12) +
     geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
 ggsave("Graficos/qc_barplot_diagnostico_2.png")
 
 ggplot(subset(categorias_data, diagnostico_1 != "NA"), aes(diagnostico_1)) +
@@ -117,60 +115,60 @@ ggplot(subset(categorias_data, !is.na(librerias)), aes(fct_reorder(categorias_da
     geom_bar() +
     guides(fill = guide_legend(title = "Platform")) +
     coord_flip() +
-    labs(y = "Number of laboratories", x = "", title = "Libraries") +
-    geom_text(stat = "count", aes(label = ..count..), vjust = 1, hjust = 2) +
-    theme(axis.text.x = element_text(vjust = 1, hjust = 1))
+    labs(y = "Number of laboratories", x = "", title = "Libraries", size = 12) +
+    geom_text(stat = "count", aes(label = ..count..), vjust = 0.4, hjust = -1) +
+    theme(axis.text.x = element_text(vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
 ggsave("Graficos/qc_barplot_librerias.png")
 
 #### plot plataformas ----
 
 ggplot(categorias_data, aes(platform_1)) +
-    geom_bar() +
+    geom_bar(fill = "#1F77B4") +
     guides(fill = guide_legend(title = "Platform")) +
-    labs(y = "Number of laboratories", x = "", title = "Platform") +
+    labs(y = "Number of laboratories", x = "", title = "Platform", size = 12) +
     geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
 ggsave("Graficos/qc_barplot_plataforma.png")
 
 ggplot(categorias_data, aes(platform_2, fill = platform_1)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Platform")) +
-    labs(y = "Number of laboratories", x = "", title = "Platform") +
+    labs(y = "Number of laboratories", x = "", title = "Platform", size = 12) +
     geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
 ggsave("Graficos/qc_barplot_plataforma_2.png")
 
 #### plot enriquecimiento ----
 
 ggplot(categorias_data, aes(enriquecimiento)) +
-    geom_bar() +
+    geom_bar(fill = "#1F77B4") +
     guides(fill = guide_legend(title = "Platform")) +
-    labs(y = "Number of laboratories", x = "", title = "Enrichment") +
+    labs(y = "Number of laboratories", x = "", title = "Enrichment", size = 12) +
     geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
 ggsave("Graficos/qc_barplot_enrichment.png")
 
 ggplot(categorias_data, aes(enriquecimiento)) +
-    geom_bar() +
+    geom_bar(fill = "#1F77B4") +
     facet_grid(~platform_1) +
     guides(fill = guide_legend(title = "Platform")) +
     labs(y = "Number of laboratories", x = "", title = "Enrichment") +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+    geom_text(stat = "count", aes(label = ..count..), vjust = -0.5) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
 ggsave("Graficos/qc_barplot_enrichment_2.png")
 
 #### plot genome ----
 
 ggplot(categorias_data, aes(genome)) +
-    geom_bar() +
+    geom_bar(fill = "#1F77B4") +
     guides(fill = guide_legend(title = "Platform")) +
-    labs(y = "Number of laboratories", x = "", title = "Reference genome") +
+    labs(y = "Number of laboratories", x = "", title = "Reference genome", size = 12) +
     geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
 ggsave("Graficos/qc_barplot_genome.png")
 
 #### plot bioinformatica ----
-
+strip.text.x = element_text(size = 30)
 ggplot(categorias_data, aes(bioinformatica)) +
     geom_bar() +
     coord_flip() +
