@@ -310,7 +310,7 @@ ggsave("Graficos/qc_barplot_bioinformatica_pangolin.png")
 
 #### Datos estadistica -----
 
-qc_ct <- read_excel(dir_excel[1], sheet = 4)
+qc_ct <- read_excel(dir_excel[1], sheet = 6)
 
 nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 
@@ -329,7 +329,18 @@ ct_data$muestra2 <- factor(ct_data$muestra2, levels = c("sample_1", "sample_2", 
 
 ##### Plot ct -----
 
+ggplot(ct_data, aes(ct, fill = plataforma)) +
+    geom_density(kernel = "gaussian")
+
 ggplot(ct_data, aes(x = muestra2, y = ct, fill = plataforma)) +
+    geom_boxplot(show.legend = T) +
+    guides(fill = guide_legend(title = "Platform")) +
+    geom_point(data = ct_data[ct_data$id == "Control", ], aes(muestra2, ct), colour = "steelblue", shape = 23, width = 0.5, size = 2.5, height = 0.5) +
+    labs(x = "", y = "Ct", title = "Valores de Ct") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+ggsave("Graficos/qc_resultados_ct_muestras_control.png")
+
+ggplot(subset(ct_data, muestra2 == "sample_7"), aes(x = id, y = ct, fill = plataforma)) +
     geom_boxplot(show.legend = T) +
     guides(fill = guide_legend(title = "Platform")) +
     geom_point(data = ct_data[ct_data$id == "Control", ], aes(muestra2, ct), colour = "steelblue", shape = 23, width = 0.5, size = 2.5, height = 0.5) +
@@ -617,6 +628,10 @@ variants_data$id <- factor(variants_data$id, levels = levels_id)
 #write.table(aa, "variant_na.csv", sep = "\t", row.names = F, quote = F)
 
 ##### Plot variantes illumina -----
+
+aa<- subset(variants_data, plataforma == "Illumina" & id == "COD_2117")
+sd(aa$variants[aa$tipo == "Variants (AF > 0.75)"], na.rm = T)
+
 
 ggplot(subset(variants_data, plataforma == "Illumina" & id != "COD_2117"), aes(x = id, y = variants, fill = tipo)) +
     geom_violin() +
