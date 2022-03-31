@@ -161,10 +161,11 @@ ggsave("Graficos/qc_barplot_enrichment_2.png")
 
 ggplot(categorias_data, aes(genome)) +
     geom_bar(fill = "#1F77B4") +
+    coord_flip() +
     guides(fill = guide_legend(title = "Platform")) +
     labs(y = "Number of laboratories", x = "", title = "Reference genome", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), vjust = 0, hjust = -1) +
+    theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
 ggsave("Graficos/qc_barplot_genome.png")
 
 #### plot bioinformatica ----
@@ -190,7 +191,7 @@ ggsave("Graficos/qc_barplot_bioinformatica_2.png")
 
 ### datos bioinfo ----
 
-qc_bioinfo <- read_excel(dir_excel[1], sheet = 8)
+qc_bioinfo <- read_excel(dir_excel[1], sheet = 10)
 
 bioinfo_data <- data.frame(
     id = as.character(qc_bioinfo$ID),
@@ -303,7 +304,7 @@ ggplot(bioinfo_data, aes(pangolin_version)) +
     geom_bar(fill = "#1F77B4") +
     guides(fill = guide_legend(title = "platform")) +
     labs(y = "Number of laboratories", x = "", title = "Pangolin version", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1, size = 5) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
 ggsave("Graficos/qc_barplot_bioinformatica_pangolin.png")
 
@@ -992,7 +993,7 @@ ggsave("Graficos/qc_resultados_hostvirusunmapped_nanopore.png")
 
 ### calculo de TP y FP
 
-qc_parsed_linajes <- read_excel(dir_excel[1], sheet = 5)
+qc_parsed_linajes <- read_excel(dir_excel[1], sheet = 7)
 df_parsed_linajes <- as.data.frame(qc_parsed_linajes[, c(3, 5:14)])
 
 # linajes
@@ -1066,83 +1067,59 @@ table(matrix_valores_0[, 1])
 
 # Sensibilidad y precision
 
-qc_tasa <- read_excel(dir_excel[1], sheet = 7)
-muestras<- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
-qc_tasa$samples<- as.character(rep(muestras, 2))
-qc_tasa$samples<- factor (qc_tasa$samples, levels = c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10"))
-qc_tasa$lineages<- factor (qc_tasa$lineages, levels = unique(df_linajes_control))
-qc_tasa$tipo<- factor (qc_tasa$type, levels = c("Sensitivity", "Precision"))
+levels_samples<- c("Sample 1 – B.1.1.7",
+"Sample 2 – B.1.351",
+"Sample 3 – A.28",
+"Sample 4 – B.1.621",
+"Sample 5 – P.1",
+"Sample 6 – AY.9.2",
+"Sample 7 – AY.43",
+"Sample 8 – AY.94",
+"Sample 9 – AY.94",
+"Sample 10 – AY.43")
+
+qc_tasa <- read_excel(dir_excel[1], sheet = 9)
+qc_tasa$samples<- factor (qc_tasa$samples, levels = levels_samples)
+qc_tasa$tipo<- factor (qc_tasa$tipo, levels = c("Sensitivity", "Precision"))
 
 
-# plot sensitivity & precision
-ggplot(qc_tasa, aes(x = lineages, y = tasa, group = tipo)) + 
-    geom_line(aes(color = type)) +
-    facet_grid(~type) +
+# plot sensitivity & precision smooth
+ggplot(qc_tasa, aes(x = samples, y = tasa, group = tipo)) + 
+    geom_line(aes(color = tipo), size = 2) +
     guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
-    labs(x = "Lineages", y = "Sensitivity", title = "") +
+    ylim(0,1) +
+    labs(x = "Control lineages", y = "", title = "") +
     theme(
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
-        axis.text.y = element_text()
-    )
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12),
+        axis.text.y = element_text(size = 12),
+        legend.title = element_text(size=12), legend.text = element_text(size=12)
 
-ggsave("Graficos/qc_lineages_sensitivity_precision_2.png")
-
-# plot sensitivity & precision join
-ggplot(qc_tasa, aes(x = lineages, y = tasa, group = tipo)) + 
-    geom_line(aes(color = tipo)) +
-    guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
-    labs(x = "Lineages", y = "Sensitivity", title = "") +
-    theme(
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
-        axis.text.y = element_text()
     )
 
 ggsave("Graficos/qc_lineages_sensitivity_precision.png")
-
-# plot sensitivity & precision smooth
-ggplot(qc_tasa, aes(x = lineages, y = tasa, group = tipo)) + 
-    geom_smooth(aes(color = tipo), method = "loess", se = F) +
-    facet_grid(~type) +
-    guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
-    labs(x = "Lineages", y = "", title = "") +
-    theme(
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
-        axis.text.y = element_text()
-    )
-
-ggsave("Graficos/qc_lineages_sensitivity_precision_smooth.png")
 
 # mutaciones por muestra
 
 matrix_mutaciones <- matrix(0, ncol = 2, nrow = 10)
 for (i in 1:10) {
-    matrix_mutaciones[i, 1]<- mean(mutaciones_data$variants_effect[mutaciones_data$muestra2 == unique(mutaciones_data$muestra2)[i]], na.rm = T)
-    matrix_mutaciones[i, 2]<- median(mutaciones_data$variants_effect[mutaciones_data$muestra2 == unique(mutaciones_data$muestra2)[i]], na.rm = T)
+    matrix_mutaciones[i, 1]<- mean(variants_data$variants[variants_data$muestra == unique(variants_data$muestra)[i]], na.rm = T)
+    matrix_mutaciones[i, 2]<- median(variants_data$variants[variants_data$muestra == unique(variants_data$muestra)[i]], na.rm = T)
 }
 
 qc_tasa$mutaciones<- round(as.numeric(rep (matrix_mutaciones[,1], 2)))
 
-# plot sensitivity & mutations
-data_sen<- qc_tasa[qc_tasa$type == "Sensitivity", ]
+# plot sensitivity, precision & mutations
 
-ggplot(data_sen, aes(x = lineages, y = tasa * 100)) + 
-    geom_bar(aes(x = lineages, y = mutaciones), stat = "identity",fill = "steelblue") +
-    geom_smooth(method = "loess", se = F, aes(group = tipo, fill = tipo)) +
-    guides(fill = guide_legend(title = "Curve")) +
-    labs(x = "Lineages", y = "", title = "") +
+ggplot(qc_tasa, aes(x = samples, y = tasa * 100, group = tipo)) + 
+    geom_bar(aes(x = samples, y = mutaciones), stat = "identity",fill = "steelblue") +
+    geom_line(aes(color = tipo), size = 2) +
+    guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
+    ylim(0,100) +
+    labs(x = "Control lineages", y = "", title = "") +
     theme(
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
-        axis.text.y = element_text()
-    )
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12),
+        axis.text.y = element_text(size = 12),
+        legend.title = element_text(size=12), legend.text = element_text(size=12)
 
-ggplot(qc_tasa, aes(x = lineages, y = tasa * 100)) + 
-    geom_bar(aes(x = lineages, y = mutaciones), stat = "identity",fill = "steelblue") +
-    geom_smooth(method = "loess", se = F, aes(group = tipo, color = tipo)) +
-    guides(fill = guide_legend(title = "Curve")) +
-    labs(x = "Lineages", y = "", title = "") +
-    theme(
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
-        axis.text.y = element_text()
     )
-
-ggsave("Graficos/qc_lineages_sensitivity_precision_smooth_mutaciones.png")
+ggsave("Graficos/qc_lineages_sensitivity_precision_mutaciones.png")
