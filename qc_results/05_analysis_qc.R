@@ -407,8 +407,6 @@ ggsave("Graficos/qc_resultados_ct_plataforma.png")
 
 qc_estadistica <- read_excel(dir_excel[1], sheet = 3)
 
-head(qc_estadistica)
-
 nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 
 estadistica_data <- data.frame(
@@ -484,6 +482,13 @@ ggplot(subset(estadistica_data, mean_depth > 5), aes(x = id, y = log10(mean_dept
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_coverage_platform_nosamples.png")
 
+ggplot(subset(estadistica_data, mean_depth > 5), aes(x = muestra2, y = log10(mean_depth), fill = plataforma)) +
+    geom_boxplot() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    labs(x = "", y = "log10(coverage (mean depth)) / sample", title = "") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+ggsave("Graficos/qc_resultados_coverage_platform_samples.png")
+
 ##### Plot % genoma 10x -----
 # aa<- estadistica_data[is.na(estadistica_data$qc10x), c(1, 3, 4, 5)]
 # write.table(aa, "qc10_na.csv", sep = "\t", row.names = F, quote = F)
@@ -541,12 +546,69 @@ ggplot(subset(data_n, plataforma == "Nanopore"), aes(x = factor(id), y = perc_Ns
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_Ns_nanopore.png")
 
-##### Plot variantes -----
+##### variantes data -----
 
-str(estadistica_data)
+qc_variants <- read_excel(dir_excel[1], sheet = 11)
 
-data_variantes <- data.frame(estadistica_data[is.na(estadistica_data$variants_75) != T, c(1, 3, 4, 9)])
-data_variantes$id <- factor(data_variantes$id, levels = unique(data_variantes$id))
+nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
+
+variants_data <- data.frame(
+    id = as.character(qc_variants$ID),
+    muestra = as.character(rep(nombres_muestras, 40)),
+    plataforma = as.character(qc_variants$plataforma),
+    plataforma2 = as.character(qc_variants$var_sequencing_platforms),
+    variants = as.numeric(qc_variants$variants),
+    tipo = as.character(qc_variants$tipo)
+)
+
+variants_data$muestra <- factor(variants_data$muestra, levels = c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10"))
+variants_data$plataforma <- factor(variants_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
+variants_data$tipo <- factor(variants_data$tipo, levels = c("Variants (AF > 0.75)", "Variants with effect"))
+
+levels_id <- c(
+    "COD_2103",
+    "COD_2106_2",
+    "COD_2107",
+    "COD_2108",
+    "COD_2109",
+    "COD_2110",
+    "COD_2111",
+    "COD_2112",
+    "COD_2113",
+    "COD_2114",
+    "COD_2116",
+    "COD_2117",
+    "COD_2117_2",
+    "COD_2121",
+    "COD_2122",
+    "COD_2123",
+    "COD_2124",
+    "COD_2124_2",
+    "COD_2125",
+    "COD_2126",
+    "COD_2129",
+    "COD_2131",
+    "COD_2132",
+    "COD_2134",
+    "COD_2135",
+    "COD_2137",
+    "COD_2139",
+    "COD_2141",
+    "COD_2102",
+    "COD_2104",
+    "COD_2105",
+    "COD_2115",
+    "COD_2119",
+    "COD_2120",
+    "COD_2127",
+    "COD_2136",
+    "COD_2143",
+    "COD_2106",
+    "COD_2107_2",
+    "COD_2140"
+)
+
+variants_data$id <- factor(variants_data$id, levels = levels_id)
 
 # NAs
 
@@ -555,23 +617,31 @@ data_variantes$id <- factor(data_variantes$id, levels = unique(data_variantes$id
 
 ##### Plot variantes illumina -----
 
-ggplot(subset(data_variantes, plataforma == "Illumina" & id != "COD_2117"), aes(x = muestra2, y = variants_75)) +
+ggplot(subset(variants_data, plataforma == "Illumina" & id != "COD_2117"), aes(x = id, y = variants, fill = tipo)) +
     geom_violin() +
-    geom_jitter(position = position_jitter(0.01), aes(color = id)) +
     facet_grid(~plataforma) +
-    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
-    labs(x = "", y = "Variants (AF > 0.75) / sample", title = "") +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Variants")) +
+    labs(x = "", y = "Number of variants / sample", title = "Variants: Illumina") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_variantes_illumina.png")
 
-bb<- subset(data_variantes, plataforma == "Illumina" & id != "COD_2117")
-aa<- data.frame (
-    id = as.character(bb$id),
-    variants = bb$variants_75
-)
+ggplot(subset(variants_data, plataforma == "Ion Torrent" & id != "COD_2117"), aes(x = muestra, y = variants, fill = tipo)) +
+    geom_violin() +
+    facet_grid(~plataforma) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Variants")) +
+    labs(x = "", y = "Number of variants / sample", title = "Variants: Ion Torrent") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_variantes_iontorrent.png")
 
-ggplot(aa, aes(x = id, y = variants)) +
-    geom_point() +
-    geom_line()
+# no values in Nanopore
+
+ggplot(subset(variants_data, plataforma == "Nanopore"), aes(x = muestra, y = variants, fill = tipo)) +
+    geom_violin() +
+    facet_grid(~plataforma) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Variants")) +
+    labs(x = "", y = "Number of variants / sample", title = "Variants: Nanopore") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_variantes_nanopore.png")
 
 # ggsave("Graficos/qc_resultados_variantes_AF75_illumina.png")
 
@@ -730,10 +800,11 @@ reads_data <- data.frame(
     plataforma = as.character(qc_reads$plataforma),
     plataforma2 = as.character(qc_reads$var_sequencing_platforms),
     reads = as.numeric(qc_reads$var_readcount),
-    tipo = factor(qc_reads$type, levels = c("raw", "filtered"))
+    tipo = factor(qc_reads$type, levels = c("pre-trimming", "post-trimming"))
 )
 
 reads_data$plataforma <- factor(reads_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
+reads_data$muestra2 <- factor(reads_data$muestra2, levels = c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10"))
 
 levels_id <- c(
     "COD_2103",
@@ -780,28 +851,54 @@ levels_id <- c(
 
 reads_data$id <- factor(reads_data$id, levels = levels_id)
 
+# NAs
+
+# aa<- data.frame(reads_data[is.na(reads_data$reads) == T, ])
+# write.table(aa, "read_na.csv", sep = "\t", row.names = F, quote = F)
+
 #plot reads filtered
 
 ggplot(subset(reads_data, plataforma == "Illumina"), aes(x = id, y = log10(reads), fill = tipo)) +
     geom_boxplot() +
-    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
     labs(x = "", y = "log10 (read) / laboratory", title = "Illumina reads", size = 12) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
-ggsave("Graficos/qc_resultados_read_illumina.png")
+ggsave("Graficos/qc_resultados_read_illumina_lab.png")
+
+ggplot(subset(reads_data, plataforma == "Illumina"), aes(x = muestra2, y = log10(reads), fill = tipo)) +
+    geom_boxplot() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
+    labs(x = "", y = "log10 (read) / samples", title = "Illumina reads", size = 12) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
+ggsave("Graficos/qc_resultados_read_illumina_sample.png")
 
 ggplot(subset(reads_data, plataforma == "Ion Torrent"), aes(x = id, y = log10(reads), fill = tipo)) +
     geom_boxplot() +
-    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
-    labs(x = "", y = "log10 (read) / laboratory", title = "Illumina reads", size = 12) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
+    labs(x = "", y = "log10 (read) / laboratory", title = "Ion Torrent reads", size = 12) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
-ggsave("Graficos/qc_resultados_read_iontorrent.png")
+ggsave("Graficos/qc_resultados_read_iontorrent_lab.png")
+
+ggplot(subset(reads_data, plataforma == "Ion Torrent"), aes(x = muestra2, y = log10(reads), fill = tipo)) +
+    geom_boxplot() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
+    labs(x = "", y = "log10 (read) / samples", title = "Ion Torrent reads", size = 12) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
+ggsave("Graficos/qc_resultados_read_iontorrent_sample.png")
 
 ggplot(subset(reads_data, plataforma == "Nanopore"), aes(x = id, y = log10(reads), fill = tipo)) +
     geom_boxplot() +
-    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
-    labs(x = "", y = "log10 (read) / laboratory", title = "Illumina reads", size = 12) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
+    labs(x = "", y = "log10 (read) / laboratory", title = "Nanopore reads", size = 12) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
-ggsave("Graficos/qc_resultados_read_nanopore.png")
+ggsave("Graficos/qc_resultados_read_nanopore_lab.png")
+
+ggplot(subset(reads_data, plataforma == "Nanopore"), aes(x = muestra2, y = log10(reads), fill = tipo)) +
+    geom_boxplot() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
+    labs(x = "", y = "log10 (read) / samples", title = "Nanopore reads", size = 12) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
+ggsave("Graficos/qc_resultados_read_nanopore_sample.png")
 
 
 #new virus, host data
