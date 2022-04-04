@@ -329,8 +329,22 @@ ct_data$muestra2 <- factor(ct_data$muestra2, levels = c("sample_1", "sample_2", 
 
 ##### Plot ct -----
 
-ggplot(ct_data, aes(ct, fill = plataforma)) +
-    geom_density(kernel = "gaussian")
+ggplot(ct_data, aes(ct)) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(x = "Ct", y = "Density", title = "Ct values") +
+    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_ct_hist.png")
+
+ggplot(ct_data, aes(ct)) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    facet_grid(~plataforma) +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(x = "Ct", y = "Density", title = "Ct values by platform") +
+    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_ct_hist_plataforma.png")
 
 ggplot(ct_data, aes(x = muestra2, y = ct, fill = plataforma)) +
     geom_boxplot(show.legend = T) +
@@ -413,7 +427,16 @@ ggplot(ct_format_data, aes(x = sample, y = Ct, fill = tipo)) +
     facet_grid(~plataforma) +
     labs(x = "", y = "Ct", title = "Ct values by gene") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
-ggsave("Graficos/qc_resultados_ct_plataforma.png")
+ggsave("Graficos/qc_resultados_ct_plataforma_genes.png")
+
+ggplot(ct_format_data, aes(Ct)) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    facet_grid(~tipo) +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(x = "Ct", y = "Density", title = "Ct values") +
+    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_ct_hist_genes.png")
 
 #### Datos estadistica -----
 
