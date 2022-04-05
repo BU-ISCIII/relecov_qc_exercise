@@ -556,6 +556,14 @@ ggplot(subset(estadistica_data, mean_depth > 5), aes(x = muestra2, y = log10(mea
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_coverage_platform_samples.png")
 
+ggplot(subset(estadistica_data, mean_depth > 5 & muestra2 == "sample_7"), aes(log10(mean_depth))) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(x = "log10 (mean depth)", y = "Density", title = "Sample 7 - AY.43") +
+    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_coverage_platform_sample7.png")
+
 ##### Plot % genoma 10x -----
 # aa<- estadistica_data[is.na(estadistica_data$qc10x), c(1, 3, 4, 5)]
 # write.table(aa, "qc10_na.csv", sep = "\t", row.names = F, quote = F)
@@ -574,6 +582,20 @@ ggplot(estadistica_data, aes(x = id, y = qc10x, fill = plataforma)) +
     labs(x = "", y = "genome % > 10x / sample", title = "", size = 10) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 ggsave("Graficos/qc_resultados_genoma_10x_sin samples.png")
+
+ggplot(estadistica_data, aes(x = id, y = qc10x, fill = plataforma)) +
+    geom_hist() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    labs(x = "", y = "genome % > 10x / sample", title = "", size = 10) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+
+ggplot(subset(estadistica_data, muestra2 == "sample_7"), aes(qc10x)) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(x = "% genome 10x", y = "Density", title = "Sample 7 - AY.43") +
+    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_genoma_10x_sample7.png")
 
 # NAs
 
@@ -900,7 +922,7 @@ reads_data <- data.frame(
     plataforma = as.character(qc_reads$plataforma),
     plataforma2 = as.character(qc_reads$var_sequencing_platforms),
     reads = as.numeric(qc_reads$var_readcount),
-    tipo = factor(qc_reads$type, levels = c("pre-trimming", "post-trimming"))
+    tipo = factor(qc_reads$tipo, levels = c("pre-trimming", "post-trimming"))
 )
 
 reads_data$plataforma <- factor(reads_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
@@ -1000,6 +1022,14 @@ ggplot(subset(reads_data, plataforma == "Nanopore"), aes(x = muestra2, y = log10
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
 ggsave("Graficos/qc_resultados_read_nanopore_sample.png")
 
+aa<- subset(reads_data, muestra2 == "sample_7")
+View(aa)
+ggplot(subset(reads_data, muestra2 == "sample_7"), aes(x = id, y = reads, fill = tipo)) +
+    geom_bar(stat = "identity", position=position_dodge()) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
+    labs(x = "", y = "reads / lab", title = "Sample 7 - AY.43 reads", size = 12) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
+ggsave("Graficos/qc_resultados_read_sample7.png")
 
 #new virus, host data
 
@@ -1087,6 +1117,18 @@ ggplot(subset(virushost_data, plataforma == "Nanopore"), aes(x = muestra2, y = p
     labs(x = "", y = "", title = "Nanopore reads", size = 12) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), strip.text.x = element_text(size = 12))
 ggsave("Graficos/qc_resultados_hostvirusunmapped_nanopore.png")
+
+# sample 7
+
+ggplot(subset(virushost_data, muestra2 == "sample_7"), aes(porcentaje)) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    facet_grid(~tipo) +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(x = "Ct", y = "Density", title = "Sample 7 - AY.43") +
+    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_hostvirusunmapped_sample7.png")
 
 ### datos linajes ----
 
