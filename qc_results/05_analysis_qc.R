@@ -11,6 +11,7 @@ library(janitor, quietly = TRUE, warn.conflicts = FALSE)
 library(tibble, quietly = TRUE, warn.conflicts = FALSE)
 library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
 library(forcats, quietly = TRUE, warn.conflicts = FALSE)
+library(gridExtra, quietly = TRUE, warn.conflicts = FALSE)
 
 ### Excel ----
 
@@ -376,6 +377,25 @@ ggplot(ct_data, aes(x = muestra2, y = ct_S, fill = plataforma)) +
     labs(x = "", y = "Ct", title = "Valores de Ct") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
 
+##### Plot ct for sample 7 -----
+
+sata_ct_sample7<- subset(ct_data, muestra2 == "sample_7")
+ggplot(sata_ct_sample7, aes(ct)) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(x = "Ct", y = "Density", title = "Ct values: Sample 7 - AY.43") +
+    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_ct_hist_sample7.png")
+
+ggplot(sata_ct_sample7, aes(ct)) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    guides(fill = guide_legend(title = "Platform")) +
+    facet_grid(~plataforma) +
+    labs(x = "Ct", y = "Density", title = "Ct values: Sample 7 - AY.43") +
+    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_ct_hist_plat_sample7.png")
 
 #### datos estadistica Ct ----
 
@@ -437,6 +457,18 @@ ggplot(ct_format_data, aes(Ct)) +
     labs(x = "Ct", y = "Density", title = "Ct values") +
     theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
 ggsave("Graficos/qc_resultados_ct_hist_genes.png")
+
+##### Plot ct for sample 7 genes -----
+
+ggplot(subset(ct_format_data, sample == "sample_7"), aes(Ct)) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    facet_grid(~tipo) +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(x = "Ct", y = "Density", title = "Ct values: Sample 7 - AY.43") +
+    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_ct_hist_genes_sample7.png")
+
 
 #### Datos estadistica -----
 
@@ -550,7 +582,9 @@ ggsave("Graficos/qc_resultados_genoma_10x_sin samples.png")
 
 ##### Plot Ns illumina -----
 
-data_n <- data.frame(estadistica_data[is.na(estadistica_data$perc_Ns) != T, c(1, 3, 4, 7)])
+View(estadistica_data)
+
+data_n <- data.frame(estadistica_data[is.na(estadistica_data$perc_Ns) != T, c(1, 3, 4, 8)])
 data_n$id <- factor(data_n$id, levels = unique(data_n$id))
 
 ggplot(subset(data_n, plataforma == "Illumina"), aes(x = factor(id), y = perc_Ns, fill = muestra2)) +
@@ -578,8 +612,26 @@ ggplot(subset(data_n, plataforma == "Nanopore"), aes(x = factor(id), y = perc_Ns
     facet_grid(~plataforma) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
     labs(x = "", y = "Ns % / sample", title = "") +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
 ggsave("Graficos/qc_resultados_Ns_nanopore.png")
+
+##### Plot Ns sample 7 -----
+
+ggplot(data_n, aes(x = perc_Ns)) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    facet_grid(~muestra2) +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(x = "Ct", y = "Density", title = "% Ns by sample") +
+    theme(axis.text.x = element_text(size = 12, angle = 45, vjust = 1, hjust = 1,), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_Ns.png")
+
+ggplot(subset(data_n, muestra2 == "sample_7"), aes(x = factor(id), y = perc_Ns, fill = muestra2)) +
+    geom_bar(stat = "identity", position = position_dodge()) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "Ns % / lab", title = "Sample 7 - AY.43") +
+    theme(legend.position="none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_Ns_sample7.png")
 
 ##### variantes data -----
 
@@ -655,8 +707,7 @@ variants_data$id <- factor(variants_data$id, levels = levels_id)
 aa<- subset(variants_data, plataforma == "Illumina" & id == "COD_2117")
 sd(aa$variants[aa$tipo == "Variants (AF > 0.75)"], na.rm = T)
 
-
-ggplot(subset(variants_data, plataforma == "Illumina" & id != "COD_2117"), aes(x = id, y = variants, fill = tipo)) +
+ggplot(subset(variants_data, plataforma == "Illumina" & id != "COD_2117"), aes(x = muestra, y = variants, fill = tipo)) +
     geom_violin() +
     facet_grid(~plataforma) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Variants")) +
@@ -671,6 +722,16 @@ ggplot(subset(variants_data, plataforma == "Ion Torrent" & id != "COD_2117"), ae
     labs(x = "", y = "Number of variants / sample", title = "Variants: Ion Torrent") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
 ggsave("Graficos/qc_resultados_variantes_iontorrent.png")
+
+# variantes sample 7
+
+ggplot(subset(variants_data, muestra == "sample_7"), aes(x = factor(id), y = variants, fill = muestra)) +
+    geom_bar(stat = "identity", position = position_dodge()) +
+    facet_grid(~tipo) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "mutations / lab", title = "Sample 7 - AY.43") +
+    theme(legend.position="none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 8), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_variantes_sample7.png")
 
 # no values in Nanopore
 
