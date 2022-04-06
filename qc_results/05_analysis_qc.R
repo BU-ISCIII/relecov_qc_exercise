@@ -1178,7 +1178,7 @@ ggsave("Graficos/qc_resultados_hostvirusunmapped_sample7.png")
 
 ### calculo de TP y FP
 
-qc_parsed_linajes <- read_excel(dir_excel[1], sheet = 7)
+qc_parsed_linajes <- read_excel(dir_excel[1], sheet = 8)
 df_parsed_linajes <- as.data.frame(qc_parsed_linajes[, c(3, 5:14)])
 
 # linajes
@@ -1225,30 +1225,148 @@ table(matrix_tasa[,8])
 table(matrix_tasa[,9])
 table(matrix_tasa[,10])
 
-matrix_linajes <- matrix(0, ncol = 10, nrow = 40)
-for (i in 1:10) {
-    control <- as.character(df_linajes_control[, i])
-    sample <- as.character(df_linajes_lab[, i])
-    if (control == sample) {
-        matrix_linajes[,i]<- 
-    } else {
-        matrix_linajes[,i]<- 0 
-    }
+matrix_tasa<- matrix(0, ncol = 10, nrow = 40)
+for (j in 1:ncol(df_linajes_lab)) {
+    control<- df_linajes_control[j]
+    muestra<- df_linajes_lab[, j]
+        for (i in 1:length(muestra)) {
+            if (control == muestra[i]) {
+                matrix_tasa [i, j]<- "Bien"
+            } else if (muestra[i] == "None") {
+                matrix_tasa [i, j]<- "Mal"
+            } else if (control != muestra[i]) {
+                matrix_tasa [i, j]<- "Mal"
+            } 
+        }   
 }
 
-colnames(matrix_linajes) <- colnames(df_parsed_linajes[2:11])
-rownames(matrix_linajes) <- NULL
-
-df_resultados_linajes <- data.frame(id = df_parsed_linajes$grupo[2:41], matrix_linajes)
 
 matrix_valores_0 <- matrix(0, ncol = 1, nrow = 40)
 for (i in 1:40) {
-    tabla_0 <- table(matrix_linajes[i, ])
-    tabla_0 <- table(matrix_linajes[i, ])
-    matrix_valores_0[i, 1] <- as.numeric(tabla_0[1])
+    tabla_0 <- table(matrix_tasa[i, ])
+    matrix_valores_0[i, 1] <- as.numeric(tabla_0[2])
 }
 
-table(matrix_valores_0[, 1])
+matrix_valores_0[7,]<- 0
+matrix_valores_0[30,]<- 0
+matrix_valores_0[32,]<- 0
+matrix_valores_0[36,]<- 0
+matrix_valores_0[37,]<- 0
+
+df_aciertos<- data.frame(
+    id = df_parsed_linajes$grupo[-1],
+    aciertos = matrix_valores_0[,1]
+)
+
+# write.table(df_aciertos, "df_aciertos.csv", row.names = F, quote = F, sep = "\t")
+
+#### Datos aciertos
+
+
+qc_aciertos <- read_excel(dir_excel[1], sheet = 12)
+niveles_aciertos<- c("COD_2109",
+"COD_2129",
+"COD_2122",
+"COD_2126",
+"COD_2132",
+"COD_2143",
+"COD_2110",
+"COD_2102",
+"COD_2111",
+"COD_2104",
+"COD_2127",
+"COD_2136",
+"COD_2131",
+"COD_2107",
+"COD_2107_2",
+"COD_2114",
+"COD_2115",
+"COD_2121",
+"COD_2123",
+"COD_2124",
+"COD_2124_2",
+"COD_2141",
+"COD_2119",
+"COD_2112",
+"COD_2135",
+"COD_2137",
+"COD_2113",
+"COD_2103",
+"COD_2105",
+"COD_2116",
+"COD_2125",
+"COD_2120",
+"COD_2117",
+"COD_2117_2",
+"COD_2108",
+"COD_2106",
+"COD_2106_2",
+"COD_2134",
+"COD_2139",
+"COD_2140")
+
+qc_aciertos$id<- factor(qc_aciertos$id, levels = niveles_aciertos)
+
+ggplot(qc_aciertos, aes(x = id, y = errores)) +
+    geom_bar(stat = "identity") +
+    guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
+    labs(x = "Control lineages", y = "", title = "") +
+    theme(
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12),
+        axis.text.y = element_text(size = 12),
+        legend.title = element_text(size=12), legend.text = element_text(size=12)
+    )
+    
+    
+    
+    ggsave("Graficos/qc_resultados_hostvirusunmapped_sample7.png")
+
+
+
+levels_id <- c(
+    "COD_2103",
+    "COD_2106_2",
+    "COD_2107",
+    "COD_2108",
+    "COD_2109",
+    "COD_2110",
+    "COD_2111",
+    "COD_2112",
+    "COD_2113",
+    "COD_2114",
+    "COD_2116",
+    "COD_2117",
+    "COD_2117_2",
+    "COD_2121",
+    "COD_2122",
+    "COD_2123",
+    "COD_2124",
+    "COD_2124_2",
+    "COD_2125",
+    "COD_2126",
+    "COD_2129",
+    "COD_2131",
+    "COD_2132",
+    "COD_2134",
+    "COD_2135",
+    "COD_2137",
+    "COD_2139",
+    "COD_2141",
+    "COD_2102",
+    "COD_2104",
+    "COD_2105",
+    "COD_2115",
+    "COD_2119",
+    "COD_2120",
+    "COD_2127",
+    "COD_2136",
+    "COD_2143",
+    "COD_2106",
+    "COD_2107_2",
+    "COD_2140"
+)
+
+virushost_data$id <- factor(virushost_data$id, levels = levels_id)
 
 # Sensibilidad y precision
 
