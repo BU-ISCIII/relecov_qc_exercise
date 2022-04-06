@@ -192,7 +192,7 @@ ggsave("Graficos/qc_barplot_bioinformatica_2.png")
 
 ### datos bioinfo ----
 
-qc_bioinfo <- read_excel(dir_excel[1], sheet = 10)
+qc_bioinfo <- read_excel(dir_excel[1], sheet = 11)
 
 bioinfo_data <- data.frame(
     id = as.character(qc_bioinfo$ID),
@@ -268,6 +268,27 @@ ggplot(bioinfo_data, aes(assembly)) +
     geom_text(stat = "count", aes(label = ..count..), hjust = -0.9) +
     theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
 ggsave("Graficos/qc_barplot_bioinformatica_assembly.png")
+
+#### plot variant callers ----
+
+ggplot(bioinfo_data, aes(variant)) +
+    geom_bar(fill = "#1F77B4") +
+    facet_grid(~platform) +
+    coord_flip() +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Variant callers software") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
+    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_barplot_bioinformatica_variants_plat.png")
+
+ggplot(bioinfo_data, aes(variant)) +
+    geom_bar(fill = "#1F77B4") +
+    coord_flip() +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Variant callers software") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.9) +
+    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_barplot_bioinformatica_variants.png")
 
 #### plot consensus ----
 
@@ -657,7 +678,7 @@ ggsave("Graficos/qc_resultados_Ns_sample7.png")
 
 ##### variantes data -----
 
-qc_variants <- read_excel(dir_excel[1], sheet = 11)
+qc_variants <- read_excel(dir_excel[1], sheet = 6)
 
 nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 
@@ -666,6 +687,7 @@ variants_data <- data.frame(
     muestra = as.character(rep(nombres_muestras, 40)),
     plataforma = as.character(qc_variants$plataforma),
     plataforma2 = as.character(qc_variants$var_sequencing_platforms),
+    software = as.character(qc_variants$software),
     variants = as.numeric(qc_variants$variants),
     tipo = as.character(qc_variants$tipo)
 )
@@ -724,7 +746,7 @@ variants_data$id <- factor(variants_data$id, levels = levels_id)
 #aa <- data.frame(estadistica_data[is.na(estadistica_data$variants_75) == T, c(1, 3, 4, 8)])
 #write.table(aa, "variant_na.csv", sep = "\t", row.names = F, quote = F)
 
-##### Plot variantes illumina -----
+##### Plot variantes illumina & ion torrent -----
 
 aa<- subset(variants_data, plataforma == "Illumina" & id == "COD_2117")
 sd(aa$variants[aa$tipo == "Variants (AF > 0.75)"], na.rm = T)
@@ -744,6 +766,28 @@ ggplot(subset(variants_data, plataforma == "Ion Torrent" & id != "COD_2117"), ae
     labs(x = "", y = "Number of variants / sample", title = "Variants: Ion Torrent") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
 ggsave("Graficos/qc_resultados_variantes_iontorrent.png")
+
+# variantes software
+    
+ggplot(subset(variants_data, plataforma == "Illumina"), aes(x = factor(software), y = variants)) +
+    geom_bar(fill = "#1F77B4", stat = "identity", position = position_dodge()) +
+    geom_boxplot(outlier.colour="red") +
+    facet_grid(~tipo) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "mutations / lab", title = "Variants callers software: Illumina") +
+    theme(legend.position="none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_variantes_software_illumina.png")
+
+ggplot(subset(variants_data, plataforma == "Ion Torrent"), aes(x = factor(software), y = variants)) +
+    geom_bar(fill = "#1F77B4", stat = "identity", position = position_dodge()) +
+    geom_boxplot(outlier.colour="red") +
+    facet_grid(~tipo) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "mutations / lab", title = "Variants callers software: Ion Torrent") +
+    theme(legend.position="none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+ggsave("Graficos/qc_resultados_variantes_software_iontorrent.png")
+
+# nanopore mal
 
 # variantes sample 7
 
