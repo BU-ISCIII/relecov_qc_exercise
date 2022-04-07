@@ -92,17 +92,19 @@ ggplot(subset(categorias_data, diagnostico_1 != "NA"), aes(diagnostico_1, fill =
     guides(fill = guide_legend(title = "Commercial")) +
     coord_flip() +
     labs(y = "Number of laboratories", x = "", title = "Diagnosis protocol for SARS-CoV-2") +
-    geom_text(stat = "count", aes(label = ..count..), vjust = 0.5, hjust = -1) +
-    theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12),
-    legend.title = element_text(size = 12),
-    legend.text = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), vjust = 0.5, hjust = -0.05, size = 10) +
+    theme(
+    text = element_text(size = 23),
+    axis.text.x = element_text(angle = 0, vjust = 1, hjust = 1), axis.text.y = element_text(),
+    legend.title = element_text(),
+    legend.text = element_text())
 ggsave("Graficos/qc_barplot_diagnostico.png")
 
 ggplot(subset(categorias_data, diagnostico_2 != "NA"), aes(diagnostico_2)) +
     geom_bar(fill = "#1F77B4") +
-    labs(y = "Number of laboratories", x = "", title = "Diagnosis protocol for SARS-CoV-2", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
+    labs(y = "Number of laboratories", x = "", title = "Diagnosis protocol for SARS-CoV-2") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -0.5, size = 8) +
+    theme(text = element_text(size = 25), axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.text.y = element_text())    
 ggsave("Graficos/qc_barplot_diagnostico_2.png")
 
 ggplot(subset(categorias_data, diagnostico_1 != "NA"), aes(diagnostico_1)) +
@@ -119,9 +121,13 @@ ggplot(subset(categorias_data, !is.na(librerias)), aes(fct_reorder(categorias_da
     geom_bar() +
     guides(fill = guide_legend(title = "Platform")) +
     coord_flip() +
-    labs(y = "Number of laboratories", x = "", title = "Libraries", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = 0.4, hjust = -1) +
-    theme(axis.text.x = element_text(vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
+    labs(y = "Number of laboratories", x = "", title = "Libraries") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = 0.4, hjust = -0.2, size = 6.5) +
+    theme(
+    text = element_text(size = 23),
+    axis.text.x = element_text(angle = 0, vjust = 1, hjust = 1), axis.text.y = element_text(),
+    legend.title = element_text(),
+    legend.text = element_text())
 ggsave("Graficos/qc_barplot_librerias.png")
 
 #### plot plataformas ----
@@ -129,17 +135,25 @@ ggsave("Graficos/qc_barplot_librerias.png")
 ggplot(categorias_data, aes(platform_1)) +
     geom_bar(fill = "#1F77B4") +
     guides(fill = guide_legend(title = "Platform")) +
-    labs(y = "Number of laboratories", x = "", title = "Platform", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
+    labs(y = "Number of laboratories", x = "", title = "Platform") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1, size = 6.5, hjust = -0.2) +
+    theme(
+    text = element_text(size = 23),
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.text.y = element_text(),
+    legend.title = element_text(),
+    legend.text = element_text())
 ggsave("Graficos/qc_barplot_plataforma.png")
 
 ggplot(categorias_data, aes(platform_2, fill = platform_1)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Platform")) +
-    labs(y = "Number of laboratories", x = "", title = "Platform", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
+    labs(y = "Number of laboratories", x = "", title = "Platform") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1, size = 6.5, hjust = -0.2) +
+    theme(
+    text = element_text(size = 23),
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.text.y = element_text(),
+    legend.title = element_text(),
+    legend.text = element_text())
 ggsave("Graficos/qc_barplot_plataforma_2.png")
 
 #### plot enriquecimiento ----
@@ -147,9 +161,13 @@ ggsave("Graficos/qc_barplot_plataforma_2.png")
 ggplot(categorias_data, aes(enriquecimiento)) +
     geom_bar(fill = "#1F77B4") +
     guides(fill = guide_legend(title = "Platform")) +
-    labs(y = "Number of laboratories", x = "", title = "Enrichment", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -1) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
+    labs(y = "Number of laboratories", x = "", title = "Enrichment") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -0.8, size = 6.5, hjust = 0.2) +
+    theme(
+    text = element_text(size = 23),
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.text.y = element_text(),
+    legend.title = element_text(),
+    legend.text = element_text())
 ggsave("Graficos/qc_barplot_enrichment.png")
 
 ggplot(categorias_data, aes(enriquecimiento)) +
@@ -157,8 +175,12 @@ ggplot(categorias_data, aes(enriquecimiento)) +
     facet_grid(~platform_1) +
     guides(fill = guide_legend(title = "Platform")) +
     labs(y = "Number of laboratories", x = "", title = "Enrichment") +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -0.5) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), vjust = -0.8, size = 6.5, hjust = 0.2) +
+    theme(
+    text = element_text(size = 23),
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.text.y = element_text(),
+    legend.title = element_text(),
+    legend.text = element_text())
 ggsave("Graficos/qc_barplot_enrichment_2.png")
 
 #### plot genome ----
@@ -168,8 +190,12 @@ ggplot(categorias_data, aes(genome)) +
     coord_flip() +
     guides(fill = guide_legend(title = "Platform")) +
     labs(y = "Number of laboratories", x = "", title = "Reference genome", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = 0, hjust = -1) +
-    theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), vjust = 1, size = 6.5, hjust = -1) +
+    theme(
+    text = element_text(size = 23),
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.text.y = element_text(),
+    legend.title = element_text(),
+    legend.text = element_text())
 ggsave("Graficos/qc_barplot_genome.png")
 
 #### plot bioinformatica ----
@@ -180,7 +206,9 @@ ggplot(categorias_data, aes(bioinformatica)) +
     guides(fill = guide_legend(title = "Platform")) +
     labs(y = "Number of laboratories", x = "", title = "Bioinformatic protocol") +
     geom_text(stat = "count", aes(label = ..count..), hjust = -0.8) +
-    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12))
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica.png")
 
 ggplot(categorias_data, aes(bioinformatica)) +
@@ -189,8 +217,10 @@ ggplot(categorias_data, aes(bioinformatica)) +
     facet_grid(~platform_1) +
     guides(fill = guide_legend(title = "Platform")) +
     labs(y = "Number of laboratories", x = "", title = "Bioinformatic protocol") +
-    geom_text(stat = "count", aes(label = ..count..), vjust = 0.5, hjust = 2) +
-    theme(axis.text.x = element_text(vjust = 1, hjust = 0, size = 12), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), vjust = 0.5, hjust = 1.5, , color = "black", size = 6.5) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_2.png")
 
 ### datos bioinfo ----
@@ -217,8 +247,24 @@ ggplot(bioinfo_data, aes(preprocessing)) +
     coord_flip() +
     guides(fill = guide_legend(title = "platform")) +
     labs(y = "Number of laboratories", x = "", title = "Preprocessing software") +
-    geom_text(stat = "count", aes(label = ..count..), hjust = -0.8) +
-    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.8, size = 6.5) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
+ggsave("Graficos/qc_barplot_bioinformatica_preprocessing_plat.png")
+
+#### plot preprocessing ----
+
+ggplot(bioinfo_data, aes(preprocessing)) +
+    geom_bar(fill = "#1F77B4") +
+    facet_grid(~platform) +
+    coord_flip() +
+    guides(fill = guide_legend(title = "platform")) +
+    labs(y = "Number of laboratories", x = "", title = "Preprocessing software") +
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.8, size = 6.5) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_preprocessing_plat.png")
 
 ggplot(bioinfo_data, aes(preprocessing)) +
@@ -238,8 +284,10 @@ ggplot(bioinfo_data, aes(mapping)) +
     coord_flip() +
     guides(fill = guide_legend(title = "platform")) +
     labs(y = "Number of laboratories", x = "", title = "Mapping software") +
-    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
-    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2, size = 6.5) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_mapping_plat.png")
 
 ggplot(bioinfo_data, aes(mapping)) +
@@ -247,8 +295,10 @@ ggplot(bioinfo_data, aes(mapping)) +
     coord_flip() +
     guides(fill = guide_legend(title = "platform")) +
     labs(y = "Number of laboratories", x = "", title = "Mapping software") +
-    geom_text(stat = "count", aes(label = ..count..), hjust = -0.9) +
-    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.9, size = 6.5) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_mapping.png")
 
 #### plot assembly ----
@@ -259,8 +309,10 @@ ggplot(bioinfo_data, aes(assembly)) +
     coord_flip() +
     guides(fill = guide_legend(title = "platform")) +
     labs(y = "Number of laboratories", x = "", title = "Assembly software") +
-    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
-    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2, size = 6.5) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_assembly_plat.png")
 
 ggplot(bioinfo_data, aes(assembly)) +
@@ -280,8 +332,10 @@ ggplot(bioinfo_data, aes(variant)) +
     coord_flip() +
     guides(fill = guide_legend(title = "platform")) +
     labs(y = "Number of laboratories", x = "", title = "Variant callers software") +
-    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
-    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2, size = 6.5) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_variants_plat.png")
 
 ggplot(bioinfo_data, aes(variant)) +
@@ -301,8 +355,10 @@ ggplot(bioinfo_data, aes(consensus)) +
     coord_flip() +
     guides(fill = guide_legend(title = "platform")) +
     labs(y = "Number of laboratories", x = "", title = "Consensus software") +
-    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
-    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2, size = 6.5) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_consensus_plat.png")
 
 ggplot(bioinfo_data, aes(consensus)) +
@@ -321,21 +377,25 @@ ggplot(bioinfo_data, aes(lineage_software)) +
     coord_flip() +
     guides(fill = guide_legend(title = "platform")) +
     labs(y = "Number of laboratories", x = "", title = "Lineage software") +
-    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2) +
-    theme(axis.text.x = element_text(size = 12, vjust = 1, hjust = 1), axis.text.y = element_text(size = 12), strip.text.x = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), hjust = -0.2, size = 6.5) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_lineage.png")
 
 ggplot(bioinfo_data, aes(pangolin_version)) +
     geom_bar(fill = "#1F77B4") +
     guides(fill = guide_legend(title = "platform")) +
     labs(y = "Number of laboratories", x = "", title = "Pangolin version", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -1, size = 5) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12))
+    geom_text(stat = "count", aes(label = ..count..), vjust = -1, size = 6.5) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_pangolin.png")
 
 #### Datos estadistica -----
 
-qc_ct <- read_excel(dir_excel[1], sheet = 6)
+qc_ct <- read_excel(dir_excel[1], sheet = 7)
 
 nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 
@@ -359,24 +419,36 @@ ggplot(ct_data, aes(ct)) +
     geom_density(fill="#FF6666", position="identity",alpha=0.6) +
     guides(fill = guide_legend(title = "Platform")) +
     labs(x = "Ct", y = "Density", title = "Ct values") +
-    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+    theme(text = element_text(size = 23),
+    axis.text.x = element_text(), 
+    axis.text.y = element_text(), 
+    legend.title = element_text(), 
+    legend.text = element_text(), 
+    strip.text.x = element_text())
 ggsave("Graficos/qc_resultados_ct_hist.png")
 
 ggplot(ct_data, aes(ct)) +
     geom_histogram(aes(y=..density..), colour="black", fill="white") +
-    facet_grid(~plataforma) +
+    facet_grid(~muestra2) +
     geom_density(fill="#FF6666", position="identity",alpha=0.6) +
     guides(fill = guide_legend(title = "Platform")) +
-    labs(x = "Ct", y = "Density", title = "Ct values by platform") +
-    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
-ggsave("Graficos/qc_resultados_ct_hist_plataforma.png")
+    labs(x = "Ct", y = "Density", title = "Ct values by sample") +
+    theme(text = element_text(size = 22),
+    axis.text.x = element_text(), 
+    axis.text.y = element_text(), 
+    legend.title = element_text(), 
+    legend.text = element_text(), 
+    strip.text.x = element_text())
+ggsave("Graficos/qc_resultados_ct_hist_sample.png")
 
-ggplot(ct_data, aes(x = muestra2, y = ct, fill = plataforma)) +
-    geom_boxplot(show.legend = T) +
+ggplot(ct_data, aes(x = muestra2, y = ct)) +
+    geom_boxplot(fill = "#1F77B4", show.legend = T) +
     guides(fill = guide_legend(title = "Platform")) +
-    geom_point(data = ct_data[ct_data$id == "Control", ], aes(muestra2, ct), colour = "steelblue", shape = 23, width = 0.5, size = 2.5, height = 0.5) +
-    labs(x = "", y = "Ct", title = "Valores de Ct") +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+    geom_point(data = ct_data[ct_data$id == "Control", ], aes(muestra2, ct), color = "red", shape = 15, width = 0.5, size = 2.5, height = 0.5) +
+    labs(x = "", y = "Ct", title = "Ct values by sample") +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ggsave("Graficos/qc_resultados_ct_muestras_control.png")
 
 ggplot(subset(ct_data, muestra2 == "sample_7"), aes(x = id, y = ct, fill = plataforma)) +
@@ -468,10 +540,30 @@ ct_format_data$plataforma <- factor(ct_format_data$plataforma, levels = c("Illum
 
 ggplot(ct_format_data, aes(x = sample, y = Ct, fill = tipo)) +
     geom_boxplot(show.legend = T) +
-    facet_grid(~plataforma) +
     labs(x = "", y = "Ct", title = "Ct values by gene") +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
-ggsave("Graficos/qc_resultados_ct_plataforma_genes.png")
+    guides(fill = guide_legend(title = "Type")) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
+ggsave("Graficos/qc_resultados_ct_boxplot_genes.png")
+
+ggplot(ct_format_data, aes(x = id, y = Ct, fill = tipo)) +
+    geom_boxplot(show.legend = T) +
+    labs(x = "", y = "Ct", title = "Ct values by gene") +
+    guides(fill = guide_legend(title = "Type")) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
+ggsave("Graficos/qc_resultados_ct_boxplot_id_genes.png")
+
+ggplot(subset(ct_format_data, tipo == "PCR"), aes(x = id, y = Ct, fill = tipo)) +
+    geom_boxplot(show.legend = T) +
+    labs(x = "", y = "Ct", title = "Ct values by gene") +
+    guides(fill = guide_legend(title = "Type")) +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
+ggsave("Graficos/qc_resultados_ct_boxplot_id.png")
 
 ggplot(ct_format_data, aes(Ct)) +
     geom_histogram(aes(y=..density..), colour="black", fill="white") +
@@ -479,8 +571,11 @@ ggplot(ct_format_data, aes(Ct)) +
     facet_grid(~tipo) +
     guides(fill = guide_legend(title = "Platform")) +
     labs(x = "Ct", y = "Density", title = "Ct values") +
-    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_resultados_ct_hist_genes.png")
+
 
 ##### Plot ct for sample 7 genes -----
 
@@ -566,12 +661,24 @@ estadistica_data$id <- factor(estadistica_data$id, levels = levels_id)
 
 ##### Plot depth -----
 
-ggplot(subset(estadistica_data, mean_depth > 5), aes(x = id, y = log10(mean_depth), fill = plataforma)) +
-    geom_boxplot() +
+head(estadistica_data)
+
+ggplot(subset(estadistica_data, mean_depth > 5), aes(x = muestra2, y = log10(mean_depth))) +
+    geom_boxplot(fill = "#1F77B4") +
+    facet_grid(~plataforma) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
     labs(x = "", y = "log10(coverage (mean depth)) / sample", title = "") +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
-ggsave("Graficos/qc_resultados_coverage_platform_nosamples.png")
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
+ggsave("Graficos/qc_resultados_coverage_platform_samples.png")
+
+ggplot(subset(estadistica_data, mean_depth > 5), aes(log10(mean_depth))) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    guides(fill = guide_legend(title = "Platform")) +
+    labs(x = "log10 (mean depth)", y = "Density", title = "Sample 7 - AY.43") +
+    theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
 
 ggplot(subset(estadistica_data, mean_depth > 5), aes(x = muestra2, y = log10(mean_depth), fill = plataforma)) +
     geom_boxplot() +
@@ -592,13 +699,25 @@ ggsave("Graficos/qc_resultados_coverage_platform_sample7.png")
 # aa<- estadistica_data[is.na(estadistica_data$qc10x), c(1, 3, 4, 5)]
 # write.table(aa, "qc10_na.csv", sep = "\t", row.names = F, quote = F)
 
-ggplot(estadistica_data, aes(x = id, y = qc10x, fill = plataforma)) +
-    geom_boxplot() +
+ggplot(estadistica_data, aes(x = muestra2, y = qc10x)) +
+    geom_boxplot(fill = "#1F77B4") +
+    facet_grid(~plataforma) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
-    geom_jitter(position = position_jitter(0.001), aes(color = muestra2)) +
     labs(x = "", y = "genome % > 10x / sample", title = "", size = 10) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
-ggsave("Graficos/qc_resultados_genoma_10x.png")
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
+ggsave("Graficos/qc_resultados_genoma_10x_samples.png")
+
+ggplot(subset(estadistica_data, mean_depth > 5), aes(x = muestra2, y = log10(mean_depth))) +
+    geom_boxplot(fill = "#1F77B4") +
+    facet_grid(~plataforma) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
+    labs(x = "", y = "log10(coverage (mean depth)) / sample", title = "") +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
+ggsave("Graficos/qc_resultados_coverage_platform_samples.png")
 
 ggplot(estadistica_data, aes(x = id, y = qc10x, fill = plataforma)) +
     geom_boxplot() +
@@ -627,19 +746,47 @@ ggsave("Graficos/qc_resultados_genoma_10x_sample7.png")
 # write.table(aa, "ns_na.csv", sep = "\t", row.names = F, quote = F)
 
 ##### Plot Ns illumina -----
-
-View(estadistica_data)
+    labs(x = "", y = "log10(coverage (mean depth)) / sample", title = "") +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
+ggsave("Graficos/qc_resultados_coverage_platform_samples.png")
 
 data_n <- data.frame(estadistica_data[is.na(estadistica_data$perc_Ns) != T, c(1, 3, 4, 8)])
 data_n$id <- factor(data_n$id, levels = unique(data_n$id))
 
-ggplot(subset(data_n, plataforma == "Illumina"), aes(x = factor(id), y = perc_Ns, fill = muestra2)) +
-    geom_bar(stat = "identity", position = position_dodge()) +
-    facet_grid(~plataforma) +
+ggplot(subset(data_n, plataforma == "Illumina"), aes(perc_Ns)) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    facet_grid(~muestra2) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
-    labs(x = "", y = "Ns % / sample", title = "") +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10))
+    labs(x = "Ns %", y = "Density", title = "") +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_resultados_Ns_illumina.png")
+
+ggplot(subset(data_n, plataforma == "Ion Torrent"), aes(perc_Ns)) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    facet_grid(~muestra2) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "Ns %", y = "Density", title = "") +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
+ggsave("Graficos/qc_resultados_Ns_ion.png")
+
+ggplot(subset(data_n, plataforma == "Nanopore"), aes(perc_Ns)) +
+    geom_histogram(aes(y=..density..), colour="black", fill="white") +
+    geom_density(fill="#FF6666", position="identity",alpha=0.6) +
+    facet_grid(~muestra2) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "Ns %", y = "Density", title = "") +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
+ggsave("Graficos/qc_resultados_Ns_nano.png")
 
 ##### Plot Ns Ion torrent -----
 
@@ -759,7 +906,8 @@ ggplot(subset(variants_data, plataforma == "Illumina" & id != "COD_2117"), aes(x
     facet_grid(~plataforma) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Variants")) +
     labs(x = "", y = "Number of variants / sample", title = "Variants: Illumina") +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+    text = element_text(size = 22))
 ggsave("Graficos/qc_resultados_variantes_illumina.png")
 
 ggplot(subset(variants_data, plataforma == "Ion Torrent" & id != "COD_2117"), aes(x = muestra, y = variants, fill = tipo)) +
@@ -767,7 +915,8 @@ ggplot(subset(variants_data, plataforma == "Ion Torrent" & id != "COD_2117"), ae
     facet_grid(~plataforma) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Variants")) +
     labs(x = "", y = "Number of variants / sample", title = "Variants: Ion Torrent") +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+    text = element_text(size = 22))
 ggsave("Graficos/qc_resultados_variantes_iontorrent.png")
 
 # variantes software
@@ -778,7 +927,8 @@ ggplot(subset(variants_data, plataforma == "Illumina"), aes(x = factor(software)
     facet_grid(~tipo) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
     labs(x = "", y = "mutations / lab", title = "Variants callers software: Illumina") +
-    theme(legend.position="none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+    text = element_text(size = 22))
 ggsave("Graficos/qc_resultados_variantes_software_illumina.png")
 
 ggplot(subset(variants_data, plataforma == "Ion Torrent"), aes(x = factor(software), y = variants)) +
@@ -787,7 +937,8 @@ ggplot(subset(variants_data, plataforma == "Ion Torrent"), aes(x = factor(softwa
     facet_grid(~tipo) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
     labs(x = "", y = "mutations / lab", title = "Variants callers software: Ion Torrent") +
-    theme(legend.position="none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), axis.text.y = element_text(size = 12), legend.title = element_text(size=12), legend.text = element_text(size=12), strip.text.x = element_text(size = 12))
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+    text = element_text(size = 22))
 ggsave("Graficos/qc_resultados_variantes_software_iontorrent.png")
 
 # nanopore mal
@@ -922,18 +1073,18 @@ ggplot(n_carreras_data, aes(x = id, y = carreras, fill = plataforma)) +
     geom_text(aes(label = carreras), vjust = -0.85, color = "black", size = 3) +
     labs(x = "", y = "samples / run", title = "") +
     theme(
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
-        axis.text.y = element_text()
-    )
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_secuenciacion_carreras_plataforma.png")
 
 ggplot(n_carreras_data, aes(x = id, y = carreras, fill = plataforma2)) +
     geom_bar(stat = "identity") +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
-    geom_text(aes(label = carreras), vjust = -0.85, color = "black", size = 3) +
+    geom_text(aes(label = carreras), vjust = -0.85, color = "black", size = 5) +
     labs(x = "", y = "samples / run", title = "") +
     theme(
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
+        text = element_text(size = 22),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
         axis.text.y = element_text()
     )
 ggsave("Graficos/qc_secuenciacion_carreras_plataforma_2.png")
@@ -952,7 +1103,8 @@ ggplot(read_data, aes(x = id, y = read, fill = plataforma2)) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
     labs(x = "", y = "read length / sample", title = "") +
     theme(
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 10),
+        text = element_text(size = 22),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
         axis.text.y = element_text()
     )
 ggsave("Graficos/qc_secuenciacion_reads_plataforma.png")
@@ -1030,16 +1182,39 @@ reads_data$id <- factor(reads_data$id, levels = levels_id)
 ggplot(subset(reads_data, plataforma == "Illumina"), aes(x = id, y = log10(reads), fill = tipo)) +
     geom_boxplot() +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
-    labs(x = "", y = "log10 (read) / laboratory", title = "Illumina reads", size = 12) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
+    labs(x = "", y = "log10 (read) / laboratory", title = "Illumina reads") +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
 ggsave("Graficos/qc_resultados_read_illumina_lab.png")
 
-ggplot(subset(reads_data, plataforma == "Illumina"), aes(x = muestra2, y = log10(reads), fill = tipo)) +
+ggplot(subset(reads_data, plataforma == "Ion Torrent"), aes(x = id, y = log10(reads), fill = tipo)) +
     geom_boxplot() +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
-    labs(x = "", y = "log10 (read) / samples", title = "Illumina reads", size = 12) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
-ggsave("Graficos/qc_resultados_read_illumina_sample.png")
+    labs(x = "", y = "log10 (read) / laboratory", title = "Ion Torrent reads") +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
+ggsave("Graficos/qc_resultados_read_ion_lab.png")
+
+ggplot(subset(reads_data, plataforma == "Nanopore"), aes(x = id, y = log10(reads), fill = tipo)) +
+    geom_boxplot() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
+    labs(x = "", y = "log10 (read) / laboratory", title = "Nanopore reads") +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
+ggsave("Graficos/qc_resultados_read_nano_lab.png")
+
+ggplot(reads_data, aes(x = muestra2, y = log10(reads), fill = tipo)) +
+    geom_boxplot() +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
+    facet_grid(~plataforma) +
+    labs(x = "", y = "log10 (read) / samples") +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
+ggsave("Graficos/qc_resultados_read_illumina_sample_platform.png")
 
 ggplot(subset(reads_data, plataforma == "Ion Torrent"), aes(x = id, y = log10(reads), fill = tipo)) +
     geom_boxplot() +
@@ -1069,8 +1244,6 @@ ggplot(subset(reads_data, plataforma == "Nanopore"), aes(x = muestra2, y = log10
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12))
 ggsave("Graficos/qc_resultados_read_nanopore_sample.png")
 
-aa<- subset(reads_data, muestra2 == "sample_7")
-View(aa)
 ggplot(subset(reads_data, muestra2 == "sample_7"), aes(x = id, y = reads, fill = tipo)) +
     geom_bar(stat = "identity", position=position_dodge()) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
@@ -1145,24 +1318,29 @@ virushost_data$id <- factor(virushost_data$id, levels = levels_id)
 ggplot(subset(virushost_data, plataforma == "Illumina"), aes(x = muestra2, y = porcentaje)) +
     geom_boxplot(fill = "#1F77B4") +
     facet_grid(~tipo) +
-    labs(x = "", y = "", title = "Illumina reads", size = 12) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), strip.text.x = element_text(size = 12))
+    labs(x = "", y = "", title = "") +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
 ggsave("Graficos/qc_resultados_hostvirusunmapped_illumina.png")
 
 ggplot(subset(virushost_data, plataforma == "Ion Torrent"), aes(x = muestra2, y = porcentaje)) +
     geom_boxplot(fill = "#1F77B4") +
     facet_grid(~tipo) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
-    labs(x = "", y = "", title = "Ion Torrent reads", size = 12) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), strip.text.x = element_text(size = 12))
+    labs(x = "", y = "", title = "") +
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
 ggsave("Graficos/qc_resultados_hostvirusunmapped_iontorrent.png")
 
 ggplot(subset(virushost_data, plataforma == "Nanopore"), aes(x = muestra2, y = porcentaje)) +
     geom_boxplot(fill = "#1F77B4") +
     facet_grid(~tipo) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Platform")) +
-    labs(x = "", y = "", title = "Nanopore reads", size = 12) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12), strip.text.x = element_text(size = 12))
+    theme(
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
 ggsave("Graficos/qc_resultados_hostvirusunmapped_nanopore.png")
 
 # sample 7
@@ -1314,23 +1492,12 @@ ggplot(qc_aciertos, aes(x = nombre, y = errores, fill = comunidad)) +
     geom_bar(stat = "identity") +
     coord_flip() +
     guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Comunidades")) +
-    labs(x = "Control lineages", y = "", title = "") +
+    labs(x = "", y = "", title = "") +
     theme(
-        axis.text.x = element_text(vjust = 1, hjust = 1, size = 12),
-        axis.text.y = element_text(size = 12),
-        legend.title = element_text(size=12), legend.text = element_text(size=12)
-    )
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_aciertos.png")
 
-ggplot(qc_aciertos, aes(x = nombre, y = errores)) +
-    geom_bar(stat = "identity") +
-    guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
-    labs(x = "Control lineages", y = "", title = "") +
-    theme(
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12),
-        axis.text.y = element_text(size = 12),
-        legend.title = element_text(size=12), legend.text = element_text(size=12)
-    )
     
     
     
@@ -1396,24 +1563,19 @@ levels_samples<- c("Sample 1 – B.1.1.7",
 "Sample 9 – AY.94",
 "Sample 10 – AY.43")
 
-qc_tasa <- read_excel(dir_excel[1], sheet = 9)
+qc_tasa <- read_excel(dir_excel[1], sheet = 10)
 qc_tasa$samples<- factor (qc_tasa$samples, levels = levels_samples)
 qc_tasa$tipo<- factor (qc_tasa$tipo, levels = c("Sensitivity", "Precision"))
 
 
 # plot sensitivity & precision smooth
-ggplot(qc_tasa, aes(x = samples, y = tasa, group = tipo)) + 
+ggplot(qc_tasa, aes(x = samples, y = tasa*100, group = tipo)) + 
     geom_line(aes(color = tipo), size = 2) +
     guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
-    ylim(0,1) +
     labs(x = "Control lineages", y = "", title = "") +
     theme(
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12),
-        axis.text.y = element_text(size = 12),
-        legend.title = element_text(size=12), legend.text = element_text(size=12)
-
-    )
-
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
 ggsave("Graficos/qc_lineages_sensitivity_precision.png")
 
 # mutaciones por muestra
@@ -1435,9 +1597,6 @@ ggplot(qc_tasa, aes(x = samples, y = tasa * 100, group = tipo)) +
     ylim(0,100) +
     labs(x = "Control lineages", y = "", title = "") +
     theme(
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, size = 12),
-        axis.text.y = element_text(size = 12),
-        legend.title = element_text(size=12), legend.text = element_text(size=12)
-
-    )
+    text = element_text(size = 22),
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
 ggsave("Graficos/qc_lineages_sensitivity_precision_mutaciones.png")
