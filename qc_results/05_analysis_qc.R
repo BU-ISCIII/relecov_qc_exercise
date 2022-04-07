@@ -33,14 +33,17 @@ fechas_data <- data.frame(
 )
 
 #### plot tiempo de ejecucion ----
-
+Sys.setlocale("LC_TIME", "C")
+format(Sys.Date(), format = "%Y-%b-%d")
 ggplot(fechas_data, aes(
     x = as.Date(fechas_data$recepcion), xend = as.Date(fechas_data$secuenciacion),
     y = id, yend = id, color = "#4a8abe"
 )) +
     geom_segment(size = 3, show.legend = F) +
-    geom_text(aes(label = fechas_data$ejecucion), position = position_dodge(width = 1), hjust = -1, color = "black", size = 2.5) +
-    labs(x = "Execution time (days)", y = "")
+    geom_text(aes(label = fechas_data$ejecucion), position = position_dodge(width = 1), hjust = 1.2, color = "black", size = 5) +
+    labs(x = "Execution time (days)", y = "") +
+    theme(text = element_text(size = 23),
+    axis.text.x = element_text(angle = 0, vjust = 1, hjust = 0.9))
 ggsave("Graficos/qc_tiempo_ejecucion.png")
 
 #### boxplot ejecucion ----
@@ -1264,50 +1267,62 @@ df_aciertos<- data.frame(
 
 
 qc_aciertos <- read_excel(dir_excel[1], sheet = 12)
-niveles_aciertos<- c("COD_2109",
-"COD_2129",
-"COD_2122",
-"COD_2126",
-"COD_2132",
-"COD_2143",
-"COD_2110",
-"COD_2102",
-"COD_2111",
-"COD_2104",
-"COD_2127",
-"COD_2136",
-"COD_2131",
-"COD_2107",
-"COD_2107_2",
-"COD_2114",
-"COD_2115",
-"COD_2121",
-"COD_2123",
-"COD_2124",
-"COD_2124_2",
-"COD_2141",
-"COD_2119",
-"COD_2112",
-"COD_2135",
-"COD_2137",
-"COD_2113",
-"COD_2103",
-"COD_2105",
-"COD_2116",
-"COD_2125",
-"COD_2120",
-"COD_2117",
-"COD_2117_2",
-"COD_2108",
-"COD_2106",
-"COD_2106_2",
-"COD_2134",
-"COD_2139",
-"COD_2140")
+niveles_aciertos<- c("HU Virgen del Rocio",
+"HU San Cecilio",
+"HU Miguel Servet",
+"CIB de Aragón",
+"HCU Lozano Blesa",
+"HUC de Asturias",
+"HU Son Espases",
+"HU de Gran Canaria Dr. Negrín",
+"HU Ntra. Sra de Candelaria",
+"HU Marqués de Valdecilla",
+"CHU de Albacete",
+"HU de Ciudad Real",
+"Consorcio LUCIA",
+"HU Germans Trias i Pujol - 1",
+"HU Germans Trias i Pujol - 2",
+"H Dr. Josep Trueta",
+"LR de Catalunya",
+"HU Vall d’Hebron",
+"H Clínic de Barcelona",
+"Hospital Universitari Bellvitge - 1",
+"Hospital Universitari Bellvitge - 2",
+"Banc de Sang i Teixits Catalunya",
+"HU de Badajoz",
+"CHUVI",
+"CHUS",
+"CHUAC",
+"Fundacion RiojaSalud",
+"HU 12 DE OCTUBRE",
+"HU La Paz",
+"HU RAMÓN Y CAJAL",
+"HU GREGORIO MARAÑÓN",
+"HU Virgen de la Arrixaca",
+"CH de Navarra - 1",
+"CH de Navarra - 2",
+"HU de Donostia",
+"FISABIO - 1",
+"FISABIO - 2",
+"HGU de Alicante",
+"HGU de Valencia",
+"HGU de Elche")
 
-qc_aciertos$id<- factor(qc_aciertos$id, levels = niveles_aciertos)
+qc_aciertos$nombre<- factor(qc_aciertos$nombre, levels = niveles_aciertos)
 
-ggplot(qc_aciertos, aes(x = id, y = errores)) +
+ggplot(qc_aciertos, aes(x = nombre, y = errores, fill = comunidad)) +
+    geom_bar(stat = "identity") +
+    coord_flip() +
+    guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Comunidades")) +
+    labs(x = "Control lineages", y = "", title = "") +
+    theme(
+        axis.text.x = element_text(vjust = 1, hjust = 1, size = 12),
+        axis.text.y = element_text(size = 12),
+        legend.title = element_text(size=12), legend.text = element_text(size=12)
+    )
+ggsave("Graficos/qc_aciertos.png")
+
+ggplot(qc_aciertos, aes(x = nombre, y = errores)) +
     geom_bar(stat = "identity") +
     guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
     labs(x = "Control lineages", y = "", title = "") +
