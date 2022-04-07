@@ -225,7 +225,7 @@ ggsave("Graficos/qc_barplot_bioinformatica_2.png")
 
 ### datos bioinfo ----
 
-qc_bioinfo <- read_excel(dir_excel[1], sheet = 11)
+qc_bioinfo <- read_excel(dir_excel[1], sheet = 12)
 
 bioinfo_data <- data.frame(
     id = as.character(qc_bioinfo$ID),
@@ -387,10 +387,10 @@ ggplot(bioinfo_data, aes(pangolin_version)) +
     geom_bar(fill = "#1F77B4") +
     guides(fill = guide_legend(title = "platform")) +
     labs(y = "Number of laboratories", x = "", title = "Pangolin version", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -1, size = 6.5) +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -0.5, size = 6.5) +
     theme(
     text = element_text(size = 22),
-    axis.text.x = element_text(vjust = 1, hjust = 1))
+    axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
 ggsave("Graficos/qc_barplot_bioinformatica_pangolin.png")
 
 #### Datos estadistica -----
@@ -1357,7 +1357,7 @@ ggsave("Graficos/qc_resultados_hostvirusunmapped_sample7.png")
 
 ### datos linajes ----
 
-### calculo de TP y FP
+### calculo de TP y FP - QC
 
 qc_parsed_linajes <- read_excel(dir_excel[1], sheet = 8)
 df_parsed_linajes <- as.data.frame(qc_parsed_linajes[, c(3, 5:14)])
@@ -1377,6 +1377,7 @@ df_linajes_control<- c("B.1.1.7",
 "AY.43")
 
 df_linajes_lab <- df_parsed_linajes[df_parsed_linajes$grupo != "control", 2:11]
+df_linajes_lab<- subset()
 
 # calculamos los TP, FP, FN by sample
 
@@ -1441,6 +1442,92 @@ df_aciertos<- data.frame(
 
 # write.table(df_aciertos, "df_aciertos.csv", row.names = F, quote = F, sep = "\t")
 
+
+### calculo de TP y FP - Viralrecon
+
+qc_parsed_linajes <- read_excel(dir_excel[1], sheet = 9)
+df_parsed_linajes <- as.data.frame(qc_parsed_linajes)
+
+# linajes
+
+# df_linajes_control <- df_parsed_linajes[df_parsed_linajes$grupo == "control", 2:11]
+df_linajes_control<- c("B.1.1.7",
+"B.1.351",
+"A.28",
+"B.1.621",
+"P.1",
+"AY.9.2",
+"AY.43",
+"AY.94",
+"AY.94",
+"AY.43")
+
+df_linajes_lab <- df_parsed_linajes[df_parsed_linajes$grupo != "control", 2:11]
+
+# calculamos los TP, FP, FN by sample
+
+matrix_tasa<- matrix(0, ncol = 10, nrow = 24)
+for (j in 1:ncol(df_linajes_lab)) {
+    control<- df_linajes_control[j]
+    muestra<- df_linajes_lab[, j]
+        for (i in 1:length(muestra)) {
+            if (control == muestra[i]) {
+                matrix_tasa [i, j]<- "TP"
+            } else if (muestra[i] == "None") {
+                matrix_tasa [i, j]<- "FN"
+            } else if (control != muestra[i]) {
+                matrix_tasa [i, j]<- "FP"
+            } 
+        }   
+}
+
+table(matrix_tasa[,1])
+table(matrix_tasa[,2])
+table(matrix_tasa[,3])
+table(matrix_tasa[,4])
+table(matrix_tasa[,5])
+table(matrix_tasa[,6])
+table(matrix_tasa[,7])
+table(matrix_tasa[,8])
+table(matrix_tasa[,9])
+table(matrix_tasa[,10])
+
+matrix_tasa<- matrix(0, ncol = 10, nrow = 40)
+for (j in 1:ncol(df_linajes_lab)) {
+    control<- df_linajes_control[j]
+    muestra<- df_linajes_lab[, j]
+        for (i in 1:length(muestra)) {
+            if (control == muestra[i]) {
+                matrix_tasa [i, j]<- "Bien"
+            } else if (muestra[i] == "None") {
+                matrix_tasa [i, j]<- "Mal"
+            } else if (control != muestra[i]) {
+                matrix_tasa [i, j]<- "Mal"
+            } 
+        }   
+}
+
+
+matrix_valores_0 <- matrix(0, ncol = 1, nrow = 40)
+for (i in 1:40) {
+    tabla_0 <- table(matrix_tasa[i, ])
+    matrix_valores_0[i, 1] <- as.numeric(tabla_0[2])
+}
+
+matrix_valores_0[7,]<- 0
+matrix_valores_0[30,]<- 0
+matrix_valores_0[32,]<- 0
+matrix_valores_0[36,]<- 0
+matrix_valores_0[37,]<- 0
+
+df_aciertos<- data.frame(
+    id = df_parsed_linajes$grupo[-1],
+    aciertos = matrix_valores_0[,1]
+)
+
+# write.table(df_aciertos, "df_aciertos.csv", row.names = F, quote = F, sep = "\t")
+
+
 #### Datos aciertos
 
 
@@ -1497,12 +1584,6 @@ ggplot(qc_aciertos, aes(x = nombre, y = errores, fill = comunidad)) +
     text = element_text(size = 22),
     axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_aciertos.png")
-
-    
-    
-    
-    ggsave("Graficos/qc_resultados_hostvirusunmapped_sample7.png")
-
 
 
 levels_id <- c(
@@ -1563,20 +1644,23 @@ levels_samples<- c("Sample 1 – B.1.1.7",
 "Sample 9 – AY.94",
 "Sample 10 – AY.43")
 
-qc_tasa <- read_excel(dir_excel[1], sheet = 10)
+qc_tasa <- read_excel(dir_excel[1], sheet = 11)
 qc_tasa$samples<- factor (qc_tasa$samples, levels = levels_samples)
 qc_tasa$tipo<- factor (qc_tasa$tipo, levels = c("Sensitivity", "Precision"))
-
+qc_tasa$analisis<- factor (qc_tasa$analisis, levels = c("qc", "viralrecon"))
 
 # plot sensitivity & precision smooth
-ggplot(qc_tasa, aes(x = samples, y = tasa*100, group = tipo)) + 
+qc_variant_data<- subset(qc_tasa, analisis == "qc")
+
+ggplot(qc_variant_data, aes(x = samples, y = tasa*100, group = tipo)) + 
     geom_line(aes(color = tipo), size = 2) +
+    facet_grid(~analisis) +
     guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
     labs(x = "Control lineages", y = "", title = "") +
     theme(
     text = element_text(size = 22),
     axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
-ggsave("Graficos/qc_lineages_sensitivity_precision.png")
+ggsave("Graficos/qc_lineages_sensitivity_precision_analisis.png")
 
 # mutaciones por muestra
 
@@ -1586,12 +1670,12 @@ for (i in 1:10) {
     matrix_mutaciones[i, 2]<- median(variants_data$variants[variants_data$muestra == unique(variants_data$muestra)[i]], na.rm = T)
 }
 
-qc_tasa$mutaciones<- round(as.numeric(rep (matrix_mutaciones[,1], 2)))
+qc_variant_data$mutaciones<- round(as.numeric(rep (matrix_mutaciones[,1], 2)))
 
 # plot sensitivity, precision & mutations
 
-ggplot(qc_tasa, aes(x = samples, y = tasa * 100, group = tipo)) + 
-    geom_bar(aes(x = samples, y = mutaciones), stat = "identity",fill = "steelblue") +
+ggplot(qc_variant_data, aes(x = samples, y = tasa * 100, group = tipo)) + 
+    geom_point(aes(x = samples, y = mutaciones)) +
     geom_line(aes(color = tipo), size = 2) +
     guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
     ylim(0,100) +
