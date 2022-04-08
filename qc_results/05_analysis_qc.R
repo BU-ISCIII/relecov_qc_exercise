@@ -211,10 +211,9 @@ ggplot(categorias_data, aes(bioinformatica)) +
     axis.text.x = element_text(vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica.png")
 
-ggplot(categorias_data, aes(bioinformatica)) +
-    geom_bar(fill = "#1F77B4") +
+ggplot(categorias_data, aes(bioinformatica, fill = platform_1)) +
+    geom_bar() +
     coord_flip() +
-    facet_grid(~platform_1) +
     guides(fill = guide_legend(title = "Platform")) +
     labs(y = "Number of laboratories", x = "", title = "Bioinformatic protocol") +
     geom_text(stat = "count", aes(label = ..count..), vjust = 0.5, hjust = 1.5, , color = "black", size = 6.5) +
@@ -661,8 +660,6 @@ estadistica_data$id <- factor(estadistica_data$id, levels = levels_id)
 
 ##### Plot depth -----
 
-head(estadistica_data)
-
 ggplot(subset(estadistica_data, mean_depth > 5), aes(x = muestra2, y = log10(mean_depth))) +
     geom_boxplot(fill = "#1F77B4") +
     facet_grid(~plataforma) +
@@ -922,8 +919,7 @@ ggsave("Graficos/qc_resultados_variantes_iontorrent.png")
 # variantes software
     
 ggplot(subset(variants_data, plataforma == "Illumina"), aes(x = factor(software), y = variants)) +
-    geom_bar(fill = "#1F77B4", stat = "identity", position = position_dodge()) +
-    geom_boxplot(outlier.colour="red") +
+    geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
     facet_grid(~tipo) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
     labs(x = "", y = "mutations / lab", title = "Variants callers software: Illumina") +
@@ -932,14 +928,22 @@ ggplot(subset(variants_data, plataforma == "Illumina"), aes(x = factor(software)
 ggsave("Graficos/qc_resultados_variantes_software_illumina.png")
 
 ggplot(subset(variants_data, plataforma == "Ion Torrent"), aes(x = factor(software), y = variants)) +
-    geom_bar(fill = "#1F77B4", stat = "identity", position = position_dodge()) +
-    geom_boxplot(outlier.colour="red") +
+    geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
     facet_grid(~tipo) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
     labs(x = "", y = "mutations / lab", title = "Variants callers software: Ion Torrent") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
     text = element_text(size = 22))
 ggsave("Graficos/qc_resultados_variantes_software_iontorrent.png")
+
+ggplot(subset(variants_data, plataforma == "Nanopore"), aes(x = factor(software), y = variants)) +
+    geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
+    facet_grid(~tipo) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "mutations / lab", title = "Variants callers software: Ion Torrent") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+    text = element_text(size = 22))
+ggsave("Graficos/qc_resultados_variantes_software_nanopore.png")
 
 # nanopore mal
 
@@ -1654,7 +1658,6 @@ qc_variant_data<- subset(qc_tasa, analisis == "qc")
 
 ggplot(qc_variant_data, aes(x = samples, y = tasa*100, group = tipo)) + 
     geom_line(aes(color = tipo), size = 2) +
-    facet_grid(~analisis) +
     guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
     labs(x = "Control lineages", y = "", title = "") +
     theme(
@@ -1675,7 +1678,7 @@ qc_variant_data$mutaciones<- round(as.numeric(rep (matrix_mutaciones[,1], 2)))
 # plot sensitivity, precision & mutations
 
 ggplot(qc_variant_data, aes(x = samples, y = tasa * 100, group = tipo)) + 
-    geom_point(aes(x = samples, y = mutaciones)) +
+    geom_point(aes(x = samples, y = mutaciones), size = 3) +
     geom_line(aes(color = tipo), size = 2) +
     guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Platform")) +
     ylim(0,100) +
