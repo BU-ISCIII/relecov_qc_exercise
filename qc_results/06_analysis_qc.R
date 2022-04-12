@@ -470,23 +470,38 @@ ggsave("Graficos/qc_resultados_variantes.png", dpi = 500, units = "cm", width = 
 
 # variantes software
 
-ggplot(subset(variants_data, plataforma == "Illumina"), aes(x = software, y = variants)) +
+p1<- ggplot(subset(variants_data, plataforma == "Illumina"), aes(x = software, y = variants)) +
     geom_bar(aes(), stat = "identity", position = position_dodge()) +
     geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
     facet_grid(~tipo) +
     scale_y_continuous(
         name = "Mutaciones",
-        sec.axis = sec_axis(trans=~./24, name="Software")
+        sec.axis = sec_axis(trans=~./24, name="")
     ) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
     labs(x = "", y = "Mutaciones / software", title = "") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
-    text = element_text(size = 25))
-ggsave("Graficos/qc_variantes_software_illumina.png", dpi = 500, units = "cm", width = 25, height = 25)
+    text = element_text(size = 15))
+
+p2<- ggplot(subset(variants_data, plataforma == "Ion Torrent"), aes(x = software, y = variants)) +
+    geom_bar(aes(), stat = "identity", position = position_dodge()) +
+    geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
+    facet_grid(~tipo) +
+    scale_y_continuous(
+        name = "",
+        sec.axis = sec_axis(trans=~./25, name="Software")
+    ) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
+    labs(x = "", y = "", title = "") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+    text = element_text(size = 15))
+
+p1 + p2
+ggsave("Graficos/qc_variantes_software.png", dpi = 500, units = "cm", width = 30, height = 30)
 
 #### plot variant callers ----
 
-aa<- subset(bioinfo_data, platform == "Illumina")
+aa<- subset(bioinfo_data, platform == "Ion Torrent")
 table(aa$variant)
 ggplot(bioinfo_data, aes(variant, fill = platform)) +
     geom_bar() +
