@@ -597,7 +597,7 @@ nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5"
 estadistica_data <- data.frame(
     id = as.character(qc_estadistica$ID),
     muestra = as.character(qc_estadistica$`Sample ID`),
-    muestra2 = as.character(rep(nombres_muestras, 40)),
+    muestra2 = as.character(rep(nombres_muestras, 41)),
     plataforma = as.character(qc_estadistica$plataforma),
     plataforma2 = as.character(qc_estadistica$var_sequencing_platforms),
     qc10x = as.numeric(qc_estadistica$`var_QC>10x`),
