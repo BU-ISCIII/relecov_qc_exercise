@@ -919,6 +919,7 @@ ggsave("Graficos/qc_resultados_variantes_iontorrent.png")
 # variantes software
     
 ggplot(subset(variants_data, plataforma == "Illumina"), aes(x = factor(software), y = variants)) +
+    geom_bar(aes(), stat = "identity") +
     geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
     facet_grid(~tipo) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
@@ -928,6 +929,7 @@ ggplot(subset(variants_data, plataforma == "Illumina"), aes(x = factor(software)
 ggsave("Graficos/qc_resultados_variantes_software_illumina.png")
 
 ggplot(subset(variants_data, plataforma == "Ion Torrent"), aes(x = factor(software), y = variants)) +
+    geom_bar(aes(), stat = "identity", position = position_dodge()) +
     geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
     facet_grid(~tipo) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
