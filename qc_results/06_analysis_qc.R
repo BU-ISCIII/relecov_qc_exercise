@@ -62,7 +62,6 @@ levels_id <- c(
     "COD_2140"
 )
 
-
 ### datos Fechas ----
 
 qc_fechas <- read_excel(dir_excel[1], sheet = 2)
@@ -78,7 +77,7 @@ fechas_data <- data.frame(
 
 #### plot tiempo de ejecucion ----
 
-Sys.setlocale("LC_TIME", "C")
+Sys.setlocale("LC_TIME", "English")
 format(Sys.Date(), format = "%Y-%b-%d")
 ggplot(fechas_data, aes(
     x = as.Date(fechas_data$recepcion), xend = as.Date(fechas_data$secuenciacion),
@@ -86,17 +85,18 @@ ggplot(fechas_data, aes(
 )) +
     geom_segment(size = 3, show.legend = F) +
     geom_text(aes(label = fechas_data$ejecucion), position = position_dodge(width = 1), hjust = 1.2, color = "black", size = 5) +
-    labs(x = "Execution time (days)", y = "") +
+    labs(x = "Tiempo de ejecución (dias)", y = "") +
     theme(
         text = element_text(size = 23),
-        axis.text.x = element_text(angle = 0, vjust = 1, hjust = 0.9)
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 0.9)
     )
 ggsave("Graficos/qc_tiempo_ejecucion.png")
 
 # Datos reads
 
 qc_reads <- read_excel(dir_excel[1], sheet = 4)
-nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
+# nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
+nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
 
 reads_data <- data.frame(
     id = as.character(qc_reads$ID),
@@ -109,16 +109,16 @@ reads_data <- data.frame(
 )
 
 reads_data$plataforma <- factor(reads_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
-reads_data$muestra2 <- factor(reads_data$muestra2, levels = c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10"))
+reads_data$muestra2 <- factor(reads_data$muestra2, levels = c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10"))
 reads_data$id <- factor(reads_data$id, levels = levels_id)
 
 # plot reads filtered
 
 ggplot(reads_data, aes(x = muestra2, y = log10(reads), fill = tipo)) +
     geom_boxplot() +
-    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Filter")) +
+    guides(color = guide_legend(title = ""), fill = guide_legend(title = "Filtro")) +
     facet_grid(~plataforma) +
-    labs(x = "", y = "log10 (read) / samples") +
+    labs(x = "", y = "log10 (lecturas) / muestra") +
     theme(
         text = element_text(size = 22),
         axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45)
