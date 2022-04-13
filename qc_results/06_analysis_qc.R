@@ -301,7 +301,7 @@ n_carreras_data <- data.frame(carreras_data[is.na(carreras_data$carreras) != T, 
 
 ggplot(n_carreras_data, aes(x = id, y = carreras, fill = plataforma2)) +
     geom_bar(stat = "identity") +
-    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Plataforma")) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Instrumento")) +
     geom_text(aes(label = carreras), color = "black", vjust = -0.5, size = 10) +
     labs(x = "", y = "Muestras / Carrera", title = "") +
     theme(
@@ -320,7 +320,7 @@ read_data$id <- factor(read_data$id, levels = l_id_plataforma)
 
 ggplot(read_data, aes(x = id, y = read, fill = plataforma2)) +
     geom_col() +
-    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Plataforma")) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Instrumento")) +
     labs(x = "", y = "Longitud lectura / muestra", title = "") +
     theme(
         text = element_text(size = 20),
@@ -501,8 +501,6 @@ ggsave("Graficos/qc_variantes_software.png", dpi = 500, units = "cm", width = 30
 
 #### plot variant callers ----
 
-aa<- subset(bioinfo_data, platform == "Ion Torrent")
-table(aa$variant)
 ggplot(bioinfo_data, aes(variant, fill = platform)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Plataforma")) +
@@ -665,9 +663,7 @@ df_aciertos_variantes<- data.frame(
     aciertos = matrix_valores_1[,1]
 )
 
-
 # write.table(df_aciertos, "df_aciertos.csv", row.names = F, quote = F, sep = "\t")
-
 
 ### calculo de TP y FP - Viralrecon
 
@@ -755,10 +751,10 @@ df_aciertos<- data.frame(
 
 #### Datos aciertos
 
-# sort_df_aciertos_lin<- df_aciertos_lin[order(df_aciertos_lin$id), ]
-# write.table(sort_df_aciertos_lin, "aciertos_linajes.csv", row.names = F, quote = F, sep = "\t")
-# sort_df_aciertos_variantes<- df_aciertos_variantes[order(df_aciertos_variantes$id), ]
-# write.table(sort_df_aciertos_variantes, "aciertos_variantes.csv", row.names = F, quote = F, sep = "\t")
+#sort_df_aciertos_lin<- df_aciertos_lin[order(df_aciertos_lin$id), ]
+#write.table(sort_df_aciertos_lin, "aciertos_linajes.csv", row.names = F, quote = F, sep = "\t")
+#sort_df_aciertos_variantes<- df_aciertos_variantes[order(df_aciertos_variantes$id), ]
+#write.table(sort_df_aciertos_variantes, "aciertos_variantes.csv", row.names = F, quote = F, sep = "\t")
 
 qc_aciertos <- read_excel(dir_excel[1], sheet = 15)
 niveles_aciertos<- c("HU Virgen del Rocio",
@@ -847,16 +843,29 @@ niveles_id_aciertos<-c("COD_2109",
 
 qc_aciertos$nombre<- factor(qc_aciertos$nombre, levels = niveles_aciertos)
 qc_aciertos$id<- factor(qc_aciertos$id, levels = niveles_id_aciertos)
+qc_aciertos$clase<- revalue(qc_aciertos$clase, c("linaje" = "Linajes", "variante" = "Variantes"))
 
-ggplot(qc_aciertos, aes(x = id, y = aciertos, fill = comunidad)) +
+rep_level<- c(
+"COD_2106_2",
+"COD_2117_2",
+"COD_2124_2",
+"COD_2107_2"
+)
+
+qc_aciertos_mod <- qc_aciertos[ !qc_aciertos$id %in% rep_level, ] 
+
+ggplot(qc_aciertos_mod, aes(x = id, y = aciertos, fill = comunidad)) +
     geom_bar(stat = "identity") +
     coord_flip() +
     facet_grid(~clase) +
     guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Comunidades")) +
-    labs(x = "Aciertos", y = "", title = "") +
+    labs(x = "", y = "", title = "") +
+    scale_y_discrete(name ="Aciertos", 
+                    limits=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) +
     theme(
-    text = element_text(size = 22),
-    axis.text.x = element_text(vjust = 1, hjust = 1))
+    text = element_text(size = 18),
+    axis.text.y = element_text())
+    axis.text.x = element_text())
 ggsave("Graficos/qc_aciertos.png")
 
 # Sensibilidad y precision
@@ -883,7 +892,7 @@ levels_samples_var<- c("Muestra 1 Alfa",
 "Muestra 9 Delta",
 "Muestra 10 Delta")
 
-qc_tasa <- read_excel(dir_excel[1], sheet = 14)
+qc_tasa <- read_excel(dir_excel[1], sheet = 13)
 
 qc_tasa_linajes<- subset(qc_tasa, clase == "linajes")
 qc_tasa_linajes$samples<- factor (qc_tasa_linajes$samples, levels = levels_samples_lin)
@@ -918,11 +927,11 @@ ggplot(resultado_data, aes(x = samples, y = tasa * 100, group = tipo)) +
     geom_point(aes(x = samples, y = mutaciones), size = 3) +
     geom_line(aes(color = tipo), size = 2) +
     facet_grid(tipo~clase) +
-        scale_y_continuous(
+        scale_y_continuous(breaks = c(0,20,40,60,80,100), limits = c(0,100),
         name = "%",
-        sec.axis = sec_axis(trans=~./1, name="Mutaciones")
+        sec.axis = sec_axis(trans=~./1.05, name="Mutaciones")
     ) +
-    guides(color = guide_legend(title = "Curvas"), fill = guide_legend(title = "Platform")) +
+    guides(color = guide_legend(title = "Curvas"), fill = guide_legend(title = "")) +
     labs(x = "", y = "%", title = "") +
     theme(
     text = element_text(size = 20),
