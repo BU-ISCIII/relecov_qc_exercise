@@ -21,7 +21,7 @@ dir_excel <- list.files(path = "Data", pattern = "xlsx", full.names = TRUE, recu
 rep_level<- c(
 "COD_2106_2",
 "COD_2117_2",
-"COD_2124_2",
+"COD_2127_2",
 "COD_2107_2"
 )
 
@@ -43,7 +43,6 @@ levels_id <- c(
     "COD_2122",
     "COD_2123",
     "COD_2124",
-    "COD_2124_2",
     "COD_2125",
     "COD_2126",
     "COD_2129",
@@ -54,6 +53,7 @@ levels_id <- c(
     "COD_2137",
     "COD_2139",
     "COD_2141",
+    "COD_2127",
     "COD_2101",
     "COD_2102",
     "COD_2104",
@@ -61,7 +61,7 @@ levels_id <- c(
     "COD_2115",
     "COD_2119",
     "COD_2120",
-    "COD_2127",
+    "COD_2127_2",
     "COD_2136",
     "COD_2143",
     "COD_2106",
@@ -122,6 +122,15 @@ reads_data$plataforma <- factor(reads_data$plataforma, levels = c("Illumina", "I
 reads_data$muestra2 <- factor(reads_data$muestra2, levels = c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10"))
 reads_data$id <- factor(reads_data$id, levels = levels_id)
 
+summary(reads_data)
+dim(reads_data)
+
+
+aa<- virushost_data[rowSums(is.na(virushost_data)) > 0,]
+bb<- as.data.frame(table(as.character(aa$id)))
+length(bb$Var1)
+
+
 # plot reads filtered
 
 ggplot(reads_data, aes(x = muestra2, y = log10(reads), fill = tipo)) +
@@ -133,7 +142,7 @@ ggplot(reads_data, aes(x = muestra2, y = log10(reads), fill = tipo)) +
         text = element_text(size = 22),
         axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45)
     )
-ggsave("Graficos/qc_resultados_read_sample_platform.png")
+ggsave("Graficos/qc_resultados_read_sample_platform.png", width = 22, height = 22, units = "cm", scale = 1)
 
 # new virus, host data
 
@@ -151,25 +160,31 @@ virushost_data <- data.frame(
     tipo = factor(qc_virushost$tipo, levels = c("host", "virus", "unmapped"))
 )
 
+aa<- virushost_data[rowSums(is.na(virushost_data)) > 0,]
+bb<- as.data.frame(table(as.character(aa$id)))
+length(bb$Var1)
+
+
 virushost_data$plataforma <- factor(virushost_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
 virushost_data$id <- factor(virushost_data$id, levels = levels_id)
 
 # plot host, virus, unmapped
 
-virushost_data$tipo <- revalue(virushost_data$tipo, c("host" = "Huésped", "virus" = "Virus", "unmapped" = "No mapeado"))
+virushost_data$tipo <- revalue(virushost_data$tipo, c("host" = "% de huésped", "virus" = "% de virus", "unmapped" = "% de lecturas no mapeadas"))
 
 ggplot(virushost_data, aes(x = muestra2, y = porcentaje)) +
     geom_boxplot(fill = "#1F77B4") +
     facet_grid(plataforma ~ tipo) +
     labs(x = "", y = "%", title = "") +
     theme(
-        text = element_text(size = 22),
+        text = element_text(size = 18),
         axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45)
     )
 ggsave("Graficos/qc_resultados_hostvirusunmapped_plataforma.png")
 
 #### Datos depth -----
 
+qc_estadistica <- read_excel(dir_excel[1], sheet = 3)
 qc_estadistica <- read_excel(dir_excel[1], sheet = 3)
 #nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
@@ -194,7 +209,19 @@ estadistica_data$muestra2 <- factor(estadistica_data$muestra2, levels = nombres_
 estadistica_data$plataforma <- factor(estadistica_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
 estadistica_data$id <- factor(estadistica_data$id, levels = levels_id)
 
+
 ##### Plot depth -----
+
+a1<- subset(estadistica_data, mean_depth > 5)
+a2<- subset(a1, plataforma == "Illumina")
+mean(a2$mean_depth, na.rm = T)
+sd(a2$qc10x, na.rm = T)
+
+aa<- estadistica_data[rowSums(is.na(estadistica_data)) > 0,]
+bb<- as.data.frame(table(as.character(aa$id)))
+length(bb$Var1)
+
+(20*100)/41
 
 ggplot(subset(estadistica_data, mean_depth > 5), aes(x = muestra2, y = log10(mean_depth))) +
     geom_boxplot(fill = "#1F77B4") +
@@ -264,7 +291,6 @@ l_id_plataforma <- c(
     "COD_2114",
     "COD_2116",
     "COD_2124",
-    "COD_2124_2",
     "COD_2125",
     "COD_2126",
     "COD_2129",
@@ -273,6 +299,7 @@ l_id_plataforma <- c(
     "COD_2137",
     "COD_2139",
     "COD_2141",
+    "COD_2127",
     "COD_2109",
     "COD_2111",
     "COD_2121",
@@ -284,14 +311,16 @@ l_id_plataforma <- c(
     "COD_2115",
     "COD_2119",
     "COD_2120",
-    "COD_2127",
+    "COD_2127_2",
     "COD_2136",
     "COD_2143",
     "COD_2101",
-    "COD_2106",
     "COD_2107_2",
+    "COD_2106",
     "COD_2140"
 )
+
+table(carreras_data$id)
 
 carreras_data <- estadistica_data[!duplicated(estadistica_data$id), c(1, 3, 4, 5, 11, 12, 13)]
 carreras_data$id <- factor(carreras_data$id, levels = l_id_plataforma)
@@ -459,14 +488,24 @@ variants_data$id <- factor(variants_data$id, levels = levels_id)
 
 subset_variants_data<- subset(variants_data, variants < 80)
 
-ggplot(subset_variants_data, aes(x = muestra, y = variants, fill = tipo)) +
+subset_variants_data_nuevo<- as.data.frame(subset(subset_variants_data, plataforma == "Illumina" | plataforma == "Ion Torrent"))
+
+#aa<- subset(subset_variants_data_nuevo, plataforma == "Illumina")
+#aa<- subset(subset_variants_data_nuevo, plataforma == "Ion Torrent")
+
+#summary(aa$variants)
+#sd(aa$variants, na.rm = T)
+#summary(aa$variants[aa$software == "Torrent Variant Caller"], na.rm = T)
+#sd(aa$variants[aa$software == "Torrent Variant Caller"], na.rm = T)
+
+ggplot(subset_variants_data_nuevo, aes(x = muestra, y = variants, fill = tipo)) +
     geom_violin() +
     facet_grid(~plataforma) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Mutaciones")) +
     labs(x = "", y = "Mutaciones / muestra", title = "") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
     text = element_text(size = 22))
-ggsave("Graficos/qc_resultados_variantes.png", dpi = 500, units = "cm", width = 40, height = 40)
+ggsave("Graficos/qc_resultados_variantes.png", dpi = 500, units = "cm", width = 60, height = 36)
 
 # variantes software
 
@@ -475,29 +514,33 @@ p1<- ggplot(subset(variants_data, plataforma == "Illumina"), aes(x = software, y
     geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
     facet_grid(~tipo) +
     scale_y_continuous(
+        limits = c(0,280),
         name = "Mutaciones",
         sec.axis = sec_axis(trans=~./24, name="")
     ) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
-    labs(x = "", y = "Mutaciones / software", title = "Illumina software") +
+    labs(x = "", y = "Mutaciones / software", title = "") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
-    text = element_text(size = 15))
-
+    text = element_text(size = 25))
 p2<- ggplot(subset(variants_data, plataforma == "Ion Torrent"), aes(x = software, y = variants)) +
     geom_bar(aes(), stat = "identity", position = position_dodge()) +
     geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
     facet_grid(~tipo) +
     scale_y_continuous(
+        limits = c(0,280),
         name = "",
         sec.axis = sec_axis(trans=~./25, name="Software")
     ) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
-    labs(x = "", y = "", title = "Ion Torrent software") +
+    labs(x = "", y = "", title = "") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
-    text = element_text(size = 15))
+    text = element_text(size = 25))
+p1 + p2
+ggsave("Graficos/qc_variantes_software.png", dpi = 500, units = "cm", width = 65, height = 40)
+
 
 p1 + p2
-ggsave("Graficos/qc_variantes_software.png", dpi = 500, units = "cm", width = 30, height = 30)
+ggsave("Graficos/qc_variantes_software.png", dpi = 500, units = "cm", width = 60, height = 36)
 
 #### plot variant callers ----
 
@@ -516,8 +559,8 @@ ggsave("Graficos/qc_variantes_software.png", dpi = 500, units = "cm", width = 25
 
 # linajes
 
-qc_parsed_linajes <- read_excel(dir_excel[1], sheet = 9
-df_parsed_linajes <- as.data.frame(qc_parsed_linajes[, c(3, 5:14)])
+qc_parsed_linajes <- read_excel(dir_excel[1], sheet = 9)
+df_parsed_linajes <- as.data.frame(qc_parsed_linajes[1:41, c(3, 5:14)])
 
 # df_linajes_control <- df_parsed_linajes[df_parsed_linajes$grupo == "control", 2:11]
 df_linajes_control<- c("B.1.1.7",
@@ -584,15 +627,16 @@ for (i in 1:41) {
 }
 
 df_aciertos_lin<- data.frame(
-    id = df_parsed_linajes$grupo[-1],
+    id = df_parsed_linajes$grupo,
     aciertos = matrix_valores_1[,1]
 )
 
+# write.table(df_aciertos_lin, "df_aciertos_linajes.csv", quote = F, row.names = F, sep = "\t")
 
 # variantes
 
 qc_parsed_variantes <- read_excel(dir_excel[1], sheet = 10)
-df_parsed_variantes <- as.data.frame(qc_parsed_variantes[, c(1, 3:12)])
+df_parsed_variantes <- as.data.frame(qc_parsed_variantes[1:41, c(1, 3:12)])
 
 # df_linajes_control <- df_parsed_linajes[df_parsed_linajes$grupo == "control", 2:11]
 df_variantes_control<- c("Alfa",
@@ -659,11 +703,11 @@ for (i in 1:41) {
 }
 
 df_aciertos_variantes<- data.frame(
-    id = df_parsed_linajes$grupo[-1],
+    id = df_parsed_linajes$grupo,
     aciertos = matrix_valores_1[,1]
 )
 
-# write.table(df_aciertos, "df_aciertos.csv", row.names = F, quote = F, sep = "\t")
+#write.table(df_aciertos_variantes, "df_aciertos_variantes.csv", row.names = F, quote = F, sep = "\t")
 
 ### calculo de TP y FP - Viralrecon
 
@@ -848,14 +892,17 @@ qc_aciertos$clase<- revalue(qc_aciertos$clase, c("linaje" = "Linajes", "variante
 rep_level<- c(
 "COD_2106_2",
 "COD_2117_2",
-"COD_2124_2",
+"COD_2127_2",
 "COD_2107_2"
 )
 
 qc_aciertos_mod <- qc_aciertos[ !qc_aciertos$id %in% rep_level, ] 
 
-ggplot(qc_aciertos_mod, aes(x = id, y = aciertos, fill = comunidad)) +
-    geom_bar(stat = "identity") +
+
+(10*100)/37
+
+ggplot(qc_aciertos_mod, aes(x = id, y = aciertos)) +
+    geom_bar(fill = "#1F77B4", stat = "identity") +
     coord_flip() +
     facet_grid(~clase) +
     guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "Comunidades")) +
@@ -922,6 +969,9 @@ resultado_data<- rbind(qc_tasa_linajes, qc_tasa_variantes)
 prueba_nombres<- rep(nombres_muestras, 4)
 resultado_data$samples<- factor(prueba_nombres, levels = nombres_muestras)
 resultado_data$clase<- revalue(resultado_data$clase, c("linajes" = "Linajes", "variantes" = "Variantes"))
+
+
+mean(resultado_data$tasa[resultado_data$tipo == "Sensibilidad" & resultado_data$samples == "muestra 7" & resultado_data$clase == "Variantes"])
 
 ggplot(resultado_data, aes(x = samples, y = tasa * 100, group = tipo)) + 
     geom_point(aes(x = samples, y = mutaciones), size = 3) +
