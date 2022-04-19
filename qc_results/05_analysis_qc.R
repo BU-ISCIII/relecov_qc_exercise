@@ -59,7 +59,6 @@ qc_categorias <- read_excel(dir_excel[1], sheet = 1)
 
 categorias_data <- data.frame(
     id = as.character(qc_categorias$ID),
-    values = qc_categorias$values,
     platform_1 = factor(qc_categorias$sequencing_platforms_1, levels = c("Illumina", "Ion Torrent", "Nanopore")),
     platform_2 = as.character(qc_categorias$sequencing_platforms_2),
     librerias = as.character(qc_categorias$libraries_2),
@@ -146,9 +145,9 @@ ggsave("Graficos/qc_barplot_plataforma.png")
 
 ggplot(categorias_data, aes(platform_2, fill = platform_1)) +
     geom_bar() +
-    guides(fill = guide_legend(title = "Platform")) +
-    labs(y = "Number of laboratories", x = "", title = "Platform") +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -1, size = 6.5, hjust = -0.2) +
+    guides(fill = guide_legend(title = "Plataforma")) +
+    labs(y = "Número de laboratorios", x = "", title = "") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -0.8, size = 6.5, hjust = 0.5) +
     theme(
     text = element_text(size = 23),
     axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.text.y = element_text(),
