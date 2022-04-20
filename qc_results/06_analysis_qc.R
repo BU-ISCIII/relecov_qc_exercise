@@ -21,9 +21,10 @@ dir_excel <- list.files(path = "Data", pattern = "xlsx", full.names = TRUE, recu
 rep_level<- c(
 "COD_2106_2",
 "COD_2117_2",
-"COD_2127_2",
 "COD_2107_2"
 )
+
+# niveles ID por plataforma
 
 levels_id <- c(
     "COD_2103",
@@ -53,7 +54,6 @@ levels_id <- c(
     "COD_2137",
     "COD_2139",
     "COD_2141",
-    "COD_2127",
     "COD_2101",
     "COD_2102",
     "COD_2104",
@@ -61,7 +61,7 @@ levels_id <- c(
     "COD_2115",
     "COD_2119",
     "COD_2120",
-    "COD_2127_2",
+    "COD_2127",
     "COD_2136",
     "COD_2143",
     "COD_2106",
@@ -185,7 +185,6 @@ ggsave("Graficos/qc_resultados_hostvirusunmapped_plataforma.png")
 #### Datos depth -----
 
 qc_estadistica <- read_excel(dir_excel[1], sheet = 3)
-qc_estadistica <- read_excel(dir_excel[1], sheet = 3)
 #nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
 
@@ -195,6 +194,10 @@ estadistica_data <- data.frame(
     muestra2 = as.character(rep(nombres_muestras, 41)),
     plataforma = as.character(qc_estadistica$plataforma),
     plataforma2 = as.character(qc_estadistica$var_sequencing_platforms),
+    filter = as.numeric(qc_estadistica$`var_qcfiltered`),
+    host = as.numeric(qc_estadistica$`var_readhost`),
+    virus = as.numeric(qc_estadistica$`var_readsvirus`),
+    unmapped = as.numeric(qc_estadistica$`var_unmapped`),
     qc10x = as.numeric(qc_estadistica$`var_QC>10x`),
     mean_depth = as.numeric(qc_estadistica$var_mean_depth_coverage),
     perc_Ns = as.numeric(qc_estadistica$var_n_Ns),
@@ -209,6 +212,16 @@ estadistica_data$muestra2 <- factor(estadistica_data$muestra2, levels = nombres_
 estadistica_data$plataforma <- factor(estadistica_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
 estadistica_data$id <- factor(estadistica_data$id, levels = levels_id)
 
+aa<- subset(estadistica_data, plataforma == "Ion Torrent")
+mean(aa$host, na.rm = T)
+sd(aa$host, na.rm = T)
+mean(aa$virus, na.rm = T)
+sd(aa$virus, na.rm = T)
+mean(aa$unmapped, na.rm = T)
+sd(aa$unmapped, na.rm = T)
+
+mean(estadistica_data$carreras, na.rm = T)
+sd(aa$unmapped, na.rm = T)
 
 ##### Plot depth -----
 
@@ -375,7 +388,7 @@ ggsave("Graficos/qc_barplot_bioinformatica.png")
 
 ### datos bioinfo ----
 
-qc_bioinfo <- read_excel(dir_excel[1], sheet = 13)
+qc_bioinfo <- read_excel(dir_excel[1], sheet = 14)
 
 bioinfo_data <- data.frame(
     id = as.character(qc_bioinfo$ID),
@@ -420,11 +433,11 @@ ggplot(bioinfo_data, aes(assembly,  fill = platform)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Plataforma")) +
     labs(y = "Número de laboratorios", x = "", title = "") +
-    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count))) +
+    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 6) +
     theme(
-    text = element_text(size = 15),
+    text = element_text(size = 20),
     axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
-ggsave("Graficos/qc_barplot_bioinformatica_assembly_plat.png")
+ggsave("Graficos/qc_barplot_bioinformatica_assembly_plat.png", width = 40, height = 30, units = "cm")
 
 #### plot variant callers ----
 
@@ -444,11 +457,11 @@ ggplot(bioinfo_data, aes(consensus, fill = platform)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Plataforma")) +
     labs(y = "Número de laboratorios", x = "", title = "") +
-    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 12) +
+    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 6) +
     theme(
-    text = element_text(size = 30),
+    text = element_text(size = 20),
     axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
-ggsave("Graficos/qc_barplot_bioinformatica_consensus_plat.png", width = 25, height = 25)
+ggsave("Graficos/qc_barplot_bioinformatica_consensus_plat.png", width = 40, height = 30, units = "cm")
 
 # pangolin versions
 
@@ -974,6 +987,7 @@ resultado_data$clase<- revalue(resultado_data$clase, c("linajes" = "Linajes", "v
 mean(resultado_data$tasa[resultado_data$tipo == "Sensibilidad" & resultado_data$samples == "muestra 7" & resultado_data$clase == "Variantes"])
 
 ggplot(resultado_data, aes(x = samples, y = tasa * 100, group = tipo)) + 
+    geom_line() +
     geom_point(aes(x = samples, y = mutaciones), size = 3) +
     geom_line(aes(color = tipo), size = 2) +
     facet_grid(tipo~clase) +
@@ -988,3 +1002,8 @@ ggplot(resultado_data, aes(x = samples, y = tasa * 100, group = tipo)) +
     axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
 
 ggsave("Graficos/qc_sensitivity_precision_mutaciones.png")
+
+
+5+18+4+1+10+3
+
+(3*100)/41
