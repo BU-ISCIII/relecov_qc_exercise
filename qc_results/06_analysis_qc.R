@@ -449,7 +449,9 @@ ggplot(bioinfo_data, aes(pangolin_version)) +
     theme(
     text = element_text(size = 22),
     axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
-ggsave("Graficos/qc_barplot_bioinformatica_pangolin.png")
+ggsave("Graficos/qc_barplot_bioinformatica_pangolin.png", dpi = 500, units = "cm", width = 25, height = 25)
+
+(4*100) / 40
 
 ##### variantes data -----
 
@@ -877,14 +879,10 @@ qc_aciertos$clase<- revalue(qc_aciertos$clase, c("linaje" = "Linajes", "variante
 rep_level<- c(
 "COD_2106_2",
 "COD_2117_2",
-"COD_2127_2",
 "COD_2107_2"
 )
 
 qc_aciertos_mod <- qc_aciertos[ !qc_aciertos$id %in% rep_level, ] 
-
-
-(10*100)/37
 
 ggplot(qc_aciertos_mod, aes(x = id, y = aciertos)) +
     geom_bar(fill = "#1F77B4", stat = "identity") +
@@ -955,8 +953,13 @@ prueba_nombres<- rep(nombres_muestras, 4)
 resultado_data$samples<- factor(prueba_nombres, levels = nombres_muestras)
 resultado_data$clase<- revalue(resultado_data$clase, c("linajes" = "Linajes", "variantes" = "Variantes"))
 
-
-mean(resultado_data$tasa[resultado_data$tipo == "Sensibilidad" & resultado_data$samples == "muestra 7" & resultado_data$clase == "Variantes"])
+#& resultado_data$samples == "muestra 7"
+#& resultado_data$clase == "Linajes"
+# Precisión
+#Sensibilidad
+#Variantes
+#Linajes
+# mean(resultado_data$tasa[resultado_data$tipo == "Precisión" & resultado_data$clase == "Variantes" & resultado_data$samples == "muestra 7"])
 
 ggplot(resultado_data, aes(x = samples, y = tasa * 100, group = tipo)) + 
     geom_line() +
@@ -974,8 +977,3 @@ ggplot(resultado_data, aes(x = samples, y = tasa * 100, group = tipo)) +
     axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
 
 ggsave("Graficos/qc_sensitivity_precision_mutaciones.png")
-
-
-5+18+4+1+10+3
-
-(3*100)/41
