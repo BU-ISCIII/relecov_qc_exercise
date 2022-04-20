@@ -100,11 +100,12 @@ ggplot(subset_fechas_data, aes(
         text = element_text(size = 23),
         axis.text.x = element_text(angle = 45, vjust = 1, hjust = 0.9)
     )
-ggsave("Graficos/qc_tiempo_ejecucion.png")
+ggsave("Graficos/qc_tiempo_ejecucion.png", width = 40, height = 30, dpi = 500, units = c("cm"))
 
 # Datos reads
 
 qc_reads <- read_excel(dir_excel[1], sheet = 4)
+
 # nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
 
@@ -122,15 +123,6 @@ reads_data$plataforma <- factor(reads_data$plataforma, levels = c("Illumina", "I
 reads_data$muestra2 <- factor(reads_data$muestra2, levels = c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10"))
 reads_data$id <- factor(reads_data$id, levels = levels_id)
 
-summary(reads_data)
-dim(reads_data)
-
-
-aa<- virushost_data[rowSums(is.na(virushost_data)) > 0,]
-bb<- as.data.frame(table(as.character(aa$id)))
-length(bb$Var1)
-
-
 # plot reads filtered
 
 ggplot(reads_data, aes(x = muestra2, y = log10(reads), fill = tipo)) +
@@ -139,10 +131,10 @@ ggplot(reads_data, aes(x = muestra2, y = log10(reads), fill = tipo)) +
     facet_grid(~plataforma) +
     labs(x = "", y = "log10 (lecturas) / muestra") +
     theme(
-        text = element_text(size = 22),
+        text = element_text(size = 30),
         axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45)
     )
-ggsave("Graficos/qc_resultados_read_sample_platform.png", width = 22, height = 22, units = "cm", scale = 1)
+ggsave("Graficos/qc_resultados_read_sample_platform.png", width = 40, height = 30, units = "cm")
 
 # new virus, host data
 
@@ -153,17 +145,12 @@ nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muest
 virushost_data <- data.frame(
     id = as.character(qc_virushost$ID),
     muestra = as.character(qc_virushost$`Sample ID`),
-    muestra2 = factor(rep(nombres_muestras, 41), levels = nombres_muestras),
+    muestra2 = factor(rep(nombres_muestras, 40), levels = nombres_muestras),
     plataforma = as.character(qc_virushost$plataforma),
     plataforma2 = as.character(qc_virushost$var_sequencing_platforms),
     porcentaje = as.numeric(qc_virushost$percentage),
     tipo = factor(qc_virushost$tipo, levels = c("host", "virus", "unmapped"))
 )
-
-aa<- virushost_data[rowSums(is.na(virushost_data)) > 0,]
-bb<- as.data.frame(table(as.character(aa$id)))
-length(bb$Var1)
-
 
 virushost_data$plataforma <- factor(virushost_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
 virushost_data$id <- factor(virushost_data$id, levels = levels_id)
@@ -177,10 +164,10 @@ ggplot(virushost_data, aes(x = muestra2, y = porcentaje)) +
     facet_grid(plataforma ~ tipo) +
     labs(x = "", y = "%", title = "") +
     theme(
-        text = element_text(size = 18),
+        text = element_text(size = 20),
         axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45)
     )
-ggsave("Graficos/qc_resultados_hostvirusunmapped_plataforma.png")
+ggsave("Graficos/qc_resultados_hostvirusunmapped_plataforma.png", width = 30, height = 30, units = "cm")
 
 #### Datos depth -----
 
@@ -191,7 +178,7 @@ nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muest
 estadistica_data <- data.frame(
     id = as.character(qc_estadistica$ID),
     muestra = as.character(qc_estadistica$`Sample ID`),
-    muestra2 = as.character(rep(nombres_muestras, 41)),
+    muestra2 = as.character(rep(nombres_muestras, 40)),
     plataforma = as.character(qc_estadistica$plataforma),
     plataforma2 = as.character(qc_estadistica$var_sequencing_platforms),
     filter = as.numeric(qc_estadistica$`var_qcfiltered`),
@@ -212,29 +199,7 @@ estadistica_data$muestra2 <- factor(estadistica_data$muestra2, levels = nombres_
 estadistica_data$plataforma <- factor(estadistica_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
 estadistica_data$id <- factor(estadistica_data$id, levels = levels_id)
 
-aa<- subset(estadistica_data, plataforma == "Ion Torrent")
-mean(aa$host, na.rm = T)
-sd(aa$host, na.rm = T)
-mean(aa$virus, na.rm = T)
-sd(aa$virus, na.rm = T)
-mean(aa$unmapped, na.rm = T)
-sd(aa$unmapped, na.rm = T)
-
-mean(estadistica_data$carreras, na.rm = T)
-sd(aa$unmapped, na.rm = T)
-
 ##### Plot depth -----
-
-a1<- subset(estadistica_data, mean_depth > 5)
-a2<- subset(a1, plataforma == "Illumina")
-mean(a2$mean_depth, na.rm = T)
-sd(a2$qc10x, na.rm = T)
-
-aa<- estadistica_data[rowSums(is.na(estadistica_data)) > 0,]
-bb<- as.data.frame(table(as.character(aa$id)))
-length(bb$Var1)
-
-(20*100)/41
 
 ggplot(subset(estadistica_data, mean_depth > 5), aes(x = muestra2, y = log10(mean_depth))) +
     geom_boxplot(fill = "#1F77B4") +
@@ -242,9 +207,9 @@ ggplot(subset(estadistica_data, mean_depth > 5), aes(x = muestra2, y = log10(mea
     guides(color = guide_legend(title = ""), fill = guide_legend(title = "")) +
     labs(x = "", y = "log10(cobertura (media de profundidad)) / muestra", title = "") +
     theme(
-    text = element_text(size = 22),
+    text = element_text(size = 30),
     axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
-ggsave("Graficos/qc_resultados_coverage_plataforma.png")
+ggsave("Graficos/qc_resultados_coverage_plataforma.png", width = 40, height = 30, units = "cm")
 
 ##### Plot %depth -----
 
@@ -254,9 +219,9 @@ ggplot(estadistica_data, aes(x = muestra2, y = qc10x)) +
     guides(color = guide_legend(title = ""), fill = guide_legend(title = "")) +
     labs(x = "", y = " Porcentaje de genoma > 10x / muestra", title = "") +
     theme(
-    text = element_text(size = 22),
+    text = element_text(size = 35),
     axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
-ggsave("Graficos/qc_resultados_porcentajecoverage_plataforma.png")
+ggsave("Graficos/qc_resultados_porcentajecoverage_plataforma.png", width = 40, height = 30, units = "cm")
 
 ### datos categorias ----
 
@@ -279,11 +244,25 @@ ggplot(categorias_data, aes(genome)) +
     labs(y = "Número de laboratorios", x = "", title = "", size = 12) +
     geom_text(stat = "count", aes(label = ..count..), vjust = 1, size = 6.5, hjust = 2) +
     theme(
-    text = element_text(size = 23),
+    text = element_text(size = 30),
     axis.text.x = element_text(), axis.text.y = element_text(),
     legend.title = element_text(),
     legend.text = element_text())
-ggsave("Graficos/qc_barplot_genome.png")
+ggsave("Graficos/qc_barplot_genome.png", width = 40, height = 30, units = "cm")
+
+#### plot instrumentos ----
+
+ggplot(categorias_data, aes(platform_2, fill = platform_1)) +
+    geom_bar() +
+    guides(fill = guide_legend(title = "")) +
+    labs(y = "Número de laboratorios", x = "", title = "", size = 12) +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -0.8, size = 6.5, hjust = 0.5) +
+    theme(
+    text = element_text(size = 23),
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.text.y = element_text(),
+    legend.title = element_text(),
+    legend.text = element_text())
+ggsave("Graficos/qc_barplot_instrumentos.png", width = 40, height = 30, units = "cm")
 
 # plot carreras
 
@@ -312,7 +291,6 @@ l_id_plataforma <- c(
     "COD_2137",
     "COD_2139",
     "COD_2141",
-    "COD_2127",
     "COD_2109",
     "COD_2111",
     "COD_2121",
@@ -324,7 +302,7 @@ l_id_plataforma <- c(
     "COD_2115",
     "COD_2119",
     "COD_2120",
-    "COD_2127_2",
+    "COD_2127",
     "COD_2136",
     "COD_2143",
     "COD_2101",
@@ -333,9 +311,7 @@ l_id_plataforma <- c(
     "COD_2140"
 )
 
-table(carreras_data$id)
-
-carreras_data <- estadistica_data[!duplicated(estadistica_data$id), c(1, 3, 4, 5, 11, 12, 13)]
+carreras_data <- estadistica_data[!duplicated(estadistica_data$id), c(1, 3, 4, 5, 15, 16)]
 carreras_data$id <- factor(carreras_data$id, levels = l_id_plataforma)
 n_carreras_data <- data.frame(carreras_data[is.na(carreras_data$carreras) != T, c(1, 3, 4, 5)])
 
@@ -347,30 +323,29 @@ ggplot(n_carreras_data, aes(x = id, y = carreras, fill = plataforma2)) +
     geom_text(aes(label = carreras), color = "black", vjust = -0.5, size = 10) +
     labs(x = "", y = "Muestras / Carrera", title = "") +
     theme(
-        text = element_text(size = 50),
+        text = element_text(size = 56),
         axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
         axis.text.y = element_text()
     )
 
-ggsave("Graficos/qc_secuenciacion_carreras_plataforma.png", width = 80, height = 80, dpi = 300, units = c("cm"))
+ggsave("Graficos/qc_secuenciacion_carreras_plataforma.png", width = 95, height = 85, dpi = 500, units = c("cm"))
 
 ##### Plot read length -----
 
-read_data <- data.frame(carreras_data[is.na(carreras_data$read) != T, c(1, 3, 4, 6, 7)])
+read_data <- data.frame(carreras_data[is.na(carreras_data$read) != T, c(1, 3, 4, 6)])
 read_data$id <- factor(read_data$id, levels = l_id_plataforma)
-
 
 ggplot(read_data, aes(x = id, y = read, fill = plataforma2)) +
     geom_col() +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Instrumento")) +
     labs(x = "", y = "Longitud lectura / muestra", title = "") +
     theme(
-        text = element_text(size = 20),
+        text = element_text(size = 55),
         axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
         axis.text.y = element_text()
     )
 #ggsave("Graficos/qc_secuenciacion_reads_plataforma.png", width = 80, height = 80, dpi = 300, units = c("cm"))
-ggsave("Graficos/qc_secuenciacion_reads_plataforma.png")
+ggsave("Graficos/qc_secuenciacion_reads_plataforma.png", width = 95, height = 85, dpi = 300, units = c("cm"))
 
 #### plot bioinformatica ----
 
@@ -379,11 +354,11 @@ ggplot(categorias_data, aes(bioinformatica, fill = platform_1)) +
     coord_flip() +
     guides(fill = guide_legend(title = "Plataforma")) +
     labs(y = "Número de laboratorios", x = "", title = "") +
-    geom_text(stat = "count", aes(label = ..count..), vjust = 0.5, hjust = 1.5, , color = "black", size = 6.5) +
+    geom_text(stat = "count", aes(label = ..count..), vjust = 0.5, hjust = 1.5, , color = "black", size = 12) +
     theme(
-    text = element_text(size = 22),
+    text = element_text(size = 55),
     axis.text.x = element_text(vjust = 1, hjust = 1))
-ggsave("Graficos/qc_barplot_bioinformatica.png")
+ggsave("Graficos/qc_barplot_bioinformatica.png", width = 75, height = 65, dpi = 300, units = c("cm"))
 
 
 ### datos bioinfo ----
@@ -409,11 +384,11 @@ ggplot(bioinfo_data, aes(preprocessing, fill = platform)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Plataforma")) +
     labs(y = "Número de laboratorios", x = "", title = "") +
-    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count))) +
+    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 12) +
     theme(
-    text = element_text(size = 22),
+    text = element_text(size = 55),
     axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
-ggsave("Graficos/qc_barplot_bioinformatica_preprocessing_plat.png")
+ggsave("Graficos/qc_barplot_bioinformatica_preprocessing_plat.png", width = 75, height = 65, dpi = 300, units = c("cm"))
 
 #### plot mapping ----
 
@@ -421,11 +396,11 @@ ggplot(bioinfo_data, aes(mapping, fill = platform)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Plataforma")) +
     labs(y = "Número de laboratorios", x = "", title = "") +
-    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count))) +
+    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 12) +
     theme(
-    text = element_text(size = 22),
+    text = element_text(size = 55),
     axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
-ggsave("Graficos/qc_barplot_bioinformatica_mapping_plat.png")
+ggsave("Graficos/qc_barplot_bioinformatica_mapping_plat.png", width = 75, height = 65, dpi = 300, units = c("cm"))
 
 #### plot assembly ----
 
@@ -433,11 +408,12 @@ ggplot(bioinfo_data, aes(assembly,  fill = platform)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Plataforma")) +
     labs(y = "Número de laboratorios", x = "", title = "") +
-    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 6) +
+    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 15) +
     theme(
-    text = element_text(size = 20),
+    text = element_text(size = 45),
     axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
-ggsave("Graficos/qc_barplot_bioinformatica_assembly_plat.png", width = 40, height = 30, units = "cm")
+ggsave("Graficos/qc_barplot_bioinformatica_assembly_plat.png", width = 100, height = 65, dpi = 300, units = c("cm"))
+
 
 #### plot variant callers ----
 
@@ -445,9 +421,9 @@ ggplot(bioinfo_data, aes(variant, fill = platform)) +
     geom_bar() +
     guides(fill = guide_legend(title = "Plataforma")) +
     labs(y = "Número de laboratorios", x = "", title = "") +
-    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count))) +
+    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 15) +
     theme(
-    text = element_text(size = 22),
+    text = element_text(size = 45),
     axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_variants_plat.png")
 
@@ -484,7 +460,7 @@ nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muest
 
 variants_data <- data.frame(
     id = as.character(qc_variants$ID),
-    muestra = as.character(rep(nombres_muestras, 41)),
+    muestra = as.character(rep(nombres_muestras, 40)),
     plataforma = as.character(qc_variants$plataforma),
     plataforma2 = as.character(qc_variants$var_sequencing_platforms),
     software = as.character(qc_variants$software),
@@ -517,7 +493,7 @@ ggplot(subset_variants_data_nuevo, aes(x = muestra, y = variants, fill = tipo)) 
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Mutaciones")) +
     labs(x = "", y = "Mutaciones / muestra", title = "") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
-    text = element_text(size = 22))
+    text = element_text(size = 35))
 ggsave("Graficos/qc_resultados_variantes.png", dpi = 500, units = "cm", width = 60, height = 36)
 
 # variantes software
@@ -550,10 +526,6 @@ p2<- ggplot(subset(variants_data, plataforma == "Ion Torrent"), aes(x = software
     text = element_text(size = 25))
 p1 + p2
 ggsave("Graficos/qc_variantes_software.png", dpi = 500, units = "cm", width = 65, height = 40)
-
-
-p1 + p2
-ggsave("Graficos/qc_variantes_software.png", dpi = 500, units = "cm", width = 60, height = 36)
 
 #### plot variant callers ----
 
@@ -591,7 +563,7 @@ df_linajes_lab <- df_parsed_linajes[df_parsed_linajes$grupo != "control", 2:11]
 
 # calculamos los TP, FP, FN by sample
 
-matrix_tasa<- matrix(0, ncol = 10, nrow = 41)
+matrix_tasa<- matrix(0, ncol = 10, nrow = 40)
 for (j in 1:ncol(df_linajes_lab)) {
     control<- df_linajes_control[j]
     muestra<- df_linajes_lab[, j]
@@ -617,7 +589,7 @@ table(matrix_tasa[,8])
 table(matrix_tasa[,9])
 table(matrix_tasa[,10])
 
-matrix_tasa<- matrix(0, ncol = 10, nrow = 41)
+matrix_tasa<- matrix(0, ncol = 10, nrow = 40)
 for (j in 1:ncol(df_linajes_lab)) {
     control<- df_linajes_control[j]
     muestra<- df_linajes_lab[, j]
@@ -633,14 +605,14 @@ for (j in 1:ncol(df_linajes_lab)) {
 }
 
 
-matrix_valores_1 <- matrix(0, ncol = 1, nrow = 41)
-for (i in 1:41) {
+matrix_valores_1 <- matrix(0, ncol = 1, nrow = 40)
+for (i in 1:40) {
     tabla_1 <- table(matrix_tasa[i, ])
     matrix_valores_1[i, 1] <- as.numeric(tabla_1[1])
 }
 
 df_aciertos_lin<- data.frame(
-    id = df_parsed_linajes$grupo,
+    id = df_parsed_linajes$grupo[-41],
     aciertos = matrix_valores_1[,1]
 )
 
@@ -667,7 +639,7 @@ df_variantes_lab <- df_parsed_variantes[df_parsed_variantes$grupo != "control", 
 
 # calculamos los TP, FP, FN by sample
 
-matrix_tasa<- matrix(0, ncol = 10, nrow = 41)
+matrix_tasa<- matrix(0, ncol = 10, nrow = 40)
 for (j in 1:ncol(df_variantes_lab)) {
     control<- df_variantes_control[j]
     muestra<- df_variantes_lab[, j]
@@ -693,7 +665,7 @@ table(matrix_tasa[,8])
 table(matrix_tasa[,9])
 table(matrix_tasa[,10])
 
-matrix_tasa<- matrix(0, ncol = 10, nrow = 41)
+matrix_tasa<- matrix(0, ncol = 10, nrow = 40)
 for (j in 1:ncol(df_variantes_lab)) {
     control<- df_variantes_control[j]
     muestra<- df_variantes_lab[, j]
@@ -709,18 +681,18 @@ for (j in 1:ncol(df_variantes_lab)) {
 }
 
 
-matrix_valores_1 <- matrix(0, ncol = 1, nrow = 41)
-for (i in 1:41) {
+matrix_valores_1 <- matrix(0, ncol = 1, nrow = 40)
+for (i in 1:40) {
     tabla_1 <- table(matrix_tasa[i, ])
     matrix_valores_1[i, 1] <- as.numeric(tabla_1[1])
 }
 
 df_aciertos_variantes<- data.frame(
-    id = df_parsed_linajes$grupo,
+    id = df_parsed_linajes$grupo[-41],
     aciertos = matrix_valores_1[,1]
 )
 
-#write.table(df_aciertos_variantes, "df_aciertos_variantes.csv", row.names = F, quote = F, sep = "\t")
+# write.table(df_aciertos_variantes, "df_aciertos_variantes.csv", row.names = F, quote = F, sep = "\t")
 
 ### calculo de TP y FP - Viralrecon
 
