@@ -28,7 +28,7 @@ rep_level<- c(
 
 levels_id <- c(
     "COD_2103",
-    "COD_2106_2",
+    "COD_2106",
     "COD_2107",
     "COD_2108",
     "COD_2109",
@@ -64,7 +64,7 @@ levels_id <- c(
     "COD_2127",
     "COD_2136",
     "COD_2143",
-    "COD_2106",
+    "COD_2106_2",
     "COD_2107_2",
     "COD_2140"
 )
@@ -231,6 +231,8 @@ categorias_data <- data.frame(
     id = as.character(qc_categorias$ID),
     platform_1 = factor(qc_categorias$sequencing_platforms_1, levels = c("Illumina", "Ion Torrent", "Nanopore")),
     platform_2 = as.character(qc_categorias$sequencing_platforms_2),
+    valor = qc_categorias$valor,
+    librerias = as.character(qc_categorias$libraries_1),
     genome = qc_categorias$reference_genome,
     bioinformatica = qc_categorias$bioinformatic_protocol
 )
@@ -252,17 +254,37 @@ ggsave("Graficos/qc_barplot_genome.png", width = 40, height = 30, units = "cm")
 
 #### plot instrumentos ----
 
+#vjust = -0.8, size = 6.5, hjust = 0.5
 ggplot(categorias_data, aes(platform_2, fill = platform_1)) +
     geom_bar() +
     guides(fill = guide_legend(title = "")) +
     labs(y = "Número de laboratorios", x = "", title = "", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -0.8, size = 6.5, hjust = 0.5) +
+    geom_text(stat = "count", aes(label = ..count..), size = 6.5, vjust = -0.1) +
     theme(
     text = element_text(size = 23),
     axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.text.y = element_text(),
     legend.title = element_text(),
     legend.text = element_text())
 ggsave("Graficos/qc_barplot_instrumentos.png", width = 40, height = 30, units = "cm")
+
+#### plot librerias ----
+
+#vjust = -0.8, size = 6.5, hjust = 0.5
+
+categorias_data_mod <- categorias_data[ !categorias_data$id %in% rep_level, ]
+
+ggplot(categorias_data_mod, aes(fct_reorder(categorias_data_mod$librerias, categorias_data_mod$valor), fill = platform_1)) +
+    geom_bar() +
+    coord_flip() +
+    guides(fill = guide_legend(title = "")) +
+    labs(y = "Número de laboratorios", x = "", title = "", size = 15) +
+    geom_text(stat = "count", aes(label = ..count..), size = 6.5, hjust = -0.5) +
+    theme(
+    text = element_text(size = 35),
+    axis.text.x = element_text(vjust = 1, hjust = 1), axis.text.y = element_text(),
+    legend.title = element_text(),
+    legend.text = element_text())
+ggsave("Graficos/qc_barplot_instrumentos.png", width = 60, height = 40, units = "cm")
 
 # plot carreras
 
@@ -275,7 +297,7 @@ l_id_plataforma <- c(
     "COD_2122",
     "COD_2123",
     "COD_2132",
-    "COD_2106_2",
+    "COD_2106",
     "COD_2107",
     "COD_2108",
     "COD_2110",
@@ -307,7 +329,7 @@ l_id_plataforma <- c(
     "COD_2143",
     "COD_2101",
     "COD_2107_2",
-    "COD_2106",
+    "COD_2106_2",
     "COD_2140"
 )
 
@@ -375,7 +397,7 @@ bioinfo_data <- data.frame(
     variant = qc_bioinfo$Variant_Calling,
     consensus = qc_bioinfo$Consensus,
     lineage_software = qc_bioinfo$Linage_identification,
-    pangolin_version = qc_bioinfo$pangolin_version)
+    pangolin_version = qc_bioinfo$pangolin_version
 )
 
 #### plot preprocessing ----
@@ -399,7 +421,7 @@ ggplot(bioinfo_data, aes(mapping, fill = platform)) +
     geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 12) +
     theme(
     text = element_text(size = 55),
-    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+    axis.text.x = element_text(angle = 90, vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_mapping_plat.png", width = 75, height = 65, dpi = 300, units = c("cm"))
 
 #### plot assembly ----
@@ -410,8 +432,8 @@ ggplot(bioinfo_data, aes(assembly,  fill = platform)) +
     labs(y = "Número de laboratorios", x = "", title = "") +
     geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 15) +
     theme(
-    text = element_text(size = 45),
-    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+    text = element_text(size = 55),
+    axis.text.x = element_text(angle = 75, vjust = 1, hjust = 1))
 ggsave("Graficos/qc_barplot_bioinformatica_assembly_plat.png", width = 100, height = 65, dpi = 300, units = c("cm"))
 
 
@@ -451,7 +473,6 @@ ggplot(bioinfo_data, aes(pangolin_version)) +
     axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
 ggsave("Graficos/qc_barplot_bioinformatica_pangolin.png", dpi = 500, units = "cm", width = 25, height = 25)
 
-(4*100) / 40
 
 ##### variantes data -----
 
@@ -500,7 +521,14 @@ ggsave("Graficos/qc_resultados_variantes.png", dpi = 500, units = "cm", width = 
 
 # variantes software
 
-p1<- ggplot(subset(variants_data, plataforma == "Illumina"), aes(x = software, y = variants)) +
+a1<- subset(variants_data, plataforma == "Illumina" & tipo == "Mutaciones (FA > 0.75)")
+table(a1$software)
+(140*100)/540
+dim(a1)
+
+head(variants_data)
+
+p1<- ggplot(subset(variants_data, plataforma == "Illumina" & tipo == "Mutaciones (FA > 0.75)"), aes(x = software, y = variants)) +
     geom_bar(aes(), stat = "identity", position = position_dodge()) +
     geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
     facet_grid(~tipo) +
@@ -513,6 +541,7 @@ p1<- ggplot(subset(variants_data, plataforma == "Illumina"), aes(x = software, y
     labs(x = "", y = "Mutaciones / software", title = "") +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
     text = element_text(size = 25))
+p1
 p2<- ggplot(subset(variants_data, plataforma == "Ion Torrent"), aes(x = software, y = variants)) +
     geom_bar(aes(), stat = "identity", position = position_dodge()) +
     geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
