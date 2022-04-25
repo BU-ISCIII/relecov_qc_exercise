@@ -223,6 +223,10 @@ ggplot(estadistica_data, aes(x = muestra2, y = qc10x)) +
     axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
 ggsave("Graficos/qc_resultados_porcentajecoverage_plataforma.png", width = 40, height = 30, units = "cm")
 
+#### resumen 2131 y 2111
+
+data_raros<- estadistica_data[estadistica_data$id == "COD_2111" | estadistica_data$id == "COD_2131", ]
+
 ### datos categorias ----
 
 qc_categorias <- read_excel(dir_excel[1], sheet = 1)
@@ -467,11 +471,11 @@ ggplot(bioinfo_data, aes(pangolin_version)) +
     geom_bar(fill = "#1F77B4") +
     guides(fill = guide_legend(title = "Plataforma")) +
     labs(y = "Número de laboratorios", x = "", title = "", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -0.5, size = 6.5) +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -0.5, size = 8) +
     theme(
-    text = element_text(size = 22),
+    text = element_text(size = 35),
     axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45))
-ggsave("Graficos/qc_barplot_bioinformatica_pangolin.png", dpi = 500, units = "cm", width = 25, height = 25)
+ggsave("Graficos/qc_barplot_bioinformatica_pangolin.png", dpi = 500, units = "cm", width = 45, height = 30)
 
 
 ##### variantes data -----
@@ -521,27 +525,38 @@ ggsave("Graficos/qc_resultados_variantes.png", dpi = 500, units = "cm", width = 
 
 # variantes software
 
-a1<- subset(variants_data, plataforma == "Illumina" & tipo == "Mutaciones (FA > 0.75)")
-table(a1$software)
-(140*100)/540
-dim(a1)
+data_variantes_software<- bioinfo_data
 
-head(variants_data)
+matrix_mutaciones_nuevo <- matrix(0, ncol = 2, nrow = 40)
 
-p1<- ggplot(subset(variants_data, plataforma == "Illumina" & tipo == "Mutaciones (FA > 0.75)"), aes(x = software, y = variants)) +
+for (i in 1:40) {
+    matrix_mutaciones_nuevo[i, 1]<- round(mean(variants_data$variants[variants_data$id == unique(variants_data$id)[i] & variants_data$tipo == "Mutaciones (FA > 0.75)"], na.rm = T), 0)
+    matrix_mutaciones_nuevo[i, 2]<- round(mean(variants_data$variants[variants_data$id == unique(variants_data$id)[i] & variants_data$tipo == "Mutaciones con efecto"], na.rm = T), 0)
+}
+
+
+data_variantes_software$mutaciones<- matrix_mutaciones_nuevo[,1]
+data_variantes_software$efectos<- matrix_mutaciones_nuevo[,2]
+
+# write.table(data_variantes_software, "data_variantes_software.csv", quote = F, sep = "\t", row.names = F)
+
+plot_variantes_software<- read_excel(dir_excel[1], sheet = 16)
+plot_variantes_software$mutaciones<- as.numeric(plot_variantes_software$mutaciones)
+
+
+p1<- ggplot(subset(variants_data, plataforma == "Illumina"), aes(x = software, y = variants)) +
     geom_bar(aes(), stat = "identity", position = position_dodge()) +
     geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
     facet_grid(~tipo) +
     scale_y_continuous(
         limits = c(0,280),
         name = "Mutaciones",
-        sec.axis = sec_axis(trans=~./24, name="")
+        sec.axis = sec_axis(trans=~./26, name="")
     ) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
-    labs(x = "", y = "Mutaciones / software", title = "") +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
-    text = element_text(size = 25))
-p1
+    labs(x = "", y = "Mutaciones / software", title = "Illumina") +
+    theme(axis.text.x = element_text(angle = 85, vjust = 1, hjust = 1),
+    text = element_text(size = 50))
 p2<- ggplot(subset(variants_data, plataforma == "Ion Torrent"), aes(x = software, y = variants)) +
     geom_bar(aes(), stat = "identity", position = position_dodge()) +
     geom_boxplot(fill = "#1F77B4", outlier.colour="red") +
@@ -549,14 +564,14 @@ p2<- ggplot(subset(variants_data, plataforma == "Ion Torrent"), aes(x = software
     scale_y_continuous(
         limits = c(0,280),
         name = "",
-        sec.axis = sec_axis(trans=~./25, name="Software")
+        sec.axis = sec_axis(trans=~./26, name="Software")
     ) +
     guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Samples")) +
-    labs(x = "", y = "", title = "") +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
-    text = element_text(size = 25))
+    labs(x = "", y = "", title = "Ion Torrent") +
+    theme(axis.text.x = element_text(angle = 85, vjust = 1, hjust = 1),
+    text = element_text(size = 50))
 p1 + p2
-ggsave("Graficos/qc_variantes_software.png", dpi = 500, units = "cm", width = 65, height = 40)
+ggsave("Graficos/qc_variantes_software.png", dpi = 500, units = "cm", width = 85, height = 55)
 
 #### plot variant callers ----
 

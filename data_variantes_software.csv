@@ -1,0 +1,41 @@
+id	platform	preprocessing	bioinformatic	mapping	assembly	variant	consensus	lineage_software	pangolin_version	mutaciones	efectos
+COD_2101	Ion Torrent	NA	NA	NA	NA	NA	NA	Pangolin	v3.1.17	NA	NA
+COD_2102	Ion Torrent	BaseCaller	Ion Torrent Suite pipeline	TMAP	IRMA	Torrent Variant Caller	IRMA	Pangolin + Nexclade + Usher	v3.1.17	37	31
+COD_2103	Illumina	DeepChek pipeline	DeepChek pipeline	DeepChek pipeline	DeepChek pipeline	DeepChek pipeline	DeepChek pipeline	Pangolin	v3.1.16	46	30
+COD_2104	Ion Torrent	BaseCaller	Ion Torrent Suite pipeline	TMAP	IRMA	variantCaller	NA	Pangolin	v3.1.17	43	32
+COD_2105	Ion Torrent	trimmomatic	IRMA	IRMA	IRMA	IRMA	IRMA	Pangolin + Nextclade	v3.1.17	NA	26
+COD_2106_2	Nanopore	guppyplex	ARTIC-nCoV-bioinformaticsSOP	minimap2	artic_make_depth_mask	nanopolish	bcftools consensus	Pangolin	v3.1.19	NA	NA
+COD_2106	Illumina	fastp	SeqCOVID	bwa mem	NA	ivar variants	ivar consensus	Pangolin	v3.1.19	NA	NA
+COD_2107	Illumina	fastp	nf-core/viralrecon	bowtie2	None	ivar variants	ivar consensus	Pangolin	NA	NA	0
+COD_2107_2	Nanopore	guppyplex	epi2me-labs/wf-artic	minimap2	NA	medaka	NA	Pangolin	NA	NA	0
+COD_2108	Illumina	DRAGEN COVID trimmer	DRAGEN COVID	DRAGEN COVID mapping	NA	NA	NA	Pangolin + Nextclade	v3.1.17	NA	31
+COD_2109	Illumina	fastp	nf-core/viralrecon	bowtie2	None	ivar variants	ivar consensus	Pangolin	v3.1.17	39	24
+COD_2110	Illumina	trimmomatic	DRAGEN COVID	DRAGEN COVID mapping	DRAGEN COVID	DRAGEN COVID Variant Caller	DRAGEN COVID	Pangolin	v3.1.17	32	32
+COD_2111	Illumina	DRAGEN COVID trimmer	DRAGEN COVID	DRAGEN COVID mapping	DRAGEN COVID	DRAGEN COVID Variant Caller	DRAGEN COVID	Pangolin + PLEARN-v1.2.121 (2022-01-05 ) + Nextclade v1.13.0 + DRAGEN COVID Lineage v3.5.6	v3.1.17	36	26
+COD_2112	Illumina	DRAGEN COVID trimmer	DRAGEN COVID	DRAGEN COVID mapping	DRAGEN COVID	DRAGEN COVID Variant Caller	DRAGEN COVID	Pangolin + Usher	v3.1.17	38	0
+COD_2113	Illumina	fastp	SeqCOVID	bwa mem	None	ivar variants	ivar consensus	Pangolin	v3.1.17	58	44
+COD_2114	Illumina	fastp	In-house protocol	bwa mem	None	freebayes	ivar consensus	Pangolin	v3.1.17	32	22
+COD_2115	Ion Torrent	SQ Software Assay Development (Vela Dx)	Vela Dx Bioinformatics pipeline	TMAP	None	SQ Reporter CallVariants in house	SQ Reporter GenerateVariantContigs	Pangolin	v3.1.17	31	24
+COD_2116	Illumina	DRAGEN COVID trimmer	DRAGEN COVID	bwa mem	DRAGEN COVID	DRAGEN COVID Variant Caller	bcftools consensus	Pangolin	NA	36	30
+COD_2117	Illumina	NA	DRAGEN COVID	NA	NA	NA	NA	Pangolin + Nextclade	v3.1.17	151	38
+COD_2117_2	Illumina	NA	EPISEQ pipeline	NA	NA	NA	NA	Pangolin	v3.1.17	NA	NA
+COD_2120	Ion Torrent	BaseCaller	Ion Torrent Suite pipeline	TMAP	NA	tvc	generateConsensus	Pangolin + Nextclade	v3.1.19	36	31
+COD_2119	Ion Torrent	BaseCaller	Ion AmpliSeq pipeline	TMAP	IRMA	Torrent Variant Caller	Ion AmpliSeq pipeline	Pangolin	v3.1.17	41	34
+COD_2121	Illumina	NA	DRAGEN COVID	NA	NA	NA	NA	Pangolin	v3.1.17	37	27
+COD_2122	Illumina	NA	DeepChek pipeline	NA	NA	bcftools	bcftools consensus	Pangolin	v3.1.17	22	NA
+COD_2123	Illumina	fastp	In-house protocol	bwa mem	NA	ivar variants	ivar consensus	Pangolin	v3.1.16	NA	26
+COD_2124	Illumina	artic protocol	DRAGEN COVID	NA	NA	NA	NA	Pangolin	v3.1.16	NA	NA
+COD_2125	Illumina	fastp	MG-IiSGM/covid_multianalysis	bwa mem	NA	ivar variants	ivar consensus	Pangolin	v3.1.18	36	27
+COD_2126	Illumina	fastp	DRAGEN COVID	bwa mem	None	ivar variants	ivar consensus	Pangolin	v3.1.17	50	33
+COD_2127	Ion Torrent	Torrent Suite	Ion Torrent Suite pipeline	Torrent Suite	Torrent Suite	variantCaller v5.14.0.3	Ugene v.40.1	Pangolin	v3.1.17	36	NA
+COD_2129	Illumina	fastp	nf-core/viralrecon	bowtie2	None	ivar variants	ivar consensus	Pangolin	v3.1.17	34	23
+COD_2131	Illumina	sickle	In-house protocol	bwa mem	NA	ivar variants	ivar consensus	Pangolin	NA	NA	NA
+COD_2132	Illumina	NA	DRAGEN COVID	NA	NA	NA	NA	Pangolin	v3.1.17	NA	NA
+COD_2134	Illumina	NA	DRAGEN COVID	NA	NA	NA	NA	Pangolin	v3.1.17	47	2
+COD_2135	Illumina	fastp	In-house protocol	bwa mem	None	octopus v0.7.4	ivar consensus	Pangolin + Nextclade	v3.1.17	39	27
+COD_2136	Ion Torrent	Torrent Suite	Ion Torrent Suite pipeline	Torrent Suite	Torrent Suite	Torrent Variant Caller	Torrent Suite Generate Consensus Plugin	Pangolin	v3.1.17	38	28
+COD_2137	Illumina	trimmomatic	In-house protocol	bwa mem	NA	ivar variants	ivar consensus	Pangolin	v3.1.17	39	84
+COD_2139	Illumina	fastp	SeqCOVID	bwa mem	NA	ivar variants	ivar consensus	Pangolin	v3.1.18	NA	NA
+COD_2140	Nanopore	artic protocol	nextflow/poreCov	minimap2	NA	medaka	medaka	Pangolin	v3.1.17	NA	NA
+COD_2141	Illumina	DRAGEN COVID trimmer	DRAGEN COVID	DRAGEN COVID mapping	DRAGEN COVID	DRAGEN COVID Variant Caller	DRAGEN COVID	Pangolin	v3.1.17	38	28
+COD_2143	Ion Torrent	NA	Ion Torrent Suite pipeline	NA	NA	NA	NA	Pangolin	v3.1.17	36	26
