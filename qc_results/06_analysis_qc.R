@@ -710,7 +710,7 @@ df_aciertos_lin<- data.frame(
     aciertos = matrix_valores_1[,1]
 )
 
-# write.table(df_aciertos_lin, "df_aciertos_linajes.csv", quote = F, row.names = F, sep = "\t")
+#write.table(df_aciertos_lin, "df_aciertos_linajes.csv", quote = F, row.names = F, sep = "\t")
 
 # variantes
 
@@ -786,7 +786,7 @@ df_aciertos_variantes<- data.frame(
     aciertos = matrix_valores_1[,1]
 )
 
-# write.table(df_aciertos_variantes, "df_aciertos_variantes.csv", row.names = F, quote = F, sep = "\t")
+#write.table(df_aciertos_variantes, "df_aciertos_variantes.csv", row.names = F, quote = F, sep = "\t")
 
 ### calculo de TP y FP - Viralrecon
 
@@ -973,6 +973,7 @@ rep_level<- c(
 "COD_2117_2",
 "COD_2107_2"
 )
+
 
 qc_aciertos_mod <- qc_aciertos[ !qc_aciertos$id %in% rep_level, ] 
 
