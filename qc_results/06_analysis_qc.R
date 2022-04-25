@@ -12,6 +12,7 @@ library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
 library(forcats, quietly = TRUE, warn.conflicts = FALSE)
 library(gridExtra, quietly = TRUE, warn.conflicts = FALSE)
 library(patchwork, quietly = TRUE, warn.conflicts = FALSE)
+library(reshape2, quietly = TRUE, warn.conflicts = FALSE)
 
 ### Excel ----
 
@@ -84,7 +85,7 @@ fechas_data <- data.frame(
 
 #### plot tiempo de ejecucion ----
 
-# Sys.setlocale("LC_TIME", "English")
+# Sys.setlocale("LC_TIME", "English")r
 # format(Sys.Date(), format = "%Y-%b-%d")
 
 
@@ -181,6 +182,7 @@ estadistica_data <- data.frame(
     muestra2 = as.character(rep(nombres_muestras, 40)),
     plataforma = as.character(qc_estadistica$plataforma),
     plataforma2 = as.character(qc_estadistica$var_sequencing_platforms),
+    reads = as.numeric(qc_estadistica$`var_readcount`),
     filter = as.numeric(qc_estadistica$`var_qcfiltered`),
     host = as.numeric(qc_estadistica$`var_readhost`),
     virus = as.numeric(qc_estadistica$`var_readsvirus`),
@@ -225,7 +227,53 @@ ggsave("Graficos/qc_resultados_porcentajecoverage_plataforma.png", width = 40, h
 
 #### resumen 2131 y 2111
 
-data_raros<- estadistica_data[estadistica_data$id == "COD_2111" | estadistica_data$id == "COD_2131", ]
+data_raros<- read_excel(dir_excel[1], sheet = 19)
+cod_2111<- subset(data_raros, group == "2111")
+cod_2131<- subset(data_raros, group == "2131")
+
+raro_data <- data.frame(
+    id = as.character(data_raros$group),
+    muestra = as.character(data_raros$sample),
+    plataforma = as.character(data_raros$plataforma),
+    reads = as.numeric(data_raros$totalreads),
+    filter = as.numeric(data_raros$`%readshost`),
+    host = as.numeric(data_raros$`%readshost`),
+    virus = as.numeric(data_raros$`%readsvirus`),
+    unmapped = as.numeric(data_raros$`%unmapedreads`),
+    qc10x = as.numeric(data_raros$`Coverage>10x(%)`),
+    mean_depth = as.numeric(data_raros$medianDPcoveragevirus),
+    variants_75 = as.numeric(data_raros$Variantsinconsensusx10),
+    variants_effect = as.numeric(data_raros$MissenseVariants)
+)
+
+raro_data$muestra <- factor(raro_data$muestra, levels = nombres_muestras)
+
+prueba<- raro_data[,c(1,2,4:12)]
+
+df_melt = melt(prueba, id.var=c("id","muestra"))
+df_melt$variable<- factor(df_melt$variable, levels = c("reads", "filter", "host", "virus", "unmapped", "qc10x", "mean_depth", "variants_75", "variants_effect"))
+
+ggplot(subset(df_melt, variable == "reads"), aes(muestra, value)) +
+    geom_point(size = 4) + geom_line() +
+    facet_grid(id ~ variable) +
+    labs(y = "reads") +
+    theme(
+        text = element_text(size = 30),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+        legend.title = element_text(),
+        legend.text = element_text())
+ggsave("Graficos/qc_raros_reads.png", width = 40, height = 30, units = "cm")
+
+ggplot(subset(df_melt, variable != "reads"), aes(muestra, value)) +
+    geom_point(size = 4) + geom_line() +
+    facet_grid(id ~ variable) +
+    labs(y = "reads") +
+    theme(
+        text = element_text(size = 20),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+        legend.title = element_text(),
+        legend.text = element_text())
+ggsave("Graficos/qc_raros_all.png", width = 60, height = 30, units = "cm")
 
 ### datos categorias ----
 
