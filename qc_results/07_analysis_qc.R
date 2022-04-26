@@ -48,7 +48,7 @@ ggplot(subset(pangolin_data_lab, version == "v3.1.16"), aes(muestra, fill = lina
         text = element_text(size = 55),
         axis.text.x = element_text(angle = 90, vjust = 1, hjust = 1)
     )
-ggsave("Graficos/qc_pangolin_16.png", width = 75, height = 65, dpi = 300, units = c("cm"))
+# ggsave("Graficos/qc_pangolin_16.png", width = 75, height = 65, dpi = 300, units = c("cm"))
 
 # TODAS
 
@@ -111,6 +111,8 @@ ggsave("Graficos/qc_pangolin_viralrecon.png", width = 75, height = 65, dpi = 300
 
 # Analisis en conjunto
 
+data_conjunto<- rbind(pangolin_data_lab, pangolin_data_viralrecon)
+
 grupos_eliminar<- c(
 "COD_2101",
 "COD_2102",
@@ -121,7 +123,6 @@ grupos_eliminar<- c(
 "COD_2115",
 "COD_2119",
 "COD_2120",
-"COD_2124_segunda",
 "COD_2127",
 "COD_2136",
 "COD_2140",
@@ -129,11 +130,15 @@ grupos_eliminar<- c(
 )
 
 `%notin%` <- Negate(`%in%`)
-df<- pangolin_data_conj[aa %notin% grupos_eliminar, ]
+df_conjunto<- data_conjunto[data_conjunto$grupo %notin% grupos_eliminar, ]
+
+# write.table(df_conjunto, "df_conjunto.csv", row.names = F, sep = "\t", quote = F)
 
 # TODAS
 
-ggplot(df, aes(muestra, fill = linajes)) +
+n_df_conjunto<- na.exclude(df_conjunto)
+
+ggplot(n_df_conjunto, aes(muestra, fill = linajes)) +
     geom_bar() +
     guides(fill = guide_legend(title = "")) +
     facet_grid(programa~version) +
@@ -141,9 +146,9 @@ ggplot(df, aes(muestra, fill = linajes)) +
     geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 12) +
     theme(
         text = element_text(size = 55),
-        axis.text.x = element_text(angle = 90, vjust = 1, hjust = 1)
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
     )
-ggsave("Graficos/qc_pangolin_viralrecon.png", width = 75, height = 65, dpi = 300, units = c("cm"))
+ggsave("Graficos/qc_pangolin_conjunto.png", width = 85, height = 65, dpi = 500, units = c("cm"))
 
 
 # write.table(df, "pangolin_viralrecon_lab.csv", quote = F, row.names = F, sep = "\t")
