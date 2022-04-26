@@ -974,8 +974,12 @@ rep_level<- c(
 "COD_2107_2"
 )
 
+lineage_report.csv | tr ',' '\t' | cut -f2
+
 
 qc_aciertos_mod <- qc_aciertos[ !qc_aciertos$id %in% rep_level, ] 
+
+pangolin:3.1.16--pyhdfd78af_2
 
 ggplot(qc_aciertos_mod, aes(x = id, y = aciertos)) +
     geom_bar(fill = "#1F77B4", stat = "identity") +
