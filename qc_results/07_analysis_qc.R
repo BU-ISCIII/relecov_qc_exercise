@@ -13,6 +13,7 @@ library(forcats, quietly = TRUE, warn.conflicts = FALSE)
 library(gridExtra, quietly = TRUE, warn.conflicts = FALSE)
 library(patchwork, quietly = TRUE, warn.conflicts = FALSE)
 library(reshape2, quietly = TRUE, warn.conflicts = FALSE)
+library(ggimage, quietly = TRUE, warn.conflicts = FALSE)
 
 ### Excel ----
 
@@ -34,6 +35,12 @@ pangolin_data_lab <- data.frame(
 
 pangolin_data_lab$muestra <- factor(pangolin_data_lab$muestra, levels = nombres_muestras)
 # pangolin_data_lab$programa <- as.character(rep("Laboratorios", length(pangolin_data_lab$grupo)))
+
+# wide table
+
+wide_lab <- pangolin_data_lab %>%
+    spread(version, linajes)
+write.table(wide_lab, "df_pangolin_lab_wide.csv", row.names = F, sep = "\t", quote = F)
 
 
 # plots
@@ -64,7 +71,13 @@ pangolin_data_viralrecon <- data.frame(
 )
 
 pangolin_data_viralrecon$muestra <- factor(pangolin_data_viralrecon$muestra, levels = nombres_muestras)
-pangolin_data_viralrecon$programa <- as.character(rep("Viralrecon", length(pangolin_data_viralrecon$grupo)))
+# pangolin_data_viralrecon$programa <- as.character(rep("Viralrecon", length(pangolin_data_viralrecon$grupo)))
+
+# wide table
+
+wide_viralrecon <- pangolin_data_viralrecon %>%
+    spread(version, linajes)
+write.table(wide_viralrecon, "df_pangolin_viralrecon_wide.csv", row.names = F, sep = "\t", quote = F)
 
 # plots
 
@@ -83,7 +96,7 @@ ggsave("Graficos/qc_pangolin_viralrecon.png", width = 75, height = 65, dpi = 300
 
 ### datos control ----
 
-qc_pangolin <- read_excel(dir_excel[1], sheet = 3)
+qc_pangolin <- read_excel(dir_excel[1], sheet = 4)
 
 nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
 
@@ -112,20 +125,16 @@ ggplot(pangolin_data_control, aes(muestra, fill = linajes)) +
     )
 ggsave("Graficos/qc_pangolin_control.png", width = 75, height = 65, dpi = 300, units = c("cm"))
 
+# Analisis en conjunto wide
+
+wide_lab$programa <- as.character(rep("Laboratorios", length(wide_lab$grupo)))
+wide_viralrecon$programa <- as.character(rep("Viralrecon", length(wide_viralrecon$grupo)))
+
+data_conjunto <- merge(wide_lab, wide_viralrecon, by = c("grupo", "muestra"), all = TRUE)
+
+# write.table(data_conjunto, "df_pangolin_conjunto_wide_2.csv", row.names = F, sep = "\t", quote = F)
 
 # Analisis en conjunto
-
-data_conjunto <- rbind(pangolin_data_lab, pangolin_data_viralrecon)
-str(data_conjunto)
-
-# wide table
-
-wide_pangolin <- data_conjunto %>% pivot_wider(names_from = version, values_from = linajes)
-
-head(wide_pangolin)
-
-# write.table(wide_pangolin, "df_conjunto_wide.csv", row.names = F, sep = "\t", quote = F)
-
 
 grupos_eliminar <- c(
     "COD_2101",
@@ -133,7 +142,7 @@ grupos_eliminar <- c(
     "COD_2104",
     "COD_2105",
     "COD_2106_Nanopore",
-    "COD_2107_Nanopore",
+    "COD_2107_MinION",
     "COD_2115",
     "COD_2119",
     "COD_2120",
@@ -144,17 +153,69 @@ grupos_eliminar <- c(
 )
 
 `%notin%` <- Negate(`%in%`)
+
+pangolin_data_lab$programa <- as.character(rep("Laboratorios", length(pangolin_data_lab$grupo)))
+pangolin_data_viralrecon$programa <- as.character(rep("Viralrecon", length(pangolin_data_viralrecon$grupo)))
+
+data_conjunto <- rbind(pangolin_data_lab, pangolin_data_viralrecon)
+
 df_conjunto <- data_conjunto[data_conjunto$grupo %notin% grupos_eliminar, ]
+
+table(df_conjunto$programa)
 
 # write.table(df_conjunto, "df_conjunto.csv", row.names = F, sep = "\t", quote = F)
 
 # TODAS
 
-n_df_conjunto <- na.exclude(df_conjunto)
+ggplot(df_conjunto, aes(x = grupo, y = linajes, color = version)) +
+    geom_jitter() +
+    facet_grid(programa ~ muestra) +
+    labs(y = "", x = "", title = "") +
+    theme(
+        text = element_text(),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+    )
+ggsave("Graficos/qc_pangolin_conjunto.png")
 
-ggplot(n_df_conjunto, aes(muestra, fill = linajes)) +
-    geom_bar() +
-    guides(fill = guide_legend(title = "")) +
+ggplot(subset(df_conjunto, programa == "Laboratorios"), aes(x = grupo, y = linajes, color = version)) +
+    geom_jitter() +
+    facet_grid(programa ~ muestra) +
+    labs(y = "", x = "", title = "") +
+    theme(
+        text = element_text(),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+    )
+ggsave("Graficos/qc_pangolin_conjunto_lab.png")
+
+ggplot(subset(df_conjunto, programa == "Viralrecon"), aes(x = grupo, y = linajes, color = version)) +
+    geom_jitter() +
+    facet_grid(programa ~ muestra) +
+    labs(y = "", x = "", title = "") +
+    theme(
+        text = element_text(),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+    )
+ggsave("Graficos/qc_pangolin_conjunto_viralrecon.png")
+
+# , width = 85, height = 65, dpi = 500, units = c("cm")
+
+# write.table(df, "pangolin_viralrecon_lab.csv", quote = F, row.names = F, sep = "\t")
+
+# new plot with sample
+
+
+ggplot(df_conjunto, aes(x = grupo, y = linajes, fill = version)) +
+    geom_bar(stat = "identity") +
+    facet_grid(muestra ~ programa) +
+    labs(y = "", x = "", title = "") +
+    theme(
+        text = element_text(),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+    )
+ggsave("Graficos/qc_pangolin_conjunto_new.png")
+
+
+guides(fill = guide_legend(title = "")) +
     facet_grid(programa ~ version) +
     labs(y = "", x = "", title = "") +
     geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 12) +
@@ -162,7 +223,3 @@ ggplot(n_df_conjunto, aes(muestra, fill = linajes)) +
         text = element_text(size = 55),
         axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
     )
-ggsave("Graficos/qc_pangolin_conjunto.png", width = 85, height = 65, dpi = 500, units = c("cm"))
-
-
-# write.table(df, "pangolin_viralrecon_lab.csv", quote = F, row.names = F, sep = "\t")
