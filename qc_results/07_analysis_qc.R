@@ -165,17 +165,18 @@ table(df_conjunto$programa)
 
 # write.table(df_conjunto, "df_conjunto.csv", row.names = F, sep = "\t", quote = F)
 
-# TODAS
 
-ggplot(df_conjunto, aes(x = grupo, y = linajes, color = version)) +
+# TODAS
+head(df_conjunto)
+ggplot(subset(df_conjunto, muestra == "muestra 1"), aes(x = grupo, y = linajes, color = version)) +
     geom_jitter() +
-    facet_grid(programa ~ muestra) +
+    facet_grid(~programa) +
     labs(y = "", x = "", title = "") +
     theme(
         text = element_text(),
         axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
     )
-ggsave("Graficos/qc_pangolin_conjunto.png")
+ggsave("Graficos/qc_pangolin_conjunto_muestra1.png")
 
 ggplot(subset(df_conjunto, programa == "Laboratorios"), aes(x = grupo, y = linajes, color = version)) +
     geom_jitter() +

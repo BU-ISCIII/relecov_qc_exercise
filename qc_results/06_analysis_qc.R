@@ -72,7 +72,7 @@ levels_id <- c(
 
 ### datos Fechas ----
 
-qc_fechas <- read_excel(dir_excel[1], sheet = 2)
+qc_fechas <- read_excel(dir_excel[2], sheet = 2)
 
 fechas_data <- data.frame(
     id = as.character(qc_fechas$ID),
@@ -88,6 +88,7 @@ fechas_data <- data.frame(
 # Sys.setlocale("LC_TIME", "English")r
 # format(Sys.Date(), format = "%Y-%b-%d")
 
+summary(subset_fechas_data)
 
 subset_fechas_data<- subset(fechas_data, !(id %in% rep_level))
 ggplot(subset_fechas_data, aes(
@@ -95,13 +96,19 @@ ggplot(subset_fechas_data, aes(
     y = id, yend = id, color = "#4a8abe"
 )) +
     geom_segment(size = 3, show.legend = F) +
-    geom_text(aes(label = ejecucion), position = position_dodge(width = 1), hjust = 1.2, color = "black", size = 5) +
+    geom_text(aes(label = ejecucion), position = position_dodge(width = 1), hjust = 1.2, color = "black", size = 7) +
+    scale_x_date(date_breaks = "5 days",
+                 limits = as.Date(c("2021-12-17", "2022-02-08"))) +
     labs(x = "Tiempo de ejecución (días)", y = "") +
     theme(
-        text = element_text(size = 23),
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 0.9)
+        text = element_text(size = 30),
+        axis.title.x = element_text(vjust=-0.5),
+        axis.text.x = element_text(angle = 60, vjust = 0.5, hjust = 0.5)
     )
-ggsave("Graficos/qc_tiempo_ejecucion.png", width = 40, height = 30, dpi = 500, units = c("cm"))
+ggsave("Graficos/qc_tiempo_ejecucion.png", width = 55, height = 40, dpi = 500, units = c("cm"))
+
+
+
 
 # Datos reads
 
