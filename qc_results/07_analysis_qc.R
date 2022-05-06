@@ -130,7 +130,11 @@ ggsave("Graficos/qc_pangolin_control.png", width = 75, height = 65, dpi = 300, u
 wide_lab$programa <- as.character(rep("Laboratorios", length(wide_lab$grupo)))
 wide_viralrecon$programa <- as.character(rep("Viralrecon", length(wide_viralrecon$grupo)))
 
+head(wide_viralrecon)
+
 data_conjunto <- merge(wide_lab, wide_viralrecon, by = c("grupo", "muestra"), all = TRUE)
+
+str(data_conjunto)
 
 # write.table(data_conjunto, "df_pangolin_conjunto_wide_2.csv", row.names = F, sep = "\t", quote = F)
 
@@ -161,13 +165,10 @@ data_conjunto <- rbind(pangolin_data_lab, pangolin_data_viralrecon)
 
 df_conjunto <- data_conjunto[data_conjunto$grupo %notin% grupos_eliminar, ]
 
-table(df_conjunto$programa)
-
 # write.table(df_conjunto, "df_conjunto.csv", row.names = F, sep = "\t", quote = F)
 
 
 # TODAS
-head(df_conjunto)
 ggplot(subset(df_conjunto, muestra == "muestra 1"), aes(x = grupo, y = linajes, color = version)) +
     geom_jitter() +
     facet_grid(~programa) +
@@ -197,30 +198,3 @@ ggplot(subset(df_conjunto, programa == "Viralrecon"), aes(x = grupo, y = linajes
         axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
     )
 ggsave("Graficos/qc_pangolin_conjunto_viralrecon.png")
-
-# , width = 85, height = 65, dpi = 500, units = c("cm")
-
-# write.table(df, "pangolin_viralrecon_lab.csv", quote = F, row.names = F, sep = "\t")
-
-# new plot with sample
-
-
-ggplot(df_conjunto, aes(x = grupo, y = linajes, fill = version)) +
-    geom_bar(stat = "identity") +
-    facet_grid(muestra ~ programa) +
-    labs(y = "", x = "", title = "") +
-    theme(
-        text = element_text(),
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
-    )
-ggsave("Graficos/qc_pangolin_conjunto_new.png")
-
-
-guides(fill = guide_legend(title = "")) +
-    facet_grid(programa ~ version) +
-    labs(y = "", x = "", title = "") +
-    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 12) +
-    theme(
-        text = element_text(size = 55),
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
-    )
