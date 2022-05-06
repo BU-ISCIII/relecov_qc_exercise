@@ -13,7 +13,6 @@ library(forcats, quietly = TRUE, warn.conflicts = FALSE)
 library(gridExtra, quietly = TRUE, warn.conflicts = FALSE)
 library(patchwork, quietly = TRUE, warn.conflicts = FALSE)
 library(reshape2, quietly = TRUE, warn.conflicts = FALSE)
-library(ggimage, quietly = TRUE, warn.conflicts = FALSE)
 
 ### Excel ----
 
@@ -130,11 +129,7 @@ ggsave("Graficos/qc_pangolin_control.png", width = 75, height = 65, dpi = 300, u
 wide_lab$programa <- as.character(rep("Laboratorios", length(wide_lab$grupo)))
 wide_viralrecon$programa <- as.character(rep("Viralrecon", length(wide_viralrecon$grupo)))
 
-head(wide_viralrecon)
-
 data_conjunto <- merge(wide_lab, wide_viralrecon, by = c("grupo", "muestra"), all = TRUE)
-
-str(data_conjunto)
 
 # write.table(data_conjunto, "df_pangolin_conjunto_wide_2.csv", row.names = F, sep = "\t", quote = F)
 
@@ -165,36 +160,32 @@ data_conjunto <- rbind(pangolin_data_lab, pangolin_data_viralrecon)
 
 df_conjunto <- data_conjunto[data_conjunto$grupo %notin% grupos_eliminar, ]
 
-# write.table(df_conjunto, "df_conjunto.csv", row.names = F, sep = "\t", quote = F)
+# write.table(df_conjunto, "df_pangolin_conjunto_LONG.csv", row.names = F, sep = "\t", quote = F)
 
 
 # TODAS
-ggplot(subset(df_conjunto, muestra == "muestra 1"), aes(x = grupo, y = linajes, color = version)) +
-    geom_jitter() +
-    facet_grid(~programa) +
-    labs(y = "", x = "", title = "") +
-    theme(
-        text = element_text(),
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
-    )
-ggsave("Graficos/qc_pangolin_conjunto_muestra1.png")
 
-ggplot(subset(df_conjunto, programa == "Laboratorios"), aes(x = grupo, y = linajes, color = version)) +
-    geom_jitter() +
-    facet_grid(programa ~ muestra) +
+ggplot(df_conjunto, aes(muestra, fill = linajes)) +
+    geom_bar() +
+    facet_grid(~version) +
+    guides(fill = guide_legend(title = "")) +
+    facet_grid(programa ~ version) +
     labs(y = "", x = "", title = "") +
+    geom_text(stat = "count", position = position_stack(vjust = 0.5), aes(label = after_stat(count)), size = 12) +
     theme(
-        text = element_text(),
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+        text = element_text(size = 55),
+        axis.text.x = element_text(angle = 90)
     )
-ggsave("Graficos/qc_pangolin_conjunto_lab.png")
+ggsave("Graficos/qc_pangolin_conjunto_bar.png", width = 75, height = 65, dpi = 300, units = c("cm"))
 
-ggplot(subset(df_conjunto, programa == "Viralrecon"), aes(x = grupo, y = linajes, color = version)) +
-    geom_jitter() +
-    facet_grid(programa ~ muestra) +
+# TODAS - muestra 1
+
+ggplot(subset(df_conjunto, muestra == "muestra 1"), aes(x = grupo, y = version, color = version)) +
+    geom_point(alpha = 1, size = 10) +
+    facet_grid(linajes ~ programa) +
     labs(y = "", x = "", title = "") +
     theme(
-        text = element_text(),
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+        text = element_text(size = 38),
+        axis.text.x = element_text(angle = 45, hjust = 1)
     )
-ggsave("Graficos/qc_pangolin_conjunto_viralrecon.png")
+ggsave("Graficos/qc_pangolin_muestra1.png", width = 120, height = 40, dpi = 300, units = c("cm"))
