@@ -180,12 +180,18 @@ ggsave("Graficos/qc_pangolin_conjunto_bar.png", width = 75, height = 65, dpi = 3
 
 # TODAS - muestra 1
 
-ggplot(subset(df_conjunto, muestra == "muestra 1"), aes(x = grupo, y = version, color = version)) +
-    geom_point(alpha = 1, size = 10) +
-    facet_grid(linajes ~ programa) +
-    labs(y = "", x = "", title = "") +
-    theme(
-        text = element_text(size = 38),
-        axis.text.x = element_text(angle = 45, hjust = 1)
-    )
-ggsave("Graficos/qc_pangolin_muestra1.png", width = 120, height = 40, dpi = 300, units = c("cm"))
+for (i in 1:10) {
+    indice <- df_conjunto$muestra
+    plot_pangolin <- ggplot(subset(df_conjunto, muestra == indice[i]), aes(x = grupo, y = version, color = version)) +
+        geom_point(alpha = 1, size = 10) +
+        facet_grid(linajes ~ programa) +
+        labs(y = "", x = "", title = "") +
+        theme(
+            text = element_text(size = 38),
+            axis.text.x = element_text(angle = 45, hjust = 1)
+        )
+
+    nombre <- print(paste0("qc_pangolin_", indice[i], ".png"))
+
+    ggsave(nombre, width = 120, height = 40, dpi = 300, units = c("cm"))
+}
