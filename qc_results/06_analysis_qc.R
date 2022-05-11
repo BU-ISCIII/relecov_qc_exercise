@@ -88,8 +88,6 @@ fechas_data <- data.frame(
 # Sys.setlocale("LC_TIME", "English")r
 # format(Sys.Date(), format = "%Y-%b-%d")
 
-summary(subset_fechas_data)
-
 subset_fechas_data<- subset(fechas_data, !(id %in% rep_level))
 ggplot(subset_fechas_data, aes(
     x = as.Date(recepcion), xend = as.Date(secuenciacion),
@@ -108,11 +106,9 @@ ggplot(subset_fechas_data, aes(
 ggsave("Graficos/qc_tiempo_ejecucion.png", width = 55, height = 40, dpi = 500, units = c("cm"))
 
 
-
-
 # Datos reads
 
-qc_reads <- read_excel(dir_excel[1], sheet = 4)
+qc_reads <- read_excel(dir_excel[2], sheet = 4)
 
 # nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
 nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
@@ -284,7 +280,7 @@ ggsave("Graficos/qc_raros_all.png", width = 60, height = 30, units = "cm")
 
 ### datos categorias ----
 
-qc_categorias <- read_excel(dir_excel[1], sheet = 1)
+qc_categorias <- read_excel(dir_excel[2], sheet = 1)
 
 categorias_data <- data.frame(
     id = as.character(qc_categorias$ID),
@@ -295,6 +291,7 @@ categorias_data <- data.frame(
     genome = qc_categorias$reference_genome,
     bioinformatica = qc_categorias$bioinformatic_protocol
 )
+
 
 #### plot genome ----
 
@@ -886,7 +883,7 @@ df_aciertos<- data.frame(
 #sort_df_aciertos_variantes<- df_aciertos_variantes[order(df_aciertos_variantes$id), ]
 #write.table(sort_df_aciertos_variantes, "aciertos_variantes.csv", row.names = F, quote = F, sep = "\t")
 
-qc_aciertos <- read_excel(dir_excel[1], sheet = 15)
+qc_aciertos <- read_excel(dir_excel[2], sheet = 15)
 niveles_aciertos<- c("HU Virgen del Rocio",
 "HU San Cecilio",
 "HU Miguel Servet",
@@ -950,7 +947,6 @@ niveles_id_aciertos<-c("COD_2109",
 "COD_2121",
 "COD_2123",
 "COD_2124",
-"COD_2124_2",
 "COD_2141",
 "COD_2119",
 "COD_2112",
@@ -981,14 +977,9 @@ rep_level<- c(
 "COD_2107_2"
 )
 
-lineage_report.csv | tr ',' '\t' | cut -f2
+# qc_aciertos_mod <- qc_aciertos[ !qc_aciertos$id %in% rep_level, ] 
 
-
-qc_aciertos_mod <- qc_aciertos[ !qc_aciertos$id %in% rep_level, ] 
-
-pangolin:3.1.16--pyhdfd78af_2
-
-ggplot(qc_aciertos_mod, aes(x = id, y = aciertos)) +
+ggplot(qc_aciertos, aes(x = id, y = aciertos)) +
     geom_bar(fill = "#1F77B4", stat = "identity") +
     coord_flip() +
     facet_grid(~clase) +
