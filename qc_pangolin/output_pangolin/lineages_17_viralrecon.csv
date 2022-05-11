@@ -1,0 +1,311 @@
+taxon,lineage,conflict,ambiguity_score,scorpio_call,scorpio_support,scorpio_conflict,version,pangolin_version,pangoLEARN_version,pango_version,status,note
+213095_NC_045512.2,B.1.621,,,Mu (B.1.621-like),1.000000,0.000000,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2117_protocol2_10_NC_045512.2,AY.43,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2117_protocol2_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2117_protocol2_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.071400,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 1
+COD_2117_protocol2_3_NC_045512.2,A.28,0.0,0.9993362831858407,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2117_protocol2_4_NC_045512.2,B.1.621,0.0,0.9928746381652194,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2117_protocol2_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2117_protocol2_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2117_protocol2_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2117_protocol2_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2141_10_NC_045512.2,AY.43,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2141_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.913000,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 21; Ref alleles 1; Amb alleles 0; Oth alleles 1
+COD_2141_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.071400,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 1
+COD_2141_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2141_4_NC_045512.2,B.1.621,0.0,0.9944419742107603,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2141_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2141_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2141_7_NC_045512.2,AY.43,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2141_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2141_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+210153_P4_CC_NC_045512.2,B.1.1.7,0.0,0.9951121972894912,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+211761_P2_CC_NC_045512.2,B.1.351,0.0,0.9633279853311941,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+211779_P2_CC_NC_045512.2,A.28,0.0,0.976233589859665,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+213095_P2_CC_NC_045512.2,B.1.621,0.0,0.9824521934758155,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+214098_P2__CC_NC_045512.2,P.1,0.0,0.9597516099356026,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+217623_P2_CC_NC_045512.2,AY.9.2,0.0,0.9835955056179775,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+217690_CC_NC_045512.2,AY.53,0.0,0.9659350708733425,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+217737_CC_NC_045512.2,AY.43,0.0,0.9668798538145271,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2106_Illumina_10_NC_045512.2,AY.43,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2106_Illumina_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2106_Illumina_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2106_Illumina_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2106_Illumina_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2106_Illumina_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2106_Illumina_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2106_Illumina_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2106_Illumina_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2107_10_NC_045512.2,AY.43,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2107_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2107_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2107_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2107_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2107_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2107_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2107_7_NC_045512.2,AY.43,0.0,0.9491171003717472,Delta (B.1.617.2-like),0.923100,0.076900,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2107_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2107_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2108_10_NC_045512.2,AY.43,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2108_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2108_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2108_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2108_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2108_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2108_6_NC_045512.2,AY.9.2,0.0,0.9729791099000908,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2108_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2108_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2110_10_NC_045512.2,AY.43,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2110_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2110_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2110_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2110_4_NC_045512.2,B.1.621,0.0,0.9432242990654206,Mu (B.1.621-like),0.963000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 26; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2110_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2110_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2110_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2110_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2112_10_NC_045512.2,AY.43,0.0,0.9806175343700698,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2112_1_NC_045512.2,B.1.1.7,0.0,0.9930988423864648,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2112_2_NC_045512.2,B.1.351,0.0,0.9944419742107603,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2112_3_NC_045512.2,A.28,0.0,0.9930988423864648,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2112_4_NC_045512.2,B.1.621,0.0,0.9930988423864648,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2112_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2112_6_NC_045512.2,None,,,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,pangoLEARN lineage assignment AY.9.2 was not supported by scorpio
+COD_2112_7_NC_045512.2,BA.1,0.0,0.9876902417188899,Probable Omicron (BA.1-like),0.741400,0.189700,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 43; Ref alleles 11; Amb alleles 2; Oth alleles 2; scorpio replaced lineage assignment B.1.1.318
+COD_2112_8_NC_045512.2,AY.94,0.0,0.9995576199955762,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2112_9_NC_045512.2,AY.94,0.0,0.9883694922836055,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2113_10_NC_045512.2,AY.43,0.0,0.9913024085637824,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2113_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2113_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2113_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2113_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2113_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2113_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2113_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2113_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2114_10_NC_045512.2,AY.43,0.0,0.8669839679358717,Delta (B.1.617.2-like),0.846200,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 11; Ref alleles 0; Amb alleles 2; Oth alleles 0
+COD_2114_1_NC_045512.2,B.1.1.7,0.0,0.8987095203311419,Alpha (B.1.1.7-like),0.869600,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 20; Ref alleles 1; Amb alleles 1; Oth alleles 1
+COD_2114_2_NC_045512.2,B.1.351,0.0,0.9833670487750056,Beta (B.1.351-like),0.857100,0.071400,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 1; Oth alleles 0
+COD_2114_3_NC_045512.2,A.28,0.0,0.9021844660194175,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2114_4_NC_045512.2,B.1.621,0.0,0.9261633428300095,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2114_5_NC_045512.2,P.1.15,0.0,0.8288451579492491,Gamma (P.1-like),0.750000,0.062500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 2; Oth alleles 1
+COD_2114_6_NC_045512.2,AY.9.2,0.0,0.8276308968377397,Delta (B.1.617.2-like),0.846200,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 11; Ref alleles 0; Amb alleles 2; Oth alleles 0
+COD_2114_8_NC_045512.2,AY.94,0.0,0.9400046871338177,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2114_9_NC_045512.2,AY.94,0.0,0.947650069799907,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2116_10_NC_045512.2,AY.43,0.0,0.9573536191793454,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2116_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2116_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2116_3_NC_045512.2,A.28,0.0,0.9937708565072303,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2116_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),0.963000,0.037000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 26; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2116_5_NC_045512.2,P.1,0.0,0.9259083353122773,Gamma (P.1-like),0.812500,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 1; Oth alleles 2
+COD_2116_6_NC_045512.2,AY.9.2,0.0,0.6851744186046511,Delta (B.1.617.2-like),0.846200,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 11; Ref alleles 0; Amb alleles 2; Oth alleles 0
+COD_2116_8_NC_045512.2,B.1.617.2,0.0,0.99197682193002,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2116_9_NC_045512.2,AY.94,0.0,0.9851918330715728,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2121_10_NC_045512.2,AY.43,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2121_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.913000,0.087000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 21; Ref alleles 2; Amb alleles 0; Oth alleles 0
+COD_2121_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.071400,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 1
+COD_2121_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2121_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2121_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2121_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2121_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2121_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2123_10_NC_045512.2,AY.43,0.0,0.915087550971456,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2123_1_NC_045512.2,B.1.1.7,0.0,0.964514652014652,Alpha (B.1.1.7-like),0.913000,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 21; Ref alleles 1; Amb alleles 1; Oth alleles 0
+COD_2123_2_NC_045512.2,B.1.351,0.0,0.9599908024833295,Beta (B.1.351-like),0.785700,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 11; Ref alleles 0; Amb alleles 1; Oth alleles 2
+COD_2123_3_NC_045512.2,A.28,0.0,0.99197682193002,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2123_4_NC_045512.2,B.1.621,0.0,0.9568726937269373,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2123_5_NC_045512.2,P.1,0.0,0.9098577970595324,Gamma (P.1-like),0.812500,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 1; Oth alleles 2
+COD_2123_6_NC_045512.2,AY.9.2,0.0,0.9380136182202395,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2123_8_NC_045512.2,AY.94,0.0,0.932247403210576,Delta (B.1.617.2-like),0.846200,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 11; Ref alleles 0; Amb alleles 2; Oth alleles 0
+COD_2123_9_NC_045512.2,AY.94,0.0,0.9498490828883214,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2124_10_NC_045512.2,AY.43,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2124_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2124_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2124_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2124_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2124_segunda_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2124_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2124_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2124_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2125_10_NC_045512.2,AY.43,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2125_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2125_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2125_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2125_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2125_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2125_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2125_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2125_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2126_10_NC_045512.2,AY.43,0.0,0.99197682193002,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2126_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2126_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2126_3_NC_045512.2,A.28,0.0,0.8604182413706223,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2126_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2126_5_NC_045512.2,P.1,0.0,0.9894995531724754,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2126_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2126_7_NC_045512.2,AY.122,0.0,0.9585539949343772,Delta (B.1.617.2-like),0.692300,0.230800,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 9; Ref alleles 3; Amb alleles 1; Oth alleles 0
+COD_2126_8_NC_045512.2,AY.94,0.0,0.99197682193002,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2126_9_NC_045512.2,AY.94,0.0,0.99197682193002,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2132_10_NC_045512.2,AY.43,0.0,0.9090689821514712,Delta (B.1.617.2-like),0.846200,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 11; Ref alleles 0; Amb alleles 2; Oth alleles 0
+COD_2132_1_NC_045512.2,B.1.1.7,0.0,0.9189770554493308,Alpha (B.1.1.7-like),0.869600,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 20; Ref alleles 1; Amb alleles 2; Oth alleles 0
+COD_2132_2_NC_045512.2,B.1.351,0.0,0.9917521176995095,Beta (B.1.351-like),0.857100,0.071400,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 1
+COD_2132_3_NC_045512.2,A.28,0.0,0.9708759954493743,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2132_4_NC_045512.2,B.1.621,0.0,0.9266729947793071,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2132_5_NC_045512.2,P.1,0.0,0.9434711516000934,Gamma (P.1-like),0.812500,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 1; Oth alleles 2
+COD_2132_6_NC_045512.2,None,,,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,pangoLEARN lineage assignment AY.71 was not supported by scorpio
+COD_2132_7_NC_045512.2,AY.122.1,0.0,0.6534682941351593,Delta (B.1.617.2-like),0.461500,0.230800,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 6; Ref alleles 3; Amb alleles 4; Oth alleles 0
+COD_2132_8_NC_045512.2,B.1.617.2,0.0,0.9833670487750056,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2132_9_NC_045512.2,B.1.617.2,0.0,0.9611851171336702,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2134_10_NC_045512.2,AY.43,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2134_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2134_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2134_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2134_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2134_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2134_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2134_7_NC_045512.2,AY.43,0.0,0.9424830488660276,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2134_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2134_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2139_10_NC_045512.2,AY.43,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2139_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2139_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2139_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2139_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2139_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2139_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2139_7_NC_045512.2,AY.43,0.0,0.9995576199955762,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2139_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2139_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+Tubo_7_NC_045512.2,AY.43,0.0,0.8488164927462458,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+Tubo_8_NC_045512.2,AY.44,0.0,0.9027171276079573,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+Tubo_9_NC_045512.2,AY.44,0.0,0.8675513269904858,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+210153_NC_045512.2,B.1.1.7,0.0,0.9993362831858407,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+211761_NC_045512.2,B.1.351,0.0,0.9993362831858407,Beta (B.1.351-like),0.857100,0.071400,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 1
+211779_NC_045512.2,A.28,0.0,0.9122174122174123,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+214098_NC_045512.2,P.1,0.0,0.9633279853311941,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+217623_NC_045512.2,AY.9.2,0.0,0.9803877366997295,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+217690_NC_045512.2,AY.94,0.0,0.8981729598051157,Delta (B.1.617.2-like),0.769200,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 10; Ref alleles 0; Amb alleles 3; Oth alleles 0
+217737_NC_045512.2,AY.43,0.0,0.9145668346532277,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2103_10_NC_045512.2,AY.43,0.0,0.97437641723356,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2103_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2103_2_NC_045512.2,B.1.351,0.0,0.9928746381652194,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2103_3_NC_045512.2,A.28,0.0,0.9928746381652194,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2103_4_NC_045512.2,B.1.621,0.0,0.9928746381652194,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2103_5_NC_045512.2,P.1,0.0,0.99197682193002,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2103_6_NC_045512.2,AY.9.2,0.0,0.9534937528921795,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2103_8_NC_045512.2,AY.94,0.0,0.9962272525521527,Delta (B.1.617.2-like),0.923100,0.076900,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2103_9_NC_045512.2,AY.94,0.0,0.9937708565072303,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2109_10_NC_045512.2,AY.43,0.0,0.9939946619217082,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2109_1_NC_045512.2,B.1.1.7,0.0,1.0,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2109_2_NC_045512.2,B.1.351,0.0,0.9928746381652194,Beta (B.1.351-like),0.857100,0.071400,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 1
+COD_2109_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2109_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2109_5_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2109_6_NC_045512.2,AY.9.2,0.0,0.9928746381652194,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2109_8_NC_045512.2,AY.94,0.0,0.9939946619217082,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2109_9_NC_045512.2,AY.94,0.0,0.9982281284606866,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2117_10_NC_045512.2,AY.43,0.0,0.9975620567375887,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2117_1_NC_045512.2,B.1.1.7,0.0,0.9982281284606866,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2117_2_NC_045512.2,B.1.351,0.0,0.9928746381652194,Beta (B.1.351-like),0.857100,0.071400,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 1
+COD_2117_3_NC_045512.2,A.28,0.0,0.9997788589119858,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2117_4_NC_045512.2,B.1.621,0.0,0.9982281284606866,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2117_5_NC_045512.2,P.1,0.0,0.9894995531724754,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2117_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),0.923100,0.076900,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2117_8_NC_045512.2,AY.94,0.0,0.9993362831858407,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2117_9_NC_045512.2,AY.94,0.0,0.9948888888888889,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2122_10_NC_045512.2,AY.43,0.0,0.8560950935761255,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2122_1_NC_045512.2,Q.4,0.0,0.9174246050741982,Alpha (B.1.1.7-like),0.869600,0.130400,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 20; Ref alleles 3; Amb alleles 0; Oth alleles 0
+COD_2122_2_NC_045512.2,B.1.351,0.0,0.9218116805721097,Beta (B.1.351-like),0.785700,0.071400,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 11; Ref alleles 1; Amb alleles 1; Oth alleles 1
+COD_2122_3_NC_045512.2,A.28,0.0,0.97437641723356,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2122_4_NC_045512.2,B.1.621,0.0,0.9771596562641339,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2122_5_NC_045512.2,P.1,0.0,0.8641386238071321,Gamma (P.1-like),0.812500,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 1; Oth alleles 2
+COD_2122_6_NC_045512.2,AY.9.2,0.0,0.8028057173107465,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2122_8_NC_045512.2,AY.94,0.0,0.9269276393831554,Delta (B.1.617.2-like),0.846200,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 11; Ref alleles 0; Amb alleles 2; Oth alleles 0
+COD_2122_9_NC_045512.2,AY.94,0.0,0.9856470060551693,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2129_10_NC_045512.2,AY.43,0.0,0.9966725820763088,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2129_1_NC_045512.2,B.1.1.7,0.0,0.9995576199955762,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2129_2_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2129_3_NC_045512.2,A.28,0.0,0.9948888888888889,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2129_4_NC_045512.2,B.1.621,0.0,0.9948888888888889,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2129_5_NC_045512.2,P.1,0.0,0.9986716847465131,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2129_6_NC_045512.2,AY.9.2,0.0,0.9928746381652194,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2129_8_NC_045512.2,AY.94,0.0,0.9948888888888889,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2129_9_NC_045512.2,AY.94,0.0,0.9948888888888889,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2135_10_NC_045512.2,AY.43,0.0,0.9939946619217082,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2135_1_NC_045512.2,B.1.1.7,0.0,0.9988933156263834,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2135_2_NC_045512.2,B.1.351,0.0,0.9928746381652194,Beta (B.1.351-like),0.857100,0.071400,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 1
+COD_2135_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2135_4_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2135_5_NC_045512.2,P.1,0.0,0.9917521176995095,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2135_6_NC_045512.2,AY.9.2,0.0,1.0,Delta (B.1.617.2-like),0.923100,0.076900,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2135_7_NC_045512.2,None,,,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,pangoLEARN lineage assignment AY.122 was not supported by scorpio
+COD_2135_8_NC_045512.2,AY.94,0.0,0.9930988423864648,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2135_9_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2137_10_NC_045512.2,None,,,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,pangoLEARN lineage assignment AY.125 was not supported by scorpio
+COD_2137_1_NC_045512.2,None,,,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,pangoLEARN lineage assignment B.1.1.7 was not supported by scorpio
+COD_2137_2_NC_045512.2,B.1.351,0.0,0.9928746381652194,Beta (B.1.351-like),0.857100,0.071400,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 1
+COD_2137_3_NC_045512.2,A,0.0,0.9968950986915058,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2137_4_NC_045512.2,None,,,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,pangoLEARN lineage assignment AY.68 was not supported by scorpio
+COD_2137_5_NC_045512.2,P.1,0.0,0.987010078387458,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2137_6_NC_045512.2,B.1.617.2,0.0,0.9256532066508314,Delta (B.1.617.2-like),0.692300,0.076900,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 9; Ref alleles 1; Amb alleles 2; Oth alleles 1; scorpio replaced lineage assignment B.1
+COD_2137_7_NC_045512.2,AY.43,0.0,0.9885957066189625,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 1
+COD_2137_8_NC_045512.2,AY.94,0.0,0.994218367800756,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2137_9_NC_045512.2,AY.94,0.0,0.994218367800756,Delta (B.1.617.2-like),0.923100,0.076900,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2131_10_NC_045512.2,AY.43,0.0,0.9975620567375887,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2131_2_NC_045512.2,B.1.351,0.0,0.9984499557130204,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 2; Oth alleles 0
+COD_2131_3_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2131_4_NC_045512.2,B.1.621,0.0,0.9991148484177915,Mu (B.1.621-like),0.963000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 26; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2131_5_NC_045512.2,P.1,0.0,0.9975620567375887,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 1; Oth alleles 1
+COD_2131_6_NC_045512.2,AY.9.2,0.0,0.9953354064860063,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2131_8_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2131_9_NC_045512.2,AY.94,0.0,0.9991148484177915,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2111_10_NC_045512.2,AY.43,0.0,0.994218367800756,Delta (B.1.617.2-like),0.923100,0.076900,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2111_1_NC_045512.2,B.1.1.7,0.0,0.9991148484177915,Alpha (B.1.1.7-like),0.913000,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 21; Ref alleles 1; Amb alleles 1; Oth alleles 0
+COD_2111_2_NC_045512.2,B.1.351,0.0,0.9913024085637824,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 2; Oth alleles 0
+COD_2111_3_NC_045512.2,A.28,0.0,0.9988933156263834,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2111_4_NC_045512.2,B.1.621,0.0,0.9991148484177915,Mu (B.1.621-like),0.963000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 26; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2111_5_NC_045512.2,P.1,0.0,0.9340089559274098,Gamma (P.1-like),0.687500,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 11; Ref alleles 0; Amb alleles 4; Oth alleles 1; scorpio replaced lineage assignment A.2.5
+COD_2111_6_NC_045512.2,AY.9.2,0.0,0.9962272525521527,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2111_8_NC_045512.2,AY.94,0.0,0.994218367800756,Delta (B.1.617.2-like),0.923100,0.076900,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2111_9_NC_045512.2,AY.94,0.0,0.994218367800756,Delta (B.1.617.2-like),0.923100,0.076900,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2106_Nanopore_10/ARTIC/medaka_NC_045512.2,AY.43,0.0,0.9913024085637824,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2106_Nanopore_1/ARTIC/medaka_NC_045512.2,B.1.1.7,0.0,0.9995576199955762,Alpha (B.1.1.7-like),0.956500,0.043500,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 22; Ref alleles 1; Amb alleles 0; Oth alleles 0
+COD_2106_Nanopore_2/ARTIC/medaka_NC_045512.2,B.1.351,0.0,1.0,Beta (B.1.351-like),0.857100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2106_Nanopore_3/ARTIC/medaka_NC_045512.2,A.28,0.0,1.0,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2106_Nanopore_4/ARTIC/medaka_NC_045512.2,B.1.621,0.0,1.0,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2106_Nanopore_5/ARTIC/medaka_NC_045512.2,P.1,0.0,1.0,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2106_Nanopore_6/ARTIC/medaka_NC_045512.2,AY.9.2,0.0,0.9997788589119858,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2106_Nanopore_8/ARTIC/medaka_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2106_Nanopore_9/ARTIC/medaka_NC_045512.2,AY.94,0.0,1.0,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2107_nanopore_10/ARTIC/medaka_NC_045512.2,AY.43,0.0,0.9706417842512517,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2107_nanopore_1/ARTIC/medaka_NC_045512.2,B.1.1.7,0.0,0.957593915648767,Alpha (B.1.1.7-like),0.913000,0.087000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 21; Ref alleles 2; Amb alleles 0; Oth alleles 0
+COD_2107_nanopore_2/ARTIC/medaka_NC_045512.2,B.1.351,0.0,0.9699385105898428,Beta (B.1.351-like),0.785700,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 11; Ref alleles 0; Amb alleles 1; Oth alleles 2
+COD_2107_nanopore_3/ARTIC/medaka_NC_045512.2,A.28,0.0,0.9706417842512517,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2107_nanopore_4/ARTIC/medaka_NC_045512.2,B.1.621,0.0,0.9780840488025305,Mu (B.1.621-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 27; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2107_nanopore_5/ARTIC/medaka_NC_045512.2,P.1,0.0,0.9486285448628545,Gamma (P.1-like),0.875000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 14; Ref alleles 0; Amb alleles 0; Oth alleles 2
+COD_2107_nanopore_6/ARTIC/medaka_NC_045512.2,AY.9.2,0.0,0.9685290763968073,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2107_nanopore_8/ARTIC/medaka_NC_045512.2,AY.94,0.0,0.9706417842512517,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2107_nanopore_9/ARTIC/medaka_NC_045512.2,AY.94,0.0,0.9706417842512517,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2140_nanopore_10/ARTIC/medaka_NC_045512.2,AY.43,0.0,0.9194935499283325,Delta (B.1.617.2-like),0.923100,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 12; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2140_nanopore_1/ARTIC/medaka_NC_045512.2,B.1.1.7,0.0,0.9706417842512517,Alpha (B.1.1.7-like),0.913000,0.087000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 21; Ref alleles 2; Amb alleles 0; Oth alleles 0
+COD_2140_nanopore_2/ARTIC/medaka_NC_045512.2,B.1.351,0.0,0.971344098248806,Beta (B.1.351-like),0.785700,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 11; Ref alleles 0; Amb alleles 1; Oth alleles 2
+COD_2140_nanopore_3/ARTIC/medaka_NC_045512.2,A.28,0.0,0.8834855591212046,,,,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,
+COD_2140_nanopore_4/ARTIC/medaka_NC_045512.2,B.1.621,0.0,0.9466697717745691,Mu (B.1.621-like),0.963000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 26; Ref alleles 0; Amb alleles 1; Oth alleles 0
+COD_2140_nanopore_5/ARTIC/medaka_NC_045512.2,P.1,0.0,0.9223254705742197,Gamma (P.1-like),0.812500,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 1; Oth alleles 2
+COD_2140_nanopore_7/ARTIC/medaka_NC_045512.2,AY.43,0.0,0.7508975421154377,Delta (B.1.617.2-like),0.769200,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 10; Ref alleles 0; Amb alleles 3; Oth alleles 0
+COD_2140_nanopore_8/ARTIC/medaka_NC_045512.2,AY.94,0.0,0.9706417842512517,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2140_nanopore_9/ARTIC/medaka_NC_045512.2,AY.94,0.0,0.971344098248806,Delta (B.1.617.2-like),1.000000,0.000000,PLEARN-v1.2.101,3.1.17,2021-11-25,v1.2.101,passed_qc,scorpio call: Alt alleles 13; Ref alleles 0; Amb alleles 0; Oth alleles 0
+COD_2117_protocol2_7_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:1.0
+COD_2106_Illumina_7_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:0.85
+COD_2110_7_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:0.61
+COD_2113_7_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:0.68
+COD_2114_7_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:0.67
+COD_2121_7_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:0.98
+COD_2123_7_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:0.92
+COD_2125_7_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:0.82
+COD_2109_7_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:0.87
+COD_2117_7_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:0.99
+COD_2122_7_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:0.8
+COD_2129_7_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:0.91
+COD_2140_nanopore_6/ARTIC/medaka_NC_045512.2,None,,,,,,PANGO-v1.2.101,3.1.17,2021-11-25,v1.2.101,fail,N_content:0.43
