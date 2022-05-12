@@ -30,6 +30,8 @@ Parece que es un problema del PANGOLearn (Tabla X).
 | COD_2122_1_lab | B.1.1.7 |        0 |  85.405.664.906.385 | Alpha (B.1.1.7-like) |             913 |              435 | PLEARN-v1.2.123 | 3.1.19           |         2022-01-20 | v1.2.123      | passed_qc | scorpio call: Alt alleles 21; Ref alleles 1; Amb alleles 1; Oth alleles 0 |   |   |   |   |   |   |   |   |   |   |   |   |   |
 | COD_2122_1_vr  | B.1.1.7 |        0 | 918.196.238.386.585 | Alpha (B.1.1.7-like) |           8.696 |            1.304 | PLEARN-v1.2.123 | 3.1.19           |         2022-01-20 | v1.2.123      | passed_qc | scorpio call: Alt alleles 20; Ref alleles 3; Amb alleles 0; Oth alleles 0 |   |   |   |   |   |   |   |   |   |   |   |   |   |
 
+
+
 - **COD_2137, todas las versiones en Viralrecon**
 El output de Pangolin para esas muestras nos dice que aunque pangoLEARN si asigna correctamente el linaje, este no es soportado por scorpio.
 

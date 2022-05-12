@@ -131,7 +131,7 @@ wide_viralrecon$programa <- as.character(rep("Viralrecon", length(wide_viralreco
 
 data_conjunto <- merge(wide_lab, wide_viralrecon, by = c("grupo", "muestra"), all = TRUE)
 
-# write.table(data_conjunto, "df_pangolin_conjunto_wide_2.csv", row.names = F, sep = "\t", quote = F)
+# write.table(data_conjunto, "df_pangolin_conjunto_wide.csv", row.names = F, sep = "\t", quote = F)
 
 # Analisis en conjunto
 
