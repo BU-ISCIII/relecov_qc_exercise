@@ -63,3 +63,8 @@ colnames(p1_parsed_6) <- c("grupo", "muestra", "lineage", "version")
 data_lineages_parsed <- rbind(p1_parsed_5, p1_parsed_6)
 
 write.table(data_lineages_parsed, "data_lineages_parsed.csv", sep = "\t", row.names = F, quote = F)
+
+
+
+
+
