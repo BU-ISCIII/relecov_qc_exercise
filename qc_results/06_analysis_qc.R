@@ -112,13 +112,13 @@ ggsave("Graficos/Graficos_finales/fig1_qc_tiempo_ejecucion.png", width = 55, hei
 
 qc_reads <- read_excel(dir_excel[2], sheet = 4)
 
-# nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
-nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
+nombres_muestras <- c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10")
+#nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
 
 reads_data <- data.frame(
     id = as.character(qc_reads$ID),
     muestra = as.character(qc_reads$`Sample ID`),
-    muestra2 = as.character(rep(nombres_muestras, 41)),
+    muestra2 = factor(rep(nombres_muestras, 40), levels = nombres_muestras),
     plataforma = as.character(qc_reads$plataforma),
     plataforma2 = as.character(qc_reads$var_sequencing_platforms),
     reads = as.numeric(qc_reads$var_readcount),
@@ -127,8 +127,7 @@ reads_data <- data.frame(
 
 reads_data$plataforma <- factor(reads_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
 reads_data$id <- factor(reads_data$id, levels = levels_id)
-reads_data$muestra2 <- revalue(levels(reads_data$muestra2), c("muestra 1" = "sample 1", "muestra 2" = "sample 2", "muestra 3" = "sample 3", "muestra 4" = "sample 4", "muestra 5" = "sample 5", "muestra 6" = "sample 6", "muestra 7" = "sample 7", "muestra 8" = "sample 8", "muestra 9" = "sample 9", "muestra 10" = "sample 10"))
-reads_data$muestra2 <- factor(reads_data$muestra2, levels = c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10"))
+#reads_data$muestra2 <- factor(reads_data$muestra2, levels = c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10"))
 
 # plot reads filtered
 
@@ -146,8 +145,8 @@ ggsave("Graficos/Graficos_finales/fig13_qc_resultados_read_sample_platform.png",
 # new virus, host data
 
 qc_virushost <- read_excel(dir_excel[2], sheet = 5)
-# nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
-nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
+nombres_muestras <- c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10")
+#nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
 
 virushost_data <- data.frame(
     id = as.character(qc_virushost$ID),
@@ -161,8 +160,6 @@ virushost_data <- data.frame(
 
 virushost_data$plataforma <- factor(virushost_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
 virushost_data$id <- factor(virushost_data$id, levels = levels_id)
-virushost_data$muestra2 <- revalue(levels(virushost_data$muestra2), c("muestra 1" = "sample 1", "muestra 2" = "sample 2", "muestra 3" = "sample 3", "muestra 4" = "sample 4", "muestra 5" = "sample 5", "muestra 6" = "sample 6", "muestra 7" = "sample 7", "muestra 8" = "sample 8", "muestra 9" = "sample 9", "muestra 10" = "sample 10"))
-virushost_data$muestra2 <- factor(virushost_data$muestra2, levels = c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10"))
 
 # plot host, virus, unmapped
 
@@ -183,13 +180,13 @@ ggsave("Graficos/Graficos_finales/fig14_qc_resultados_hostvirusunmapped_platafor
 #### Datos depth -----
 
 qc_estadistica <- read_excel(dir_excel[2], sheet = 3)
-# nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
-nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
+nombres_muestras <- c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10")
+# nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
 
 estadistica_data <- data.frame(
     id = as.character(qc_estadistica$ID),
     muestra = as.character(qc_estadistica$`Sample ID`),
-    muestra2 = as.character(rep(nombres_muestras, 40)),
+    muestra2 = factor(rep(nombres_muestras, 40), levels = nombres_muestras),
     plataforma = as.character(qc_estadistica$plataforma),
     plataforma2 = as.character(qc_estadistica$var_sequencing_platforms),
     reads = as.numeric(qc_estadistica$`var_readcount`),
@@ -210,8 +207,6 @@ estadistica_data <- data.frame(
 # estadistica_data$muestra2 <- factor(estadistica_data$muestra2, levels = nombres_muestras)
 estadistica_data$plataforma <- factor(estadistica_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
 estadistica_data$id <- factor(estadistica_data$id, levels = levels_id)
-estadistica_data$muestra2 <- revalue(levels(estadistica_data$muestra2), c("muestra 1" = "sample 1", "muestra 2" = "sample 2", "muestra 3" = "sample 3", "muestra 4" = "sample 4", "muestra 5" = "sample 5", "muestra 6" = "sample 6", "muestra 7" = "sample 7", "muestra 8" = "sample 8", "muestra 9" = "sample 9", "muestra 10" = "sample 10"))
-estadistica_data$muestra2 <- factor(estadistica_data$muestra2, levels = c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10"))
 
 ##### Plot depth -----
 
@@ -241,7 +236,7 @@ ggsave("Graficos/Graficos_finales/fig16_qc_resultados_porcentajecoverage_platafo
 
 #### resumen 2131 y 2111
 
-data_raros <- read_excel(dir_excel[1], sheet = 19)
+data_raros <- read_excel(dir_excel[2], sheet = 19)
 cod_2111 <- subset(data_raros, group == "2111")
 cod_2131 <- subset(data_raros, group == "2131")
 
@@ -249,12 +244,12 @@ raro_data <- data.frame(
     id = as.character(data_raros$group),
     muestra = as.character(data_raros$sample),
     plataforma = as.character(data_raros$plataforma),
-    reads = as.numeric(data_raros$totalreads),
+    reads = log10(as.numeric(data_raros$totalreads)),
     filter = as.numeric(data_raros$`%readshost`),
     host = as.numeric(data_raros$`%readshost`),
     virus = as.numeric(data_raros$`%readsvirus`),
     unmapped = as.numeric(data_raros$`%unmapedreads`),
-    qc10x = as.numeric(data_raros$`Coverage>10x(%)`),
+    qc10x = log10(as.numeric(data_raros$`Coverage>10x(%)`)),
     mean_depth = as.numeric(data_raros$medianDPcoveragevirus),
     variants_75 = as.numeric(data_raros$Variantsinconsensusx10),
     variants_effect = as.numeric(data_raros$MissenseVariants)
@@ -278,7 +273,7 @@ ggplot(subset(df_melt, variable == "reads"), aes(muestra, value)) +
         legend.title = element_text(),
         legend.text = element_text()
     )
-ggsave("Graficos/qc_raros_reads.png", width = 40, height = 30, units = "cm")
+ggsave("Graficos/Graficos_finales/qc_raros_reads.png", width = 40, height = 30, units = "cm")
 
 ggplot(subset(df_melt, variable != "reads"), aes(muestra, value)) +
     geom_point(size = 4) +
@@ -291,7 +286,7 @@ ggplot(subset(df_melt, variable != "reads"), aes(muestra, value)) +
         legend.title = element_text(),
         legend.text = element_text()
     )
-ggsave("Graficos/qc_raros_all.png", width = 60, height = 30, units = "cm")
+ggsave("Graficos/Graficos_finales/qc_raros_all.png", width = 60, height = 30, units = "cm")
 
 ### datos categorias ----
 
@@ -559,12 +554,12 @@ ggsave("Graficos/Graficos_finales/fig27_qc_barplot_bioinformatica_pangolin.png",
 
 qc_variants <- read_excel(dir_excel[2], sheet = 7)
 
-# nombres_muestras <- c("sample_1", "sample_2", "sample_3", "sample_4", "sample_5", "sample_6", "sample_7", "sample_8", "sample_9", "sample_10")
-nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
+nombres_muestras <- c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10")
+#nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
 
 variants_data <- data.frame(
     id = as.character(qc_variants$ID),
-    muestra = as.character(rep(nombres_muestras, 40)),
+    muestra = factor(rep(nombres_muestras, 40), levels = nombres_muestras),
     plataforma = as.character(qc_variants$plataforma),
     plataforma2 = as.character(qc_variants$var_sequencing_platforms),
     software = as.character(qc_variants$software),
@@ -576,9 +571,6 @@ variants_data <- data.frame(
 variants_data$plataforma <- factor(variants_data$plataforma, levels = c("Illumina", "Ion Torrent", "Nanopore"))
 # variants_data$tipo <- revalue(variants_data$tipo, c("Variants (AF > 0.75)" = "Mutaciones (FA > 0.75)", "Variants with effect" = "Mutaciones con efecto"))
 variants_data$id <- factor(variants_data$id, levels = levels_id)
-variants_data$muestra <- revalue(levels(variants_data$muestra), c("muestra 1" = "sample 1", "muestra 2" = "sample 2", "muestra 3" = "sample 3", "muestra 4" = "sample 4", "muestra 5" = "sample 5", "muestra 6" = "sample 6", "muestra 7" = "sample 7", "muestra 8" = "sample 8", "muestra 9" = "sample 9", "muestra 10" = "sample 10"))
-variants_data$muestra <- factor(variants_data$muestra, levels = c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10"))
-
 ##### Plot variantes illumina & ion torrent -----
 
 subset_variants_data <- subset(variants_data, variants < 80)
