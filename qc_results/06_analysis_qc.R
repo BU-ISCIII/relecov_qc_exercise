@@ -179,7 +179,7 @@ ggsave("Graficos/Graficos_finales/fig14_qc_resultados_hostvirusunmapped_platafor
 
 #### Datos depth -----
 
-qc_estadistica <- read_excel(dir_excel[2], sheet = 3)
+qc_estadistica <- read_excel(dir_excel[1], sheet = 3)
 nombres_muestras <- c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10")
 # nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
 
@@ -290,7 +290,7 @@ ggsave("Graficos/Graficos_finales/qc_raros_all.png", width = 60, height = 30, un
 
 ### datos categorias ----
 
-qc_categorias <- read_excel(dir_excel[2], sheet = 1)
+qc_categorias <- read_excel(dir_excel[1], sheet = 1)
 
 categorias_data <- data.frame(
     id = as.character(qc_categorias$ID),
@@ -363,7 +363,6 @@ l_id_plataforma <- c(
     "COD_2112",
     "COD_2117_2",
     "COD_2122",
-    "COD_2123",
     "COD_2132",
     "COD_2106",
     "COD_2107",
@@ -380,6 +379,7 @@ l_id_plataforma <- c(
     "COD_2135",
     "COD_2137",
     "COD_2139",
+    "COD_2123",
     "COD_2141",
     "COD_2109",
     "COD_2111",
@@ -408,18 +408,20 @@ n_carreras_data <- data.frame(carreras_data[is.na(carreras_data$carreras) != T, 
 
 ##### Plot Muestras por carrera -----
 
+n_carreras_data
+
 ggplot(n_carreras_data, aes(x = id, y = carreras, fill = plataforma2)) +
     geom_bar(stat = "identity") +
-    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Instrument")) +
+    guides(color = guide_legend(title = "Muestras"), fill = guide_legend(title = "Instrumento")) +
     geom_text(aes(label = carreras), color = "black", vjust = -0.5, size = 12) +
-    labs(x = "", y = "Samples / Run", title = "") +
+    labs(x = "", y = "Carrera / muestra", title = "") +
     theme(
         text = element_text(size = 56),
         axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
         axis.text.y = element_text()
     )
 
-ggsave("Graficos/Graficos_finales/fig18_qc_secuenciacion_carreras_plataforma.png", width = 95, height = 65, dpi = 500, units = c("cm"))
+ggsave("Graficos/fig18_qc_secuenciacion_carreras_plataforma.png", width = 95, height = 65, dpi = 500, units = c("cm"))
 
 ##### Plot read length -----
 
@@ -428,16 +430,16 @@ read_data$id <- factor(read_data$id, levels = l_id_plataforma)
 
 ggplot(read_data, aes(x = id, y = read, fill = plataforma2)) +
     geom_col() +
-    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Instrument")) +
+    guides(color = guide_legend(title = "Samples"), fill = guide_legend(title = "Instrumento")) +
     geom_text(aes(label = read), color = "black", vjust = -0.5, size = 12) +
-    labs(x = "", y = "Read length / sample", title = "") +
+    labs(x = "", y = "Longitud de lectura / muestra", title = "") +
     theme(
         text = element_text(size = 55),
         axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
         axis.text.y = element_text()
     )
 # ggsave("Graficos/qc_secuenciacion_reads_plataforma.png", width = 80, height = 80, dpi = 300, units = c("cm"))
-ggsave("Graficos/Graficos_finales/fig19_qc_secuenciacion_reads_plataforma.png", width = 95, height = 65, dpi = 300, units = c("cm"))
+ggsave("Graficos/fig19_qc_secuenciacion_reads_plataforma.png", width = 95, height = 65, dpi = 300, units = c("cm"))
 
 #### plot bioinformatica ----
 
