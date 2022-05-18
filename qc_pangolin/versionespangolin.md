@@ -8,7 +8,7 @@ Hemos usado las siguientes versiones de Pangolin para discernir si existen difer
 - v3.1.19
 - v3.1.20
 
-Dividiremos el análisis por muestras para 27 laboratorios (todos Illumina) analizados con las versiones anteriores de Pangolin con sus análisis y el análisis propio de la Unidad de Bioinformática (Viralrecon).
+Dividiremos el análisis por muestras para 30 laboratorios (Illumina y Nanopore) analizados con las versiones anteriores de Pangolin con sus análisis y el análisis propio de la Unidad de Bioinformática (Viralrecon).
 
 ### Muestra 1
 
