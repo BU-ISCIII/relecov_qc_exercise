@@ -19,21 +19,26 @@ Segun [COGUK](https://cov-lineages.org/lineage_list.html) es un sublinaje de la 
 
 Parece que es un problema del PANGOLearn (Tabla X).
 
-| taxon          | lineage | conflict | ambiguity_score     | scorpio_call         | scorpio_support | scorpio_conflict | version         | pangolin_version | pangoLEARN_version | pango_version | status    | note                                                                      |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|----------------|---------|----------|---------------------|----------------------|-----------------|------------------|-----------------|------------------|--------------------|---------------|-----------|---------------------------------------------------------------------------|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| COD_2122_1_lab | B.1.1.7 |        0 | 838.826.888.139.112 | Alpha (B.1.1.7-like) |           8.261 |              435 | PLEARN-v1.2.97  | 3.1.16           |         2021-11-18 | v1.2.97       | passed_qc | scorpio call: Alt alleles 19; Ref alleles 1; Amb alleles 3; Oth alleles 0 |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| COD_2122_1_vr  | B.1.1.7 |        0 | 913.550.267.119.961 | Alpha (B.1.1.7-like) |           8.261 |            1.304 | PLEARN-v1.2.97  | 3.1.16           |         2021-11-18 | v1.2.97       | passed_qc | scorpio call: Alt alleles 19; Ref alleles 3; Amb alleles 1; Oth alleles 0 |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| COD_2122_1_lab | Q.4     |        0 |  85.232.174.574.981 | Alpha (B.1.1.7-like) |             913 |              435 | PLEARN-v1.2.101 | 3.1.17           |         2021-11-25 | v1.2.101      | passed_qc | scorpio call: Alt alleles 21; Ref alleles 1; Amb alleles 1; Oth alleles 0 |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| COD_2122_1_vr  | Q.4     |        0 | 917.424.605.074.198 | Alpha (B.1.1.7-like) |           8.696 |            1.304 | PLEARN-v1.2.101 | 3.1.17           |         2021-11-25 | v1.2.101      | passed_qc | scorpio call: Alt alleles 20; Ref alleles 3; Amb alleles 0; Oth alleles 0 |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| COD_2122_1_lab | B.1.1.7 |        0 |  85.405.664.906.385 | Alpha (B.1.1.7-like) |             913 |              435 | PLEARN-v1.2.123 | 3.1.18           |         2022-01-20 | v1.2.123      | passed_qc | scorpio call: Alt alleles 21; Ref alleles 1; Amb alleles 1; Oth alleles 0 |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| COD_2122_1_vr  | B.1.1.7 |        0 | 918.196.238.386.585 | Alpha (B.1.1.7-like) |           8.696 |            1.304 | PLEARN-v1.2.123 | 3.1.18           |         2022-01-20 | v1.2.123      | passed_qc | scorpio call: Alt alleles 20; Ref alleles 3; Amb alleles 0; Oth alleles 0 |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| COD_2122_1_lab | B.1.1.7 |        0 |  85.405.664.906.385 | Alpha (B.1.1.7-like) |             913 |              435 | PLEARN-v1.2.123 | 3.1.19           |         2022-01-20 | v1.2.123      | passed_qc | scorpio call: Alt alleles 21; Ref alleles 1; Amb alleles 1; Oth alleles 0 |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| COD_2122_1_vr  | B.1.1.7 |        0 | 918.196.238.386.585 | Alpha (B.1.1.7-like) |           8.696 |            1.304 | PLEARN-v1.2.123 | 3.1.19           |         2022-01-20 | v1.2.123      | passed_qc | scorpio call: Alt alleles 20; Ref alleles 3; Amb alleles 0; Oth alleles 0 |   |   |   |   |   |   |   |   |   |   |   |   |   |
+| taxon    | sample | class        | pangolin_version | lineage | conflict | ambiguity_score | scorpio_call         | scorpio_support | scorpio_conflict | version         | pangoLEARN_version | pango_version | status    | note                                                                      |
+|----------|--------|--------------|------------------|---------|----------|-----------------|----------------------|-----------------|------------------|-----------------|--------------------|---------------|-----------|---------------------------------------------------------------------------|
+| COD_2122 |      1 | laboratories | 3.1.16           | B.1.1.7 | 0        | 0.8388268881    | Alpha (B.1.1.7-like) | 0.8261          | 0.0435           | PLEARN-v1.2.97  | 2021-11-18         | v1.2.97       | passed_qc | scorpio call: Alt alleles 19; Ref alleles 1; Amb alleles 3; Oth alleles 0 |
+| COD_2122 |      1 | viralrecon   | 3.1.16           | B.1.1.7 | 0        | 0.9135502671    | Alpha (B.1.1.7-like) | 0.8261          | 0.1304           | PLEARN-v1.2.97  | 2021-11-18         | v1.2.97       | passed_qc | scorpio call: Alt alleles 19; Ref alleles 3; Amb alleles 1; Oth alleles 0 |
+| COD_2122 |      1 | laboratories | 3.1.17           | Q.4     |        0 |    0.8523217457 | Alpha (B.1.1.7-like) |           0.913 |           0.0435 | PLEARN-v1.2.101 |         2021-11-25 | v1.2.101      | passed_qc | scorpio call: Alt alleles 21; Ref alleles 1; Amb alleles 1; Oth alleles 0 |
+| COD_2122 |      1 | viralrecon   | 3.1.17           | Q.4     |        0 |    0.9174246051 | Alpha (B.1.1.7-like) |          0.8696 |           0.1304 | PLEARN-v1.2.101 |         2021-11-25 | v1.2.101      | passed_qc | scorpio call: Alt alleles 20; Ref alleles 3; Amb alleles 0; Oth alleles 0 |
 
+Las mutaciones observadas para el sublinaje según el issue son las siguientes:
 
+```
+- ORF1a:A2320V (nsp3:A1502V, nucleotide C7224T)
+- S:H681R (A23604G)
+```
+
+He buscado estas dos mutaciones en la longtable de variantes de la muestra 1 de COD_2122 y la he comparado con los resultados de la muestra 1 de COD_2107 (un laboratorio que lo ha hecho todo muy bien). Aparece la mutacion a nivel de nucleótido C23604T en el gen S pero no la mutacion C7224T.
+
+[longtable_muestra_1](https://docs.google.com/spreadsheets/d/1eq7tpPi9YkRsEP3AQXTR_suEM46nU4i9sURXi6IpCFk/edit#gid=2059206970)
 
 - **COD_2137, todas las versiones en Viralrecon**
-El output de Pangolin para esas muestras nos dice que aunque pangoLEARN si asigna correctamente el linaje, este no es soportado por scorpio.
+El output de Pangolin para esas muestras nos dice que aunque pangoLEARN si asigna correctamente el linaje, este no es soportado por scorpio. 
 
 ```
 Resultado de Pangolin
