@@ -35,7 +35,8 @@ Las mutaciones observadas para el sublinaje según el issue son las siguientes:
 
 He buscado estas dos mutaciones en la longtable de variantes de la muestra 1 de COD_2122 y la he comparado con los resultados de la muestra 1 de COD_2107 (un laboratorio que lo ha hecho todo muy bien). Aparece la mutacion a nivel de nucleótido C23604T en el gen S pero no la mutacion C7224T.
 
-[longtable_muestra_1](https://docs.google.com/spreadsheets/d/1eq7tpPi9YkRsEP3AQXTR_suEM46nU4i9sURXi6IpCFk/edit#gid=2059206970)
+[longtable_variantes_muestra_1](https://docs.google.com/spreadsheets/d/1eq7tpPi9YkRsEP3AQXTR_suEM46nU4i9sURXi6IpCFk/edit#gid=2059206970)
+[longtable_outputpangolin_muestra_1](https://docs.google.com/spreadsheets/d/1eq7tpPi9YkRsEP3AQXTR_suEM46nU4i9sURXi6IpCFk/edit#gid=39736565)
 
 - **COD_2137, todas las versiones en Viralrecon**
 El output de Pangolin para esas muestras nos dice que aunque pangoLEARN si asigna correctamente el linaje, este no es soportado por scorpio. 
