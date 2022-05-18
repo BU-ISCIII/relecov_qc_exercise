@@ -33,45 +33,38 @@ Las mutaciones observadas para el sublinaje según el issue son las siguientes:
 - S:H681R (A23604G)
 ```
 
-He buscado estas dos mutaciones en la longtable de variantes de la muestra 1 de COD_2122 y la he comparado con los resultados de la muestra 1 de COD_2107 (un laboratorio que lo ha hecho todo muy bien). Aparece la mutacion a nivel de nucleótido C23604T en el gen S pero no la mutacion C7224T en el gen ORF1a.
+He buscado estas dos mutaciones en la longtable de variantes de la muestra 1 de COD_2122 y la he comparado con los resultados de la muestra 1 de COD_2107 (un laboratorio que lo ha hecho todo muy bien). Aparece la mutacion a nivel de nucleótido C23604T (misssense effect) en el gen S (aunque el cambio recogido es una C>T) pero no la mutacion C7224T en el gen ORF1a.
 
 [longtable_variantes_muestra_1](https://docs.google.com/spreadsheets/d/1eq7tpPi9YkRsEP3AQXTR_suEM46nU4i9sURXi6IpCFk/edit#gid=2059206970)
 [longtable_outputpangolin_muestra_1](https://docs.google.com/spreadsheets/d/1eq7tpPi9YkRsEP3AQXTR_suEM46nU4i9sURXi6IpCFk/edit#gid=39736565)
 
 Además, he realizado el alineamiento con [clustalo](https://github.com/hybsearch/clustalo) de los fasta de la muestra 1 tanto de los laboratorios (COD_2122 y COD_2107 como control) como los de viralrecon y la referencia (NC_045512.2). Se puede visualizar en el siguiente enlace:
 
-[NCBI visual MSA](https://www.ncbi.nlm.nih.gov/projects/msaviewer/?anchor=4&coloring=diff&key=vwwl1aMOfNfQIDLQ8zEELlSS_72gzK7Jos-K2Z7djPMd_QlAcHrub3KHRxglGr9n7n-za61P9kqxUKVdo1uvQJ1poGeMW6Y,H6yFdQOu3HdwgJJwU5GkjvQyXxwAbQ5oAm4qeD58LFK9XKnh0NuULTaOAymeuL3F7N2xya_t9Oiz8qf_ofmt4p_LosWO-aQ&columns=d:120,b:55,x:17,aln,e:55,o:150)
+[NCBI visual MSA](https://www.ncbi.nlm.nih.gov/projects/msaviewer/?key=ZtX8DHrXpQ4J-esJKujd941PP-BgkW6UYpJKhF6ATK7doDffpeWn95hvrRKglurru_Pm5_jDo8bk3PDR9tf6zMjl9evZ1_M,O4ihUSeK-FNUpLZUd7WAqtARFeJKk0SWSJBghnSCZqz3oh3dj-eXsPhEzcXPACF9cGUtcTNVaFAvSjtHPUExWgNzPn0SQTg)
 
 - **COD_2131, todas las versiones en Viralrecon**
 
-EL fastq que han subido al sFTP esta corrupto y por lo tanto el resultado de Viralrecon es NA.
+EL fastq de la muestra 1 (COD_2131_1_R2.fastq.gz) que han subido al sFTP esta corrupto y por lo tanto el resultado de Viralrecon es NA.
 
 - **COD_2137, todas las versiones en Viralrecon**
+
 El output de Pangolin para esas muestras nos dice que aunque pangoLEARN si asigna correctamente el linaje, este no es soportado por scorpio. 
 
-```
-Resultado de Pangolin
+Resultado de Pangolin:
 
+```
 COD_2137_1_NC_045512.2,None,,,,,,PLEARN-v1.2.123,3.1.20,2022-02-28,v1.2.123,passed_qc,pangoLEARN lineage assignment B.1.1.7 was not supported by scorpio
 ```
-Analizamos los vcf en busca de la posible diferencia entre los fastas procedentes de los laboratorios y los procedentes de Viralrecon.
 
-```
-Resultado de una delección compartida entre ambos vcf:
+Analizamos los vcf en busca de la posible diferencia entre los fastas procedentes de los laboratorios y los procedentes de Viralrecon:
 
 - COD_2137_1: 153 mutaciones
-
-```
-MN908947.3      11287   .       GNNNNNNNNN      G       .       PASS    DP=2278 GT:REF_DP:REF_RV:REF_QUAL:ALT_DP:ALT_RV:ALT_QUAL:ALT_FREQ       1:1548:1173:56:1842:0:20:0.808604
-MN908947.3      21764   .       ANNNNNN A       .       PASS    DP=729  GT:REF_DP:REF_RV:REF_QUAL:ALT_DP:ALT_RV:ALT_QUAL:ALT_FREQ       1:539:177:52:682:0:20:0.935528
-```
 - Viralrecon_2137_1: 27 mutaciones
 
-```
-NC_045512.2	11287	.	GTCTGGTTTT	G	.	PASS	DP=4822	GT:REF_DP:REF_RV:REF_QUAL:ALT_DP:ALT_RV:ALT_QUAL:ALT_FREQ	1:4803:3113:38:4082:0:20:0.846537
-NC_045512.2     21764   .       ATACATG A       .       PASS    DP=1129 GT:REF_DP:REF_RV:REF_QUAL:ALT_DP:ALT_RV:ALT_QUAL:ALT_FREQ       1:1128:442:38:972:0:20:0.860939
-```
+He realizado el alineamiento como el caso de la 2122 y se puede visualizar en el siguiente enlace:
 
+[NCBI visual MSA](https://www.ncbi.nlm.nih.gov/projects/msaviewer/?key=fc7nF2HMvhUS4vASMfPG7JZULuNxkn-Xc5Fbh0-DXa3MoybGO_xy_ZAopbg4rsnTmMvF39v7gP7H5NPp1e_Z9Ovd1tP679A,1mVMvMpnFb65SVu5mlhtRz3_hU7aP9Q62DzwKuQu9gBnDo1rkFGHzZ1ZqAKsbqIT8wuuH7A76z6sJLgpvi-yNIAdvRORL7s)
 
+LLama la atención un 
 
 

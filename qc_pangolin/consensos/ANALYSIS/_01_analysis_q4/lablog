@@ -1,0 +1,12 @@
+#conda activate piton
+
+touch id.txt
+echo -e "COD_2107_1_control\nCOD_2122_1_lab\nCOD_2122_1_vr\n" >> id.txt
+
+cat ../../DATA/muestra_1/COD_2107/COD_2107_#1_consensus.fasta ../../DATA/muestra_1/COD_2122/COD_2122_#1_consensus.fasta ../../DATA/muestra_1/viralrecon_2122/COD_2122_1.consensus.fa > multi_muestra1_1.fasta
+
+awk 'NR == FNR { o[n++] = $0; next } /^>/ && i < n { $0 = ">" o[i++] } 1' id.txt multi_muestra1_1.fasta > multi_muestra1_2.fasta
+
+cat ../../DATA/reference/NC_045512.2.fasta multi_muestra1_2.fasta > multi_muestra_1.fasta
+
+clustalo -i multi_muestra_1.fasta -o align_muestra_1.fasta
