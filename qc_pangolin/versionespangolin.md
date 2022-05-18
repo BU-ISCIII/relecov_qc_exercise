@@ -33,10 +33,18 @@ Las mutaciones observadas para el sublinaje según el issue son las siguientes:
 - S:H681R (A23604G)
 ```
 
-He buscado estas dos mutaciones en la longtable de variantes de la muestra 1 de COD_2122 y la he comparado con los resultados de la muestra 1 de COD_2107 (un laboratorio que lo ha hecho todo muy bien). Aparece la mutacion a nivel de nucleótido C23604T en el gen S pero no la mutacion C7224T.
+He buscado estas dos mutaciones en la longtable de variantes de la muestra 1 de COD_2122 y la he comparado con los resultados de la muestra 1 de COD_2107 (un laboratorio que lo ha hecho todo muy bien). Aparece la mutacion a nivel de nucleótido C23604T en el gen S pero no la mutacion C7224T en el gen ORF1a.
 
 [longtable_variantes_muestra_1](https://docs.google.com/spreadsheets/d/1eq7tpPi9YkRsEP3AQXTR_suEM46nU4i9sURXi6IpCFk/edit#gid=2059206970)
 [longtable_outputpangolin_muestra_1](https://docs.google.com/spreadsheets/d/1eq7tpPi9YkRsEP3AQXTR_suEM46nU4i9sURXi6IpCFk/edit#gid=39736565)
+
+Además, he realizado el alineamiento con [clustalo](https://github.com/hybsearch/clustalo) de los fasta de la muestra 1 tanto de los laboratorios (COD_2122 y COD_2107 como control) como los de viralrecon y la referencia (NC_045512.2). Se puede visualizar en el siguiente enlace:
+
+[NCBI visual MSA](https://www.ncbi.nlm.nih.gov/projects/msaviewer/?anchor=4&coloring=diff&key=vwwl1aMOfNfQIDLQ8zEELlSS_72gzK7Jos-K2Z7djPMd_QlAcHrub3KHRxglGr9n7n-za61P9kqxUKVdo1uvQJ1poGeMW6Y,H6yFdQOu3HdwgJJwU5GkjvQyXxwAbQ5oAm4qeD58LFK9XKnh0NuULTaOAymeuL3F7N2xya_t9Oiz8qf_ofmt4p_LosWO-aQ&columns=d:120,b:55,x:17,aln,e:55,o:150)
+
+- **COD_2131, todas las versiones en Viralrecon**
+
+EL fastq que han subido al sFTP esta corrupto y por lo tanto el resultado de Viralrecon es NA.
 
 - **COD_2137, todas las versiones en Viralrecon**
 El output de Pangolin para esas muestras nos dice que aunque pangoLEARN si asigna correctamente el linaje, este no es soportado por scorpio. 
