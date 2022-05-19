@@ -35,7 +35,7 @@ Las mutaciones observadas para el sublinaje según el issue son las siguientes:
 
 Aquí se encuentran las mutaciones compartirdas entre B.1.1.7 y Q.4:
 
-![image](/home/alberto.lema/Documents/Desarrollo/relecov_qc_exercise/qc_pangolin/consensos/ANALYSIS/_01_analysis_q4/q.4vsb1.1.7.png)
+![image](q.4vsb1.1.7.png)
 
 He buscado estas dos mutaciones en la longtable de variantes de la muestra 1 de COD_2122 y la he comparado con los resultados de la muestra 1 de COD_2107 (un laboratorio que lo ha hecho todo muy bien). Aparece la mutacion a nivel de nucleótido C23604T (misssense effect) en el gen S (aunque el cambio recogido es una C>T) pero no la mutacion C7224T en el gen ORF1a.
 
