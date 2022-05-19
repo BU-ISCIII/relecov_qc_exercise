@@ -63,8 +63,14 @@ Analizamos los vcf en busca de la posible diferencia entre los fastas procedente
 
 He realizado el alineamiento como el caso de la 2122 y se puede visualizar en el siguiente enlace:
 
-[NCBI visual MSA](https://www.ncbi.nlm.nih.gov/projects/msaviewer/?key=fc7nF2HMvhUS4vASMfPG7JZULuNxkn-Xc5Fbh0-DXa3MoybGO_xy_ZAopbg4rsnTmMvF39v7gP7H5NPp1e_Z9Ovd1tP679A,1mVMvMpnFb65SVu5mlhtRz3_hU7aP9Q62DzwKuQu9gBnDo1rkFGHzZ1ZqAKsbqIT8wuuH7A76z6sJLgpvi-yNIAdvRORL7s)
+[NCBI visual MSA](https://www.ncbi.nlm.nih.gov/projects/msaviewer/?key=qBsywrQZa8DHNyXH5CYTOUOA5hC5Ybdku2KTdIdwlV4EUO10yE63zXu9TpiT41GeAIZdkkO2GLNfqUukTaJBuXOQTp5iokg,QvHYKF7zgSot3c8tDsz506lqDPhTiV2MUYp5nG2Yf7buuAecIqb1hIzWufWTo_veqsb30un2svP16eHk5-Lr-dnQ5N7I4uI)
 
-LLama la atención un 
+LLama la atención la región comprendida entre la posición 5000 a 5283 con una región con N. La misma muestra 1 del COD_2137 analizada con viralrecon recupera información de la región 5070 a la 5160. Esta región se encuentra el orf1ab. Sin embargo, tenemos estos resultados de viralrecon:
 
+| taxon    | sample | class      | pangolin_version | lineage | conflict | ambiguity_score | scorpio_call | scorpio_support | scorpio_conflict | version         | pangoLEARN_version | pango_version | status    | note                                                               | Reason         |
+|----------|--------|------------|------------------|---------|----------|-----------------|--------------|-----------------|------------------|-----------------|--------------------|---------------|-----------|--------------------------------------------------------------------|----------------|
+| COD_2137 |      1 | viralrecon | 3.1.16           | B.1.1   |        0 |    0.9923423423 |              |                 |                  | PLEARN-v1.2.97  |         2021-11-18 | v1.2.97       | passed_qc |                                                                    | 2137_1 problem |
+| COD_2137 |      1 | viralrecon | 3.1.17           | None    |          |                 |              |                 |                  | PLEARN-v1.2.101 |         2021-11-25 | v1.2.101      | passed_qc | pangoLEARN lineage assignment B.1.1.7 was not supported by scorpio | 2137_1 problem |
+
+El mismo resultado de la versión 3.1.17 lo tendríamos para la version 3.1.18 y 3.1.19.
 
