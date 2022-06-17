@@ -1,0 +1,4 @@
+#conda activate piton
+
+cat *.fasta > multi_muestra_1.fasta
+clustalo -i multi_muestra_1.fasta -o align_muestra_1.fasta

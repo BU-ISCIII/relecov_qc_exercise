@@ -1,0 +1,4 @@
+sample,examples,intermissions,breakpoints,regions,privates
+COD_2137_lab_1,"Alpha/B.1.1.7/20I,Beta/B.1.351/20H,Gamma/P.1/20J,Delta/21I,Delta/21J,Omicron/BA.1/21K,Omicron/BA.2/21L,Omicron/BA.3",1,0,"174:14676|Alpha/B.1.1.7/20I,15240:15240|Omicron/BA.1/21K,15279:29834|Alpha/B.1.1.7/20I","T283C,T2698C,A4964G,C7488T,A12162G,A17615G,C23606T,G27147T,C28674T"
+COD_2137_vr_1,"Alpha/B.1.1.7/20I,Beta/B.1.351/20H,Gamma/P.1/20J,Delta/21I,Delta/21J,Omicron/BA.1/21K,Omicron/BA.2/21L,Omicron/BA.3",1,0,"174:14676|Alpha/B.1.1.7/20I,15240:15240|Omicron/BA.1/21K,15279:29834|Alpha/B.1.1.7/20I","T283C,T2698C,C7488T"
+MN908947 (Wuhan-Hu-1/2019),"Alpha/B.1.1.7/20I,Beta/B.1.351/20H,Gamma/P.1/20J,Delta/21I,Delta/21J,Omicron/BA.1/21K,Omicron/BA.2/21L,Omicron/BA.3",1,-1,174:29834|Beta/B.1.351/20H,
