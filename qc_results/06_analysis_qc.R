@@ -72,7 +72,7 @@ levels_id <- c(
 
 ### datos Fechas ----
 
-qc_fechas <- read_excel(dir_excel[2], sheet = 2)
+qc_fechas <- read_excel(dir_excel[1], sheet = 2)
 
 fechas_data <- data.frame(
     id = as.character(qc_fechas$ID),
@@ -94,26 +94,29 @@ ggplot(subset_fechas_data, aes(
     y = id, yend = id, color = "#4a8abe"
 )) +
     geom_segment(size = 3, show.legend = F) +
-    geom_text(aes(label = ejecucion), position = position_dodge(width = 1), hjust = 1.2, color = "black", size = 7) +
+    geom_text(aes(label = ejecucion), position = position_dodge(width = 1), hjust = 1.2, color = "black") +
     scale_x_date(
         date_breaks = "5 days",
         limits = as.Date(c("2021-12-17", "2022-02-08"))
     ) +
-    labs(x = "Execution time (days)", y = "") +
+    labs(x = "Tiempo de ejecución (días)", y = "") +
     theme(
-        text = element_text(size = 30),
-        axis.title.x = element_text(vjust = -0.5),
-        axis.text.x = element_text(angle = 60, vjust = 0.5, hjust = 0.5)
+        text = element_text(size = 12),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
     )
-ggsave("Graficos/Graficos_finales/fig1_qc_tiempo_ejecucion.png", width = 55, height = 40, dpi = 500, units = c("cm"))
+ggsave("Graficos/Graficos_finales/fig1_qc_tiempo_ejecucion.png")
+# width = 15, height = 25, dpi = 300, units = c("cm")
+#labs(x = "Tiempo de ejecucion (días)", y = "") +
+#labs(x = "Execution time (days)", y = "") +
 
-
+#summary(subset_fechas_data$ejecucion)
+#sd(subset_fechas_data$ejecucion, na.rm = T)
 # Datos reads
 
-qc_reads <- read_excel(dir_excel[2], sheet = 4)
+qc_reads <- read_excel(dir_excel[1], sheet = 3)
 
-nombres_muestras <- c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10")
-#nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
+#nombres_muestras <- c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10")
+nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
 
 reads_data <- data.frame(
     id = as.character(qc_reads$ID),
@@ -135,18 +138,20 @@ ggplot(reads_data, aes(x = muestra2, y = log10(reads), fill = tipo)) +
     geom_boxplot() +
     guides(color = guide_legend(title = ""), fill = guide_legend(title = "Filter")) +
     facet_grid(~plataforma) +
-    labs(x = "", y = "log10 (reads) / sample") +
+    labs(x = "", y = "log10 (lecturas) / muestra") +
     theme(
-        text = element_text(size = 30),
+        text = element_text(size = 22),
         axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45)
     )
-ggsave("Graficos/Graficos_finales/fig13_qc_resultados_read_sample_platform.png", width = 40, height = 30, units = "cm")
+#labs(x = "", y = "log10 (lecturas) / muestra") +
+#labs(x = "", y = "log10 (reads) / sample") +
+ggsave("Graficos/Graficos_finales/fig13_qc_resultados_read_sample_platform.png", width = 30, height = 20, units = "cm")
 
 # new virus, host data
 
-qc_virushost <- read_excel(dir_excel[2], sheet = 5)
-nombres_muestras <- c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10")
-#nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
+qc_virushost <- read_excel(dir_excel[1], sheet = 4)
+#nombres_muestras <- c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10")
+nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
 
 virushost_data <- data.frame(
     id = as.character(qc_virushost$ID),
@@ -163,19 +168,18 @@ virushost_data$id <- factor(virushost_data$id, levels = levels_id)
 
 # plot host, virus, unmapped
 
-# virushost_data$tipo <- revalue(virushost_data$tipo, c("host" = "% de huésped", "virus" = "% de virus", "unmapped" = "% de lecturas no mapeadas"))
-
-virushost_data$tipo <- revalue(virushost_data$tipo, c("host" = "Host %", "virus" = "Virus %", "unmapped" = "Unmapped %"))
+virushost_data$tipo <- revalue(virushost_data$tipo, c("host" = "% de huésped", "virus" = "% de virus", "unmapped" = "% de lecturas no mapeadas"))
+#~virushost_data$tipo <- revalue(virushost_data$tipo, c("host" = "Host %", "virus" = "Virus %", "unmapped" = "Unmapped %"))
 
 ggplot(virushost_data, aes(x = muestra2, y = porcentaje)) +
     geom_boxplot(fill = "#1F77B4") +
     facet_grid(plataforma ~ tipo) +
     labs(x = "", y = "%", title = "") +
     theme(
-        text = element_text(size = 40),
+        text = element_text(size = 28),
         axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45)
     )
-ggsave("Graficos/Graficos_finales/fig14_qc_resultados_hostvirusunmapped_plataforma.png", width = 55, height = 55, units = "cm")
+ggsave("Graficos/Graficos_finales/fig14_qc_resultados_hostvirusunmapped_plataforma.png", width = 35, height = 35, units = "cm")
 
 #### Datos depth -----
 
@@ -308,16 +312,17 @@ ggplot(categorias_data, aes(genome)) +
     geom_bar(fill = "#1F77B4") +
     coord_flip() +
     guides(fill = guide_legend(title = "")) +
-    labs(y = "Number of laboratories", x = "", title = "", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = 1, size = 6.5, hjust = 2) +
+    labs(y = "Número de laboratorios", x = "", title = "", size = 15) +
+    geom_text(stat = "count", aes(label = ..count..), vjust = 1, size = 5, hjust = 2) +
     theme(
-        text = element_text(size = 30),
+        text = element_text(size = 15),
         axis.text.x = element_text(), axis.text.y = element_text(),
         legend.title = element_text(),
         legend.text = element_text()
     )
-ggsave("Graficos/Graficos_finales/fig16_qc_barplot_genome.png", width = 40, height = 30, units = "cm")
-
+ggsave("Graficos/Graficos_finales/fig16_qc_barplot_genome.png", width = 20, height = 15, units = "cm")
+#     labs(y = "Number of laboratories", x = "", title = "", size = 12) +
+#     labs(y = "Número de laboratorios", x = "", title = "", size = 12) +
 #### plot instrumentos ----
 
 # vjust = -0.8, size = 6.5, hjust = 0.5
@@ -458,7 +463,7 @@ ggsave("Graficos/Graficos_finales/fig20_qc_barplot_bioinformatica.png", width = 
 
 ### datos bioinfo ----
 
-qc_bioinfo <- read_excel(dir_excel[2], sheet = 14)
+qc_bioinfo <- read_excel(dir_excel[1], sheet = 14)
 
 bioinfo_data <- data.frame(
     id = as.character(qc_bioinfo$ID),
@@ -543,18 +548,18 @@ ggsave("Graficos/Graficos_finales/fig24_qc_barplot_bioinformatica_consensus_plat
 ggplot(bioinfo_data, aes(pangolin_version)) +
     geom_bar(fill = "#1F77B4") +
     guides(fill = guide_legend(title = "Platform")) +
-    labs(y = "Number of laboratories", x = "", title = "", size = 12) +
-    geom_text(stat = "count", aes(label = ..count..), vjust = -0.5, size = 8) +
+    labs(y = "Número de laboratorios", x = "", title = "") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -0.5, size = 5) +
     theme(
-        text = element_text(size = 35),
+        text = element_text(size = 20),
         axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45)
     )
-ggsave("Graficos/Graficos_finales/fig27_qc_barplot_bioinformatica_pangolin.png", dpi = 500, units = "cm", width = 45, height = 30)
+ggsave("Graficos/Graficos_finales/fig27_qc_barplot_bioinformatica_pangolin.png", dpi = 500, units = "cm", width = 25, height = 20)
 
 
 ##### variantes data -----
 
-qc_variants <- read_excel(dir_excel[2], sheet = 7)
+qc_variants <- read_excel(dir_excel[1], sheet = 7)
 
 nombres_muestras <- c("sample 1", "sample 2", "sample 3", "sample 4", "sample 5", "sample 6", "sample 7", "sample 8", "sample 9", "sample 10")
 #nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
@@ -823,7 +828,7 @@ df_aciertos_variantes <- data.frame(
     aciertos = matrix_valores_1[, 1]
 )
 
-# write.table(df_aciertos_variantes, "df_aciertos_variantes.csv", row.names = F, quote = F, sep = "\t")
+write.table(df_aciertos_variantes, "df_aciertos_variantes.csv", row.names = F, quote = F, sep = "\t")
 
 ### calculo de TP y FP - Viralrecon
 
@@ -918,7 +923,7 @@ df_aciertos <- data.frame(
 # sort_df_aciertos_variantes<- df_aciertos_variantes[order(df_aciertos_variantes$id), ]
 # write.table(sort_df_aciertos_variantes, "aciertos_variantes.csv", row.names = F, quote = F, sep = "\t")
 
-qc_aciertos <- read_excel(dir_excel[2], sheet = 15)
+qc_aciertos <- read_excel(dir_excel[1], sheet = 15)
 niveles_aciertos <- c(
     "HU Virgen del Rocio",
     "HU San Cecilio",
@@ -1009,6 +1014,7 @@ niveles_id_aciertos <- c(
 qc_aciertos$nombre <- factor(qc_aciertos$nombre, levels = niveles_aciertos)
 qc_aciertos$id <- factor(qc_aciertos$id, levels = niveles_id_aciertos)
 qc_aciertos$clase <- revalue(qc_aciertos$clase, c("linaje" = "Lineages", "variante" = "Variants"))
+#qc_aciertos$clase <- revalue(qc_aciertos$clase, c("linaje" = "Linajes", "variante" = "Variante"))
 
 rep_level <- c(
     "COD_2106_2",
@@ -1063,7 +1069,9 @@ levels_samples_var <- c(
     "Muestra 10 Delta"
 )
 
-qc_tasa <- read_excel(dir_excel[2], sheet = 13)
+nombres_muestras <- c("muestra 1", "muestra 2", "muestra 3", "muestra 4", "muestra 5", "muestra 6", "muestra 7", "muestra 8", "muestra 9", "muestra 10")
+
+qc_tasa <- read_excel(dir_excel[1], sheet = 13)
 
 qc_tasa_linajes <- subset(qc_tasa, clase == "linajes")
 qc_tasa_linajes$samples <- factor(qc_tasa_linajes$samples, levels = levels_samples_lin)
@@ -1084,17 +1092,18 @@ for (i in 1:10) {
 qc_tasa_linajes$mutaciones <- round(as.numeric(rep(matrix_mutaciones[, 1], 2)))
 qc_tasa_variantes$mutaciones <- round(as.numeric(rep(matrix_mutaciones[, 1], 2)))
 
-# qc_tasa_linajes$tipo<- revalue( qc_tasa_linajes$tipo, c("Sensitivity" = "Sensibilidad", "Precision" = "Precisión"))
-# qc_tasa_variantes$tipo<- revalue( qc_tasa_variantes$tipo, c("Sensitivity" = "Sensibilidad", "Precision" = "Precisión"))
+qc_tasa_linajes$tipo<- revalue( qc_tasa_linajes$tipo, c("Sensitivity" = "Sensibilidad", "Precision" = "Precisión"))
+qc_tasa_variantes$tipo<- revalue( qc_tasa_variantes$tipo, c("Sensitivity" = "Sensibilidad", "Precision" = "Precisión"))
 
 # plot sensitivity, precision & mutations
 
 resultado_data <- rbind(qc_tasa_linajes, qc_tasa_variantes)
 prueba_nombres <- rep(nombres_muestras, 4)
 resultado_data$samples <- factor(prueba_nombres, levels = nombres_muestras)
-resultado_data$samples <- revalue(resultado_data$samples, c("muestra 1" = "sample 1", "muestra 2" = "sample 2", "muestra 3" = "sample 3", "muestra 4" = "sample 4", "muestra 5" = "sample 5", "muestra 6" = "sample 6", "muestra 7" = "sample 7", "muestra 8" = "sample 8", "muestra 9" = "sample 9", "muestra 10" = "sample 10"))
+# resultado_data$samples <- revalue(resultado_data$samples, c("muestra 1" = "sample 1", "muestra 2" = "sample 2", "muestra 3" = "sample 3", "muestra 4" = "sample 4", "muestra 5" = "sample 5", "muestra 6" = "sample 6", "muestra 7" = "sample 7", "muestra 8" = "sample 8", "muestra 9" = "sample 9", "muestra 10" = "sample 10"))
 
-resultado_data$clase <- revalue(resultado_data$clase, c("linajes" = "Lineages", "variantes" = "Variants"))
+#resultado_data$clase <- revalue(resultado_data$clase, c("linajes" = "Lineages", "variantes" = "Variants"))
+resultado_data$clase <- revalue(resultado_data$clase, c("linajes" = "Linajes", "variantes" = "Variantes"))
 
 # & resultado_data$samples == "muestra 7"
 # & resultado_data$clase == "Linajes"
@@ -1102,7 +1111,13 @@ resultado_data$clase <- revalue(resultado_data$clase, c("linajes" = "Lineages", 
 # Sensibilidad
 # Variantes
 # Linajes
-# mean(resultado_data$tasa[resultado_data$tipo == "Precisión" & resultado_data$clase == "Variantes" & resultado_data$samples == "muestra 7"])
+
+mean(resultado_data$tasa[resultado_data$tipo == "Sensibilidad" & resultado_data$clase == "Linajes"])
+
+mean(resultado_data$tasa[resultado_data$tipo == "Precisión" & resultado_data$clase == "Variantes" & resultado_data$samples == "muestra 7"])
+
+#        sec.axis = sec_axis(trans = ~ . / 1.05, name = "Mutations")
+#    guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "")) +
 
 ggplot(resultado_data, aes(x = samples, y = tasa * 100, group = tipo)) +
     geom_line() +
@@ -1112,13 +1127,13 @@ ggplot(resultado_data, aes(x = samples, y = tasa * 100, group = tipo)) +
     scale_y_continuous(
         breaks = c(0, 20, 40, 60, 80, 100), limits = c(0, 100),
         name = "%",
-        sec.axis = sec_axis(trans = ~ . / 1.05, name = "Mutations")
+        sec.axis = sec_axis(trans = ~ . / 1.05, name = "Mutaciones")
     ) +
-    guides(color = guide_legend(title = "Curves"), fill = guide_legend(title = "")) +
+    guides(color = guide_legend(title = "Curvas"), fill = guide_legend(title = "")) +
     labs(x = "", y = "%", title = "") +
     theme(
-        text = element_text(size = 45),
+        text = element_text(size = 30),
         axis.text.x = element_text(vjust = 1, hjust = 1, angle = 45)
     )
 
-ggsave("Graficos/Graficos_finales/qc_sensitivity_precision_mutaciones.png", dpi = 500, units = "cm", width = 55, height = 45)
+ggsave("Graficos/Graficos_finales/qc_sensitivity_precision_mutaciones.png", dpi = 500, units = "cm", width = 35, height = 35)
